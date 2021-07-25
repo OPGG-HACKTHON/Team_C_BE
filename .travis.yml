@@ -35,6 +35,21 @@ deploy:
     acl: private
     local_dir: deploy
     wait-until-deployed: true
+    on:
+      branch: master
+
+    - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: opgg-deploy
+    key: opgg.zip
+    bundle_type: zip
+    application: travis-deploy
+    deployment_group: travis-webservice-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      branch: master
 
 notifications:
   email:
