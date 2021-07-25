@@ -1,0 +1,24 @@
+language: node_js
+node_js: 
+  – "14"
+
+branches:
+  only:
+    - master
+    - develop
+
+cache:
+  directories: 
+    – node_modules
+    – client/node_modules
+
+install: 
+  – npm install
+
+script: 
+  – npm run test
+
+notifications:
+  email:
+    recipients:
+      - hyotaek9812@gmail.com
