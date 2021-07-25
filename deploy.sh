@@ -7,6 +7,6 @@ cd ~
 cd ./app/step2/zip/
 
 npm i
-sleep 10
+sleep 5
 
 pm2 start app.js
