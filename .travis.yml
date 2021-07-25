@@ -12,7 +12,7 @@ cache:
     – node_modules
 
 before_install:
-  - cat > .env
+  - touch .env
   - cat .env.travis | envsubst > .env
   - echo $(cat .env)
 
