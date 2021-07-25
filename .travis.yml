@@ -12,7 +12,7 @@ cache:
     – node_modules
 
 before_install:
-  - cat .env.example | envsubst > .env
+  - cat .env.travis | envsubst > .env
 
 install: 
   – npm install
