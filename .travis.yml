@@ -22,7 +22,7 @@ script:
   – npm run test
 
 before_deploy:
-  - zip -r opgg .
+  - zip -r opgg *
   - mkdir -p deploy
   - mv opgg.zip deploy/opgg.zip
 
