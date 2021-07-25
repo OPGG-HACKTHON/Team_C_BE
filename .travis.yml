@@ -20,6 +20,22 @@ install:
 script: 
   – npm run test
 
+before_deploy:
+  - zip -r opgg *
+  - mkdir -p deploy
+  - mv opgg.zip deploy/opgg.zip
+
+deploy:
+  - provider : s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: opgg-deploy
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
+
 notifications:
   email:
     recipients:
