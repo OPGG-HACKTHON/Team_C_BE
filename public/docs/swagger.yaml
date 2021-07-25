@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  swagger: "2.0"
+  version: "1.0.0"
+  title: "OPGG_BE"
+  description: "opgg 해커톤 서버 API 명세서"
+servers:
+  - description: "OPGG_BE Base URL"
+    url: "http://localhost:3000/"
+paths:
+  /adder:
+    get:
+      tags: ["test"]
+      summary: api 테스트
+      parameters:
+        - name: one
+          in: query
+          description: Firset Value
+          required: true
+          schema:
+            type: integer
+        - name: two
+          in: query
+          description: sec Value
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: added result
+          schema:
+            type: integer
