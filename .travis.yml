@@ -14,7 +14,6 @@ cache:
 before_install:
   - touch .env
   - cat .env.travis | envsubst > .env
-  - echo $(cat .env)
 
 install: 
   – npm install
@@ -23,7 +22,7 @@ script:
   – npm run test
 
 before_deploy:
-  - zip -r opgg *
+  - zip -r opgg .
   - mkdir -p deploy
   - mv opgg.zip deploy/opgg.zip
 
