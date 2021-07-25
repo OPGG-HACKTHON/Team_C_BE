@@ -10,7 +10,9 @@ branches:
 cache:
   directories: 
     – node_modules
-    – client/node_modules
+
+before_install:
+  - cat .env.example | envsubst > .env
 
 install: 
   – npm install
