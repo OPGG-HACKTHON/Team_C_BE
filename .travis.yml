@@ -1,0 +1,26 @@
+language: node_js
+node_js: 
+  – "14"
+
+branches:
+  only:
+    - master
+    - develop
+
+cache:
+  directories: 
+    – node_modules
+
+before_install:
+  - cat .env.example | envsubst > .env
+
+install: 
+  – npm install
+
+script: 
+  – npm run test
+
+notifications:
+  email:
+    recipients:
+      - hyotaek9812@gmail.com
