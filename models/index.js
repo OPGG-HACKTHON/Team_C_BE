@@ -44,5 +44,6 @@ db.Sequelize = Sequelize;
 
 // 테이블 불러오기
 db.User = require("./user")(sequelize, Sequelize);
+db.Team = require("./team")(sequelize, Sequelize);
 
 module.exports = db;
