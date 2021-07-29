@@ -1,5 +1,4 @@
 const express = require("express");
-const createError = require("http-errors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -9,8 +8,9 @@ const cors = require("cors");
 
 dotenv.config();
 
-const router = require("./router/router");
-const leaguesApi = require("./router/leaguesApi");
+const { fail } = require("./util/resUtil");
+
+const leaguesAPI = require("./router/leaguesAPI");
 
 const app = express();
 
@@ -35,22 +35,13 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/db", router);
-app.use("/leaguesApi", leaguesApi);
-
-const server = http.createServer(app);
+app.use("/leaguesApi", leaguesAPI);
 
 app.use(function (req, res, next) {
-	next(createError(404));
+	res.status(404).send(fail(404, "요청한 API 주소가 존재하지 않습니다."));
 });
 
-app.use(function (err, req, res, next) {
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
-
-	res.status(err.status || 500);
-	res.render("error");
-});
+const server = http.createServer(app);
 
 server.listen(process.env.PORT, () => {
 	console.log("Server listening PORT : " + process.env.PORT);
