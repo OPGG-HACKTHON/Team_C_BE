@@ -1,5 +1,4 @@
 const express = require("express");
-const createError = require("http-errors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -9,7 +8,9 @@ const cors = require("cors");
 
 dotenv.config();
 
-const router = require("./router/router");
+const { fail } = require("./util/resUtil");
+
+const leaguesAPI = require("./router/leaguesAPI.router");
 
 const app = express();
 
@@ -17,13 +18,13 @@ app.use(logger("dev"));
 
 const { sequelize } = require("./models/index");
 sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("Connect DB");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+	.sync({ force: false })
+	.then(() => {
+		console.log("Connect DB");
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 app.set("views", path.join(__dirname, "public/views"));
 app.set("view engine", "ejs");
@@ -34,22 +35,14 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/db", router);
+app.use("/leaguesApi", leaguesAPI);
+
+app.use(function (req, res, next) {
+	res.status(404).send(fail(404, "요청한 API 주소가 존재하지 않습니다."));
+});
 
 const server = http.createServer(app);
 
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-app.use(function (err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  res.status(err.status || 500);
-  res.render("error");
-});
-
 server.listen(process.env.PORT, () => {
-  console.log("Server listening PORT : " + process.env.PORT);
+	console.log("Server listening PORT : " + process.env.PORT);
 });
