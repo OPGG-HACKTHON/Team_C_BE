@@ -1,12 +1,28 @@
 const { Team } = require("../models/index");
 
 module.exports = {
+	initTeamInfo: (teamInfo) => {
+		return new Promise((res, rej) => {
+			teamInfo.forEach((element) => {
+				Team.create({
+					name: element.name,
+					icon: element.icon,
+				})
+					.then(() => {
+						res("success init Team");
+					})
+					.catch((err) => {
+						rej(err);
+					});
+			});
+		});
+	},
+
 	updateTeam: (teamRankInfo) => {
-		return new Promise((resolve, reject) => {
+		return new Promise((res, rej) => {
 			teamRankInfo.forEach((element) => {
 				Team.update(
 					{
-						name: element.name,
 						rank: element.rank,
 						win: element.win,
 						lose: element.lose,
@@ -15,10 +31,10 @@ module.exports = {
 					{ where: { name: element.name } }
 				)
 					.then(() => {
-						resolve("success update Team tables");
+						res("success update Team tables");
 					})
 					.catch((err) => {
-						reject(err);
+						rej(err);
 					});
 			});
 		});

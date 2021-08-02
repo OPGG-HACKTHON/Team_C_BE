@@ -1,4 +1,4 @@
-const { getTeamRankInfo } = require("../../service/leaguesAPI/getTeamRank");
+const { getTeamRankInfo } = require("../../service/leaguesAPI/teamRank");
 
 test("getTeamRankInfo's length is 10", async () => {
 	try {

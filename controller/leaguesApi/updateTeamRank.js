@@ -1,4 +1,4 @@
-const { getTeamRankInfo } = require("../../service/leaguesAPI/getTeamRank");
+const { getTeamRankInfo } = require("../../service/leaguesAPI/teamRank");
 const team = require("../../dataAccess/team");
 const resUtil = require("../../util/resUtil");
 

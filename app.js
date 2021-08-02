@@ -18,7 +18,7 @@ app.use(logger("dev"));
 
 const { sequelize } = require("./models/index");
 sequelize
-	.sync({ force: false })
+	.sync({ force: true })
 	.then(() => {
 		console.log("Connect DB");
 	})
