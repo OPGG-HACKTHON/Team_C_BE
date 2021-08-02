@@ -1,7 +1,7 @@
 const { Team } = require("../models/index");
 
 module.exports = {
-	initTeamInfo: (teamInfo) => {
+	createTeamInfo: (teamInfo) => {
 		return new Promise((res, rej) => {
 			teamInfo.forEach((element) => {
 				Team.create({

@@ -3,7 +3,7 @@ const { Player } = require("../models/index");
 module.exports = {
 	initPlayer: (teamId, playerInfo) => {
 		return new Promise((res, rej) => {
-			playerInfo.forEach((team) => {
+			playerInfo.forEach(async (team) => {
 				await this.createPlayer(teamId, team.players);
 			});
 		});
