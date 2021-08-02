@@ -15,6 +15,8 @@ const getTeamRankInfo = () => {
 				}
 				if (response.statusCode === 200) {
 					const teamRankInfo = parseTeamRankInfo(body);
+					if (teamRankInfo == -1)
+						return rej("수동 크롤링에 문제가 생겼습니다.");
 					res(teamRankInfo);
 				}
 			}
@@ -40,6 +42,10 @@ const parseTeamRankInfo = (body) => {
 
 		const total = $(temp[3]).text().split("승");
 		const win = total[0] * 1;
+		if (typeof total[1] == "undefined") {
+			return -1;
+		}
+
 		const lose = total[1].split("패")[0] * 1;
 
 		const rate = $(temp[4]).text().split("%")[0];
