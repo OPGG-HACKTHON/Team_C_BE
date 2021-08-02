@@ -1,8 +1,9 @@
 const request = require("request");
-const Team = require("../../dataAccess/team");
+
+const playerRepo = require("../../dataAccess/player");
 
 module.exports = {
-	getTeamInfoWithPanda: () => {
+	getPlayerInfo: () => {
 		return new Promise((res, rej) => {
 			const PANDA_KEY = process.env.PANDA_KEY;
 			request(
@@ -17,18 +18,26 @@ module.exports = {
 					}
 					if (response.statusCode === 200) {
 						const teamInfo = JSON.parse(body);
-						const teamInfoArray = [];
+						const playerInfoArray = [];
 
 						teamInfo.forEach((team) => {
-							teamInfoArray.push({ name: team.acronym, icon: team.image_url });
+							playerInfoArray.push({
+								name: team.acronym,
+								players: team.players,
+							});
 						});
-						res(teamInfoArray);
+						res(playerInfoArray);
 					}
 				}
 			);
 		});
 	},
-	createTeamInfo: async (teamInfo) => {
-		await Team.createTeamInfo(teamInfo);
+	createPlayer: (teamInfo, players) => {
+		return new Promise(async (res, rej) => {
+			await players.forEach(async (player) => {
+				await playerRepo.createPlayer(teamInfo.dataValues.id, player);
+			});
+			res("success create player data");
+		});
 	},
 };

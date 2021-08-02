@@ -1,9 +1,9 @@
-const teamRankService = require("../../service/leaguesAPI/teamRank");
+const teamService = require("../../service/leaguesAPI/team");
 
 test("getTeamRankInfo's length is 10", async () => {
 	try {
-		const body = await teamRankService.getTeamRankInfo();
-		const teamRankInfo = teamRankService.parseTeamRankInfo(body);
+		const body = await teamService.getTeamRankInfo();
+		const teamRankInfo = teamService.parseTeamRankInfo(body);
 
 		expect(teamRankInfo.length).toBe(10);
 	} catch (error) {

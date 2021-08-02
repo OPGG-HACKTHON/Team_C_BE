@@ -1,4 +1,5 @@
 const { Team } = require("../models/index");
+const { Op } = require("sequelize");
 
 module.exports = {
 	createTeamInfo: (teamInfo) => {
@@ -37,6 +38,17 @@ module.exports = {
 						rej(err);
 					});
 			});
+		});
+	},
+	findTeamIdByName: (name) => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findAll({
+				attributes: ["id", "name"],
+				where: {
+					[Op.or]: [{ name: name }],
+				},
+			});
+			res(result[0]);
 		});
 	},
 };

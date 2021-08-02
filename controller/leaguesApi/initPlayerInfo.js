@@ -1,12 +1,16 @@
-const { getPlayerInfo } = require("../../service/leaguesAPI/playerInfo");
-const player = require("../../dataAccess/player");
+const playerService = require("../../service/leaguesAPI/player");
+const teamService = require("../../service/leaguesAPI/team");
 const resUtil = require("../../util/resUtil");
 
-const initTeamInfo = async (req, res) => {
-	const playerInfo = await getPlayerInfo();
-	// await player.initPlayer(playerInfo);
+const initPlayerInfo = async (req, res) => {
+	const playerInfo = await playerService.getPlayerInfo();
 
-	res.json(resUtil.success(201, "팀 정보 생성을 완료했습니다."));
+	await playerInfo.forEach(async (element) => {
+		let teamInfo = await teamService.getIdfindByName(element.name);
+		await playerService.createPlayer(teamInfo, element.players);
+	});
+
+	res.json(resUtil.success(201, "플레이어 정보 생성을 완료했습니다."));
 };
 
-module.exports = initTeamInfo;
+module.exports = initPlayerInfo;
