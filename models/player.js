@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
 			nickname: {
 				type: DataTypes.STRING(20), // VARCHAR
 			},
+			role: {
+				type: DataTypes.STRING(20), // VARCHAR
+			},
 			image: {
 				type: DataTypes.TEXT, // VARCHAR
 			},
