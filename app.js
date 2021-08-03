@@ -10,7 +10,7 @@ dotenv.config();
 
 const { fail } = require("./util/resUtil");
 
-const leaguesAPI = require("./router/leaguesApi.router");
+const leaguesAPI = require("./router/leaguesAPI.router");
 
 const app = express();
 
