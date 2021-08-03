@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 			},
 			key: {
-				type: DataTypes.TEXT,
+				type: DataTypes.INTEGER,
+				unique: true,
 			},
 		},
 		{

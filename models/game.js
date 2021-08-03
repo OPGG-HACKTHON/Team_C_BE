@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes, team) => {
 				type: DataTypes.INTEGER,
 				references: {
 					model: team,
-					key: "id",
+					key: "key",
 				},
 				allowNull: false,
 			},
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes, team) => {
 				type: DataTypes.INTEGER,
 				references: {
 					model: team,
-					key: "id",
+					key: "key",
 				},
 				allowNull: false,
 			},
@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes, team) => {
 				type: DataTypes.DATE,
 			},
 			status: {
+				//status | -1 시작전, 0 경기 중 ,1 경기끝
 				type: DataTypes.INTEGER,
 			},
 			finishedAt: {

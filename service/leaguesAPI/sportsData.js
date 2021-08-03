@@ -1,4 +1,5 @@
 const request = require("request");
+const game = require("../../dataAccess/game");
 
 module.exports = {
 	getSeasonTeams: () => {
@@ -39,6 +40,48 @@ module.exports = {
 					}
 				}
 			);
+		});
+	},
+	getScheduleByRoundId: () => {
+		return new Promise((res, rej) => {
+			const SPORTSDATA_KEY = process.env.SPORTSDATA_KEY;
+			request(
+				{
+					url: `https://api.sportsdata.io/v3/lol/scores/json/Schedule/100001345?key=${SPORTSDATA_KEY}`,
+					method: "GET",
+				},
+				(error, response, body) => {
+					if (error) {
+						console.error(error);
+						return rej(error);
+					}
+					if (response.statusCode === 200) {
+						res(JSON.parse(body));
+					}
+				}
+			);
+		});
+	},
+	createSchedule: (schedule, time) => {
+		return new Promise(async (res, rej) => {
+			const gameInfo = {};
+			gameInfo.a_team_id = schedule.TeamAId;
+			gameInfo.b_team_id = schedule.TeamBId;
+
+			gameInfo.a_team_score =
+				schedule.TeamAScore >= 3 ? 2 : schedule.TeamAScore;
+			gameInfo.b_team_score =
+				schedule.TeamBScore >= 3 ? 2 : schedule.TeamBScore;
+
+			gameInfo.startTime = time;
+
+			gameInfo.status =
+				gameInfo.a_team_score == 2 || gameInfo.b_team_score == 2 ? 1 : -1;
+			if (new Date() + 9 * 60 * 60 * 1000 > time) gameInfo.status = 0;
+
+			await game.createSchedule(gameInfo);
+
+			res("success createSchedule");
 		});
 	},
 };
