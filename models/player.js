@@ -1,24 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
 	return sequelize.define(
-		"team",
+		"player",
 		{
-			name: {
+			nickname: {
 				type: DataTypes.STRING(20), // VARCHAR
-				unique: true,
 			},
-			icon: {
+			role: {
+				type: DataTypes.STRING(20), // VARCHAR
+			},
+			image: {
 				type: DataTypes.TEXT, // VARCHAR
 			},
-			rank: {
-				type: DataTypes.INTEGER,
-			},
-			win: {
-				type: DataTypes.INTEGER,
-			},
-			lose: {
-				type: DataTypes.INTEGER,
-			},
-			rate: {
+			point: {
 				type: DataTypes.INTEGER,
 			},
 			key: {
