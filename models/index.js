@@ -45,6 +45,7 @@ db.Sequelize = Sequelize;
 // 테이블 불러오기
 db.Team = require("./team")(sequelize, Sequelize);
 db.Player = require("./player")(sequelize, Sequelize);
+db.Game = require("./game")(sequelize, Sequelize, db.Team);
 
 db.Team.hasMany(db.Player, {
 	onDelete: "CASCADE",
