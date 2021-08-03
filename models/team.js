@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
 			rate: {
 				type: DataTypes.INTEGER,
 			},
+			key: {
+				type: DataTypes.TEXT,
+			},
 		},
 		{
 			timestamps: true, // ture일 시 시퀄라이저는 createAt, updateAt 컬럼을 추가함.

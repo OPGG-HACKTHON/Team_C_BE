@@ -45,10 +45,26 @@ module.exports = {
 			const result = await Team.findAll({
 				attributes: ["id", "name"],
 				where: {
-					[Op.or]: [{ name: name }],
+					name: name,
 				},
 			});
 			res(result[0]);
+		});
+	},
+	updateTeamKey: (teamInfo) => {
+		return new Promise((res, rej) => {
+			Team.update(
+				{
+					key: teamInfo.TeamId,
+				},
+				{ where: { name: teamInfo.Key } }
+			)
+				.then(() => {
+					res("success update Team tables");
+				})
+				.catch((err) => {
+					rej(err);
+				});
 		});
 	},
 };

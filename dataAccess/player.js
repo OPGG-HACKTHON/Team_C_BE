@@ -18,4 +18,22 @@ module.exports = {
 				});
 		});
 	},
+	updatePlayerKey: (matchName, playerId) => {
+		return new Promise((res, rej) => {
+			Player.update(
+				{
+					key: playerId,
+				},
+				{
+					where: { nickname: matchName },
+				}
+			)
+				.then(() => {
+					res("success update Player Key");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 };
