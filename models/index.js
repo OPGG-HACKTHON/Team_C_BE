@@ -43,6 +43,13 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // 테이블 불러오기
-db.User = require("./user")(sequelize, Sequelize);
+db.Team = require("./team")(sequelize, Sequelize);
+db.Player = require("./player")(sequelize, Sequelize);
+
+db.Team.hasMany(db.Player, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.Player.belongsTo(db.Team);
 
 module.exports = db;
