@@ -1,8 +1,8 @@
 const express = require("express");
-const updateTeamRank = require("../controller/leaguesAPI/updateTeamRank.js");
-const initTeamInfo = require("../controller/leaguesAPI/initTeamInfo");
-const initPlayerInfo = require("../controller/leaguesAPI/initPlayerInfo");
-const addAPIKeys = require("../controller/leaguesAPI/addAPIKeys");
+const updateTeamRank = require("../controller/leaguesApi/updateTeamRank.js");
+const initTeamInfo = require("../controller/leaguesApi/initTeamInfo");
+const initPlayerInfo = require("../controller/leaguesApi/initPlayerInfo");
+const addAPIKeys = require("../controller/leaguesApi/addAPIKeys");
 const wrapAsync = require("../util/wrapAsync");
 
 const router = express.Router();
