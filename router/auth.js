@@ -27,7 +27,6 @@ passport.use(
 
       let email = profile.kakao_account.email;
 
-      let user;
       let user = {
         profile: profile._json,
         accessToken: accessToken,
