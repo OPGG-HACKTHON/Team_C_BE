@@ -1,4 +1,4 @@
-const sportsDataService = require("../../service/leaguesAPI/sportsData");
+const sportsDataService = require("../../service/leaguesApi/sportsData");
 const playerRepo = require("../../dataAccess/player");
 const teamRepo = require("../../dataAccess/team");
 

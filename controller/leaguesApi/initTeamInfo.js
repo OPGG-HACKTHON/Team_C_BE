@@ -1,4 +1,4 @@
-const teamService = require("../../service/leaguesAPI/team");
+const teamService = require("../../service/leaguesApi/team");
 const team = require("../../dataAccess/team");
 const resUtil = require("../../util/resUtil");
 
