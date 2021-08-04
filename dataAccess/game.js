@@ -32,4 +32,25 @@ module.exports = {
 			res(result);
 		});
 	},
+	updateSchedule: (resultSchedule, key) => {
+		return new Promise((res, rej) => {
+			Game.update(
+				{
+					a_team_score: resultSchedule.a_team_score,
+					b_team_score: resultSchedule.b_team_score,
+					status: resultSchedule.status,
+					finishedAt: resultSchedule.finishedAt,
+				},
+				{
+					where: { key: key },
+				}
+			)
+				.then(() => {
+					res("success update game");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 };

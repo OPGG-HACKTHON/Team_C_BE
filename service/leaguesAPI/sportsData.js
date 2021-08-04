@@ -86,4 +86,26 @@ module.exports = {
 			res("success createSchedule");
 		});
 	},
+	compareSchedule: (dbSchedule, recentSchedule) => {
+		const resultSchedule = {};
+
+		resultSchedule.a_team_score =
+			resultSchedule.TeamAScore == null ? 0 : resultSchedule.TeamAScore;
+		resultSchedule.b_team_score =
+			resultSchedule.TeamBScore == null ? 0 : resultSchedule.TeamBScore;
+
+		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
+			resultSchedule.finishedAt = new Date();
+		}
+
+		if (recentSchedule.Status == "Scheduled") {
+			resultSchedule.status = -1;
+		} else if (recentSchedule.Status == "Final") {
+			resultSchedule.status = 1;
+		} else {
+			resultSchedule.status = 0;
+		}
+
+		return resultSchedule;
+	},
 };
