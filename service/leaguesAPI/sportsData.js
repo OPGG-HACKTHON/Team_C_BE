@@ -79,6 +79,8 @@ module.exports = {
 				gameInfo.a_team_score == 2 || gameInfo.b_team_score == 2 ? 1 : -1;
 			if (new Date() + 9 * 60 * 60 * 1000 > time) gameInfo.status = 0;
 
+			gameInfo.gameId = schedule.GameId;
+
 			await game.createSchedule(gameInfo);
 
 			res("success createSchedule");

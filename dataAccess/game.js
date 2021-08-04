@@ -1,4 +1,5 @@
 const { Game } = require("../models/index");
+const { Op } = require("sequelize");
 
 module.exports = {
 	createSchedule: (gameInfo) => {
@@ -10,6 +11,7 @@ module.exports = {
 				b_team_score: gameInfo.b_team_score,
 				startTime: gameInfo.startTime,
 				status: gameInfo.status,
+				key: gameInfo.gameId,
 			})
 				.then(() => {
 					res("success insert game");
@@ -17,6 +19,17 @@ module.exports = {
 				.catch((err) => {
 					rej(err);
 				});
+		});
+	},
+	getRecentSchedule: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findOne({
+				where: {
+					[Op.or]: [{ status: 0 }, { status: -1 }],
+					// startTime: { [Op.gt]: date },
+				},
+			});
+			res(result);
 		});
 	},
 };

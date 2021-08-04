@@ -2,6 +2,9 @@ module.exports = (sequelize, DataTypes, team) => {
 	return sequelize.define(
 		"game",
 		{
+			key: {
+				type: DataTypes.INTEGER,
+			},
 			a_team_id: {
 				type: DataTypes.INTEGER,
 				references: {
