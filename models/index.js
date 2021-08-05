@@ -55,8 +55,9 @@ db.Team.hasMany(db.User, {
   onUpdate: "SET NULL",
   onDelete: "SET NULL",
 });
-
-db.Player.belongsTo(db.Team);
-db.User.belongsTo(db.Team);
+db.Player.belongsTo(db.Team, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
+});
 
 module.exports = db;

@@ -1,4 +1,7 @@
 const sportsDataService = require("../../service/leaguesAPI/sportsData");
+const playerRepo = require("../../dataAccess/player");
+const teamRepo = require("../../dataAccess/team");
+
 const resUtil = require("../../util/resUtil");
 
 const addAPIKeys = async (req, res) => {
@@ -8,14 +11,14 @@ const addAPIKeys = async (req, res) => {
 		let team = element.Team;
 
 		// upate Team Key
-		await sportsDataService.updateTeamKey(team);
+		await teamRepo.updateTeamKey(team);
 
 		// get Player Detatil
 		let players = await sportsDataService.getPlayersByTeamId(team.TeamId);
 
 		// save player key
 		await players.forEach(async (player) => {
-			await sportsDataService.updatePlayerKey(player);
+			await playerRepo.updatePlayerKey(player.MatchName, player.PlayerId);
 		});
 	});
 

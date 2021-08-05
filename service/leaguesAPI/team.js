@@ -52,9 +52,6 @@ module.exports = {
 		}
 		return teamRankInfo;
 	},
-	updateTeamRank: async (teamRank) => {
-		await team.updateTeam(teamRank);
-	},
 	getTeamInfoWithPanda: () => {
 		return new Promise((res, rej) => {
 			const PANDA_KEY = process.env.PANDA_KEY;
@@ -80,9 +77,6 @@ module.exports = {
 				}
 			);
 		});
-	},
-	createTeamInfo: async (teamInfo) => {
-		await team.createTeamInfo(teamInfo);
 	},
 	getIdfindByName: async (teamName) => {
 		return await team.findTeamIdByName(teamName);

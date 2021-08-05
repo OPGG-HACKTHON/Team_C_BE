@@ -1,8 +1,5 @@
 const request = require("request");
 
-const playerRepo = require("../../dataAccess/player");
-const teamRepo = require("../../dataAccess/team");
-
 module.exports = {
 	getSeasonTeams: () => {
 		return new Promise((res, rej) => {
@@ -24,12 +21,6 @@ module.exports = {
 			);
 		});
 	},
-	updateTeamKey: (teamInfo) => {
-		return new Promise(async (res, rej) => {
-			await teamRepo.updateTeamKey(teamInfo);
-			res("success create player data");
-		});
-	},
 	getPlayersByTeamId: (teamId) => {
 		return new Promise((res, rej) => {
 			const SPORTSDATA_KEY = process.env.SPORTSDATA_KEY;
@@ -48,12 +39,6 @@ module.exports = {
 					}
 				}
 			);
-		});
-	},
-	updatePlayerKey: (player) => {
-		return new Promise(async (res, rej) => {
-			await playerRepo.updatePlayerKey(player.MatchName, player.PlayerId);
-			res("success create player data");
 		});
 	},
 };
