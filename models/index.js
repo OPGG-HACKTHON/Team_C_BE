@@ -52,8 +52,8 @@ db.Team.hasMany(db.Player, {
 });
 
 db.Team.hasMany(db.User, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+  onUpdate: "SET NULL",
+  onDelete: "SET NULL",
 });
 
 db.Player.belongsTo(db.Team);

@@ -15,13 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING(50), // VARCHAR
-        unique: true,
-        allowNull: false,
       },
 
       nickname: {
         type: DataTypes.STRING(20),
-        unique: true,
       },
       refreshedAt: {
         type: DataTypes.DATE,
