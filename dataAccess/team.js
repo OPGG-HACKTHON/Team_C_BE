@@ -51,6 +51,16 @@ module.exports = {
 			res(result[0]);
 		});
 	},
+	findTeamByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findOne({
+				where: {
+					key: key,
+				},
+			});
+			res(result);
+		});
+	},
 	updateTeamKey: (teamInfo) => {
 		return new Promise((res, rej) => {
 			Team.update(

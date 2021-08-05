@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes, team) => {
 		{
 			key: {
 				type: DataTypes.INTEGER,
+				unique: true,
 			},
 			a_team_id: {
 				type: DataTypes.INTEGER,

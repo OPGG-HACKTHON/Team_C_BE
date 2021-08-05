@@ -1,4 +1,5 @@
 const { Game } = require("../models/index");
+const { Team } = require("../models/index");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -26,7 +27,6 @@ module.exports = {
 			const result = await Game.findOne({
 				where: {
 					[Op.or]: [{ status: 0 }, { status: -1 }],
-					// startTime: { [Op.gt]: date },
 				},
 			});
 			res(result);
@@ -51,6 +51,25 @@ module.exports = {
 				.catch((err) => {
 					rej(err);
 				});
+		});
+	},
+	getMonthSchedule: (month) => {
+		return new Promise(async (res, rej) => {
+			curMonth = new Date(2021, month - 1, 1);
+			nextMonth = new Date(2021, month, 1);
+
+			const result = await Game.findAll(
+				// { include: Team },
+				{
+					where: {
+						[Op.and]: [
+							{ startTime: { [Op.lt]: nextMonth } },
+							{ startTime: { [Op.gte]: curMonth } },
+						],
+					},
+				}
+			);
+			res(result);
 		});
 	},
 };

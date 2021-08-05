@@ -95,9 +95,9 @@ module.exports = {
 		const resultSchedule = {};
 
 		resultSchedule.a_team_score =
-			recentSchedule.TeamAScore == 3 ? 2 : recentSchedule.TeamAScore;
+			recentSchedule.TeamAScore == 3 ? 2 : resultSchedule.a_team_score;
 		resultSchedule.b_team_score =
-			recentSchedule.TeamBScore == 3 ? 2 : recentSchedule.TeamBScore;
+			recentSchedule.TeamBScore == 3 ? 2 : resultSchedule.b_team_score;
 
 		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
 			resultSchedule.finishedAt = new Date();
