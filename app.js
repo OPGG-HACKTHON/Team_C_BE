@@ -25,13 +25,13 @@ app.use(logger("dev"));
 const { sequelize } = require("./models/index");
 
 sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("Connect DB");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+	.sync({ force: false })
+	.then(() => {
+		console.log("Connect DB");
+	})
+	.catch((err) => {
+		console.error(err);
+	});
 
 app.set("views", path.join(__dirname, "public/views"));
 app.set("view engine", "ejs");
@@ -44,18 +44,18 @@ app.use(cookieParser());
 
 // 세션
 app.use(
-  session({
-    secret: process.env.DB_SESSIONSECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new MySQLStore({
-      host: process.env.DB_HOST,
-      port: "3306",
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PWD,
-      database: process.env.DB_DATABASE,
-    }),
-  })
+	session({
+		secret: process.env.DB_SESSIONSECRET,
+		resave: false,
+		saveUninitialized: true,
+		store: new MySQLStore({
+			host: process.env.DB_HOST,
+			port: "3306",
+			user: process.env.DB_USERNAME,
+			password: process.env.DB_PWD,
+			database: process.env.DB_DATABASE,
+		}),
+	})
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,12 +64,13 @@ app.use("/leaguesApi", leaguesAPI);
 app.use("/testAPI", testAPI);
 app.use("/auth", auth);
 app.use("/userSetting", userSetting);
+
 app.use(function (req, res, next) {
-  res.status(404).send(fail(404, "요청한 API 주소가 존재하지 않습니다."));
+	res.status(404).send(fail(404, "요청한 API 주소가 존재하지 않습니다."));
 });
 
 const server = http.createServer(app);
 
 server.listen(process.env.PORT, () => {
-  console.log("Server listening PORT : " + process.env.PORT);
+	console.log("Server listening PORT : " + process.env.PORT);
 });

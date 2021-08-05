@@ -1,12 +1,12 @@
 const playerService = require("../../service/leaguesAPI/player");
-const teamService = require("../../service/leaguesAPI/team");
+const team = require("../../dataAccess/team");
 const resUtil = require("../../util/resUtil");
 
 const initPlayerInfo = async (req, res) => {
 	const playerInfo = await playerService.getPlayerInfo();
 
 	await playerInfo.forEach(async (element) => {
-		let teamInfo = await teamService.getIdfindByName(element.name);
+		let teamInfo = await team.findTeamIdByName(element.name);
 		await playerService.createPlayer(teamInfo, element.players);
 	});
 

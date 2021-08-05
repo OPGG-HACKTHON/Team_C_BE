@@ -1,4 +1,5 @@
 const { Player } = require("../models/index");
+const { Op } = require("sequelize");
 
 module.exports = {
 	createPlayer: (teamInfo, player) => {
