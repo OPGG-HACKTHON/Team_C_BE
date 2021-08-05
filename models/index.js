@@ -46,14 +46,17 @@ db.Sequelize = Sequelize;
 db.Team = require("./team")(sequelize, Sequelize);
 db.Player = require("./player")(sequelize, Sequelize);
 db.Game = require("./game")(sequelize, Sequelize, db.Team);
-
+db.User = require("./user")(sequelize, Sequelize);
 db.Team.hasMany(db.Player, {
 	onDelete: "CASCADE",
 	onUpdate: "CASCADE",
 });
-db.Player.belongsTo(db.Team, {
-	onDelete: "CASCADE",
-	onUpdate: "CASCADE",
+db.Team.hasMany(db.User, {
+	onUpdate: "SET NULL",
+	onDelete: "SET NULL",
 });
+
+db.Player.belongsTo(db.Team);
+db.User.belongsTo(db.Team);
 
 module.exports = db;
