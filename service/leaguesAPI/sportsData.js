@@ -69,9 +69,14 @@ module.exports = {
 			gameInfo.b_team_id = schedule.TeamBId;
 
 			gameInfo.a_team_score =
-				schedule.TeamAScore >= 3 ? 2 : schedule.TeamAScore;
+				schedule.TeamAScore == 3 ? 2 : schedule.TeamAScore;
 			gameInfo.b_team_score =
-				schedule.TeamBScore >= 3 ? 2 : schedule.TeamBScore;
+				schedule.TeamBScore == 3 ? 2 : schedule.TeamBScore;
+
+			gameInfo.a_team_score =
+				gameInfo.a_team_score == null ? 0 : gameInfo.a_team_score;
+			gameInfo.b_team_score =
+				gameInfo.b_team_score == null ? 0 : gameInfo.b_team_score;
 
 			gameInfo.startTime = time;
 
@@ -90,9 +95,9 @@ module.exports = {
 		const resultSchedule = {};
 
 		resultSchedule.a_team_score =
-			resultSchedule.TeamAScore == null ? 0 : resultSchedule.TeamAScore;
+			recentSchedule.TeamAScore == 3 ? 2 : recentSchedule.TeamAScore;
 		resultSchedule.b_team_score =
-			resultSchedule.TeamBScore == null ? 0 : resultSchedule.TeamBScore;
+			recentSchedule.TeamBScore == 3 ? 2 : recentSchedule.TeamBScore;
 
 		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
 			resultSchedule.finishedAt = new Date();
