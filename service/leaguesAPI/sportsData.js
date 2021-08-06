@@ -95,15 +95,23 @@ module.exports = {
 		const resultSchedule = {};
 
 		resultSchedule.a_team_score =
-			recentSchedule.TeamAScore == 3 ? 2 : resultSchedule.a_team_score;
+			recentSchedule.TeamAScore == 3 ? 2 : recentSchedule.TeamAScore;
 		resultSchedule.b_team_score =
-			recentSchedule.TeamBScore == 3 ? 2 : resultSchedule.b_team_score;
+			recentSchedule.TeamBScore == 3 ? 2 : recentSchedule.TeamBScore;
+
+		resultSchedule.a_team_score =
+			resultSchedule.a_team_score == null ? 0 : resultSchedule.a_team_score;
+		resultSchedule.b_team_score =
+			resultSchedule.b_team_score == null ? 0 : resultSchedule.b_team_score;
 
 		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
 			resultSchedule.finishedAt = new Date();
 		}
 
-		if (recentSchedule.Status == "Scheduled") {
+		if (
+			recentSchedule.Status == "Scheduled" &&
+			new Date() < dbSchedule.startTime
+		) {
 			resultSchedule.status = -1;
 		} else if (recentSchedule.Status == "Final") {
 			resultSchedule.status = 1;
