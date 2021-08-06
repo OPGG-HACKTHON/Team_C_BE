@@ -51,20 +51,37 @@ module.exports = {
     });
   },
 
-  updateTeamId: (uid, teamId) => {
+  updateTeamId: (user, teamId) => {
     return new Promise((res, rej) => {
-      User.update(
-        { teamId: teamId, teamUpdatedAt: Date.now() },
-        {
-          where: { uid: uid },
-        }
-      )
-        .then(() => {
-          res("팀변경성공");
-        })
-        .catch((err) => {
-          rej(err);
+      if (user.teamUpdatedAt === null) {
+        User.update({ teamId: teamId, teamUpdateAt: Date.now() })
+          .then(() => {
+            res("success");
+          })
+          .catch((err) => {
+            rej(err);
+          });
+      } else if (
+        Date.parse(user.teamUpdatedAt) + 1000 * 60 * 60 * 24 * 30 <
+        Date.now()
+      ) {
+        User.update(
+          { teamId: teamId, teamUpdatedAt: Date.now() },
+          {
+            where: { uid: user.uid },
+          }
+        )
+          .then(() => {
+            res("success");
+          })
+          .catch((err) => {
+            rej(err);
+          });
+      } else {
+        res({
+          teamUpdatedAt: user.teamUpdatedAt,
         });
+      }
     });
   },
 };
