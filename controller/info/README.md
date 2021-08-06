@@ -8,7 +8,7 @@
 
 `http://3.37.194.249/info`
 
-## 1. getMonthSchedule
+## getMonthSchedule
 
 ### description
 
@@ -80,6 +80,77 @@
     | data.status      | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
     | data.startTime   | Date    | 경기 시작 시간                                              |
     | data.gameKey     | number  | 해당 경기의 세부 내용을 조회하기 위해 필요한 KEY            |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+## getTeamRank
+
+### description
+
+팀 순위, 승, 패, 승률을 확인하는 API
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/teamRank`
+
+### Res
+
+- success
+
+  `data의 리스트는 축약했습니다.`
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": [
+  		{
+  			"rank": 1,
+  			"name": "NS",
+  			"icon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
+  			"win": 11,
+  			"lose": 4,
+  			"rate": 73,
+  			"key": 100000436
+  		},
+  		{
+  			"rank": 2,
+  			"name": "GEN",
+  			"icon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
+  			"win": 10,
+  			"lose": 4,
+  			"rate": 71,
+  			"key": 100000064
+  		}
+  	]
+  }
+  ```
+
+  - | Field     | Type    | Description          |
+    | --------- | ------- | -------------------- |
+    | success   | boolean | 응답 성공 여부       |
+    | status    | number  | Status Code          |
+    | data      | List    | LCK 팀들             |
+    | data.rank | number  | 팀 순위              |
+    | data.name | string  | 팀 이름              |
+    | data.icon | string  | 팀 아이콘 URL        |
+    | data.win  | number  | 팀 승리 수           |
+    | data.lose | number  | 팀 패배 수           |
+    | data.rate | number  | 팀 승률              |
+    | data.key  | number  | 해당 팀에 대한 key값 |
 
 - fail
   ```json

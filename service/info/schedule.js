@@ -34,12 +34,4 @@ module.exports = {
 			res(gameList);
 		});
 	},
-	createPlayer: (teamInfo, players) => {
-		return new Promise(async (res, rej) => {
-			await players.forEach(async (player) => {
-				await playerRepo.createPlayer(teamInfo.dataValues.id, player);
-			});
-			res("success create player data");
-		});
-	},
 };
