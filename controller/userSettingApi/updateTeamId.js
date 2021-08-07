@@ -6,7 +6,7 @@ const updateTeamId = async (req, res) => {
     if (response === "success") {
       res.json(resUtil.success(201, "선호팀 업데이트 성공."));
     } else {
-      res.json(resUtil.fail(400, `${response.teamUpdatedAt}`));
+      res.json(resUtil.fail(400, `${response.teamUpdateAvailableAt}`));
     }
   });
 };

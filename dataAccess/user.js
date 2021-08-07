@@ -78,8 +78,11 @@ module.exports = {
             rej(err);
           });
       } else {
+        const updated = new Date(user.teamUpdatedAt);
+        const month = updated.getMonth() + 2; // 1월 = 0 이고 한달뒤 가능하니 +2
+        const day = updated.getDate();
         res({
-          teamUpdatedAt: user.teamUpdatedAt,
+          teamUpdateAvailableAt: `${month}월 ${day}일`,
         });
       }
     });
