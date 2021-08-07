@@ -51,6 +51,16 @@ module.exports = {
 			res(result[0]);
 		});
 	},
+	findTeamByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findOne({
+				where: {
+					key: key,
+				},
+			});
+			res(result);
+		});
+	},
 	updateTeamKey: (teamInfo) => {
 		return new Promise((res, rej) => {
 			Team.update(
@@ -65,6 +75,15 @@ module.exports = {
 				.catch((err) => {
 					rej(err);
 				});
+		});
+	},
+	getTeamRank: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findAll({
+				order: [["rank", "ASC"]],
+				attributes: ["rank", "name", "icon", "win", "lose", "rate", "key"],
+			});
+			res(result);
 		});
 	},
 };
