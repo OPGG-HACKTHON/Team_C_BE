@@ -1,6 +1,8 @@
 const server = require("../../app");
 const request = require("supertest");
 
+jest.setTimeout(10000);
+
 afterAll(() => {
 	server.close();
 });
