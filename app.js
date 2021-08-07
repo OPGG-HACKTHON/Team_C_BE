@@ -43,18 +43,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 // 세션
+const sessionStore = new MySQLStore({
+	host: process.env.DB_HOST,
+	port: "3306",
+	user: process.env.DB_USERNAME,
+	password: process.env.DB_PWD,
+	database: process.env.DB_DATABASE,
+});
 app.use(
 	session({
 		secret: process.env.DB_SESSIONSECRET,
 		resave: false,
 		saveUninitialized: true,
-		store: new MySQLStore({
-			host: process.env.DB_HOST,
-			port: "3306",
-			user: process.env.DB_USERNAME,
-			password: process.env.DB_PWD,
-			database: process.env.DB_DATABASE,
-		}),
+		store: sessionStore,
 	})
 );
 app.use(passport.initialize());
@@ -72,15 +73,10 @@ app.use(function (req, res, next) {
 
 const server = http.createServer(app);
 
-if (process.env.NODE_ENV == "test") {
-	port = Math.floor(Math.random() * (65535 - 49152)) + 49152;
-	server.listen(port, () => {
-		console.log("Server listening PORT with test : " + port);
-	});
-} else {
+if (process.env.NODE_ENV != "test") {
 	server.listen(process.env.PORT, () => {
 		console.log("Server listening PORT : " + process.env.PORT);
 	});
 }
 
-module.exports = server;
+module.exports = { server, sessionStore };
