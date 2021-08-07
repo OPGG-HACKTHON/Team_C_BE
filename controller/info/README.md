@@ -2,6 +2,10 @@
 
 [getMonthSchedule](#getMonthSchedule)
 
+[getTeamRank](#getTeamRank)
+
+[getPOGRank](#getPOGRank)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -151,6 +155,113 @@
     | data.lose | number  | 팀 패배 수           |
     | data.rate | number  | 팀 승률              |
     | data.key  | number  | 해당 팀에 대한 key값 |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+## getPOGRank
+
+### description
+
+POG 순위를 확인하는 API
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/pogRank`
+
+### Res
+
+- success
+
+  `data의 리스트는 축약했습니다.`
+  `값은 임의로 넣었으며, 정렬은 pog point, 이후 nickname 오름차순입니다.`
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": [
+  		{
+  			"nickname": "BeryL",
+  			"role": "sup",
+  			"point": 200,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+  				"name": "DK"
+  			}
+  		},
+  		{
+  			"nickname": "Lava",
+  			"role": "mid",
+  			"point": 150,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
+  				"name": "BRO"
+  			}
+  		},
+  		{
+  			"nickname": "Khan",
+  			"role": "top",
+  			"point": 100,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+  				"name": "DK"
+  			}
+  		},
+  		{
+  			"nickname": "Rahel",
+  			"role": "adc",
+  			"point": 100,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+  				"name": "DK"
+  			}
+  		},
+  		{
+  			"nickname": "5Kid",
+  			"role": "adc",
+  			"point": 0,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
+  				"name": "KT"
+  			}
+  		},
+  		{
+  			"nickname": "Arthur",
+  			"role": "jun",
+  			"point": 0,
+  			"team": {
+  				"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
+  				"name": "HLE"
+  			}
+  		}
+  	]
+  }
+  ```
+
+  - | Field          | Type    | Description        |
+    | -------------- | ------- | ------------------ |
+    | success        | boolean | 응답 성공 여부     |
+    | status         | number  | Status Code        |
+    | data           | List    | LCK 선수 리스트    |
+    | data.nickname  | string  | 선수 이름          |
+    | data.role      | string  | 선수 포지션        |
+    | data.point     | number  | 선수의 POG 포인트  |
+    | data.team      | object  | 선수의 소속 팀 Obj |
+    | data.team.icon | string  | 팀 icon img url    |
+    | data.team.name | string  | 팀 이름            |
 
 - fail
   ```json
