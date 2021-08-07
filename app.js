@@ -77,3 +77,5 @@ const server = http.createServer(app);
 server.listen(process.env.PORT, () => {
 	console.log("Server listening PORT : " + process.env.PORT);
 });
+
+module.exports = app;
