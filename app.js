@@ -28,9 +28,7 @@ const { sequelize } = require("./models/index");
 
 sequelize
 	.sync({ force: false })
-	.then(() => {
-		console.log("Connect DB");
-	})
+	.then(() => {})
 	.catch((err) => {
 		console.error(err);
 	});
@@ -74,8 +72,15 @@ app.use(function (req, res, next) {
 
 const server = http.createServer(app);
 
-server.listen(process.env.PORT, () => {
-	console.log("Server listening PORT : " + process.env.PORT);
-});
+if (process.env.NODE_ENV == "test") {
+	port = Math.floor(Math.random() * (65535 - 49152)) + 49152;
+	server.listen(port, () => {
+		console.log("Server listening PORT with test : " + port);
+	});
+} else {
+	server.listen(process.env.PORT, () => {
+		console.log("Server listening PORT : " + process.env.PORT);
+	});
+}
 
-module.exports = app;
+module.exports = server;

@@ -6,4 +6,5 @@ module.exports = {
 	dialect: "mysql",
 	// timezone: "Asia/Seoul",
 	timezone: "+09:00",
+	logging: false,
 };
