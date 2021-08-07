@@ -1,4 +1,5 @@
 const { Player } = require("../models/index");
+const { Team } = require("../models/index");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -35,6 +36,19 @@ module.exports = {
 				.catch((err) => {
 					rej(err);
 				});
+		});
+	},
+	getPOGRank: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findAll({
+				include: [{ model: Team, attributes: ["icon", "name"] }],
+				order: [
+					["point", "DESC"],
+					["nickname", "ASC"],
+				],
+				attributes: ["nickname", "role", "point"],
+			});
+			res(result);
 		});
 	},
 };
