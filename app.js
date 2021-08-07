@@ -18,6 +18,8 @@ const leaguesAPI = require("./router/leaguesAPI.router");
 const testAPI = require("./router/testAPI.router");
 const auth = require("./router/auth");
 const userSetting = require("./router/userSetting");
+const infoRouter = require("./router/info.router");
+
 const app = express();
 
 app.use(logger("dev"));
@@ -64,6 +66,7 @@ app.use("/leaguesApi", leaguesAPI);
 app.use("/testAPI", testAPI);
 app.use("/auth", auth);
 app.use("/userSetting", userSetting);
+app.use("/info", infoRouter);
 
 app.use(function (req, res, next) {
 	res.status(404).send(fail(404, "요청한 API 주소가 존재하지 않습니다."));
