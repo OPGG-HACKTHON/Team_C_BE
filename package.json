@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
 		"serve": "cross-env NODE_ENV=dev nodemon app.js",
-		"deploy": "cross-env NODE_ENV=deploy pm2 start app.js"
+		"deploy": "cross-env NODE_ENV=production pm2 start app.js"
 	},
 	"author": "",
 	"license": "ISC",

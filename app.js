@@ -25,7 +25,7 @@ const app = express();
 
 if (process.env.NODE_ENV == "dev") {
 	app.use(logger("dev"));
-} else {
+} else if (process.env.NODE_ENV == "production") {
 	app.use(logger("combined", { stream }));
 }
 
