@@ -65,23 +65,21 @@ module.exports = {
 	createSchedule: (schedule, time) => {
 		return new Promise(async (res, rej) => {
 			const gameInfo = {};
-			gameInfo.a_team_id = schedule.TeamAId;
-			gameInfo.b_team_id = schedule.TeamBId;
+			gameInfo.aTeamId = schedule.TeamAId;
+			gameInfo.bTeamId = schedule.TeamBId;
 
-			gameInfo.a_team_score =
-				schedule.TeamAScore == 3 ? 2 : schedule.TeamAScore;
-			gameInfo.b_team_score =
-				schedule.TeamBScore == 3 ? 2 : schedule.TeamBScore;
+			gameInfo.aTeamScore = schedule.TeamAScore == 3 ? 2 : schedule.TeamAScore;
+			gameInfo.bTeamScore = schedule.TeamBScore == 3 ? 2 : schedule.TeamBScore;
 
-			gameInfo.a_team_score =
-				gameInfo.a_team_score == null ? 0 : gameInfo.a_team_score;
-			gameInfo.b_team_score =
-				gameInfo.b_team_score == null ? 0 : gameInfo.b_team_score;
+			gameInfo.aTeamScore =
+				gameInfo.aTeamScore == null ? 0 : gameInfo.aTeamScore;
+			gameInfo.bTeamScore =
+				gameInfo.bTeamScore == null ? 0 : gameInfo.bTeamScore;
 
 			gameInfo.startTime = time;
 
 			gameInfo.status =
-				gameInfo.a_team_score == 2 || gameInfo.b_team_score == 2 ? 1 : -1;
+				gameInfo.aTeamScore == 2 || gameInfo.bTeamScore == 2 ? 1 : -1;
 			if (new Date() + 9 * 60 * 60 * 1000 > time) gameInfo.status = 0;
 
 			gameInfo.gameId = schedule.GameId;
@@ -94,15 +92,15 @@ module.exports = {
 	compareSchedule: (dbSchedule, recentSchedule) => {
 		const resultSchedule = {};
 
-		resultSchedule.a_team_score =
+		resultSchedule.aTeamScore =
 			recentSchedule.TeamAScore == 3 ? 2 : recentSchedule.TeamAScore;
-		resultSchedule.b_team_score =
+		resultSchedule.bTeamScore =
 			recentSchedule.TeamBScore == 3 ? 2 : recentSchedule.TeamBScore;
 
-		resultSchedule.a_team_score =
-			resultSchedule.a_team_score == null ? 0 : resultSchedule.a_team_score;
-		resultSchedule.b_team_score =
-			resultSchedule.b_team_score == null ? 0 : resultSchedule.b_team_score;
+		resultSchedule.aTeamScore =
+			resultSchedule.aTeamScore == null ? 0 : resultSchedule.aTeamScore;
+		resultSchedule.bTeamScore =
+			resultSchedule.bTeamScore == null ? 0 : resultSchedule.bTeamScore;
 
 		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
 			resultSchedule.finishedAt = new Date();

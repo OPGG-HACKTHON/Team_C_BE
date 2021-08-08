@@ -6,10 +6,10 @@ module.exports = {
 	createSchedule: (gameInfo) => {
 		return new Promise((res, rej) => {
 			Game.create({
-				a_team_id: gameInfo.a_team_id,
-				b_team_id: gameInfo.b_team_id,
-				a_team_score: gameInfo.a_team_score,
-				b_team_score: gameInfo.b_team_score,
+				aTeamId: gameInfo.aTeamId,
+				bTeamId: gameInfo.bTeamId,
+				aTeamScore: gameInfo.aTeamScore,
+				bTeamScore: gameInfo.bTeamScore,
 				startTime: gameInfo.startTime,
 				status: gameInfo.status,
 				key: gameInfo.gameId,
@@ -36,8 +36,8 @@ module.exports = {
 		return new Promise((res, rej) => {
 			Game.update(
 				{
-					a_team_score: resultSchedule.a_team_score,
-					b_team_score: resultSchedule.b_team_score,
+					aTeamScore: resultSchedule.aTeamScore,
+					bTeamScore: resultSchedule.bTeamScore,
 					status: resultSchedule.status,
 					finishedAt: resultSchedule.finishedAt,
 				},

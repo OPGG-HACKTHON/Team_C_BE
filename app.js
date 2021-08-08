@@ -12,6 +12,7 @@ const passport = require("passport");
 
 dotenv.config();
 
+const { stream } = require("./config/winston");
 const { fail } = require("./util/resUtil");
 
 const leaguesAPI = require("./router/leaguesAPI.router");
@@ -22,15 +23,17 @@ const infoRouter = require("./router/info.router");
 
 const app = express();
 
-app.use(logger("dev"));
+if (process.env.NODE_ENV == "dev") {
+	app.use(logger("dev"));
+} else if (process.env.NODE_ENV == "production") {
+	app.use(logger("combined", { stream }));
+}
 
 const { sequelize } = require("./models/index");
 
 sequelize
 	.sync({ force: false })
-	.then(() => {
-		console.log("Connect DB");
-	})
+	.then(() => {})
 	.catch((err) => {
 		console.error(err);
 	});
@@ -45,18 +48,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 // 세션
+const sessionStore = new MySQLStore({
+	host: process.env.DB_HOST,
+	port: "3306",
+	user: process.env.DB_USERNAME,
+	password: process.env.DB_PWD,
+	database: process.env.DB_DATABASE,
+});
 app.use(
 	session({
 		secret: process.env.DB_SESSIONSECRET,
 		resave: false,
 		saveUninitialized: true,
-		store: new MySQLStore({
-			host: process.env.DB_HOST,
-			port: "3306",
-			user: process.env.DB_USERNAME,
-			password: process.env.DB_PWD,
-			database: process.env.DB_DATABASE,
-		}),
+		store: sessionStore,
 	})
 );
 app.use(passport.initialize());
@@ -74,6 +78,10 @@ app.use(function (req, res, next) {
 
 const server = http.createServer(app);
 
-server.listen(process.env.PORT, () => {
-	console.log("Server listening PORT : " + process.env.PORT);
-});
+if (process.env.NODE_ENV != "test") {
+	server.listen(process.env.PORT, () => {
+		console.log("Server listening PORT : " + process.env.PORT);
+	});
+}
+
+module.exports = { server, sessionStore };
