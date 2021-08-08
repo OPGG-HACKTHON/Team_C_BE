@@ -12,6 +12,7 @@ const passport = require("passport");
 
 dotenv.config();
 
+const { stream } = require("./config/winston");
 const { fail } = require("./util/resUtil");
 
 const leaguesAPI = require("./router/leaguesAPI.router");
@@ -22,7 +23,11 @@ const infoRouter = require("./router/info.router");
 
 const app = express();
 
-app.use(logger("dev"));
+if (process.env.NODE_ENV == "dev") {
+	app.use(logger("dev"));
+} else {
+	app.use(logger("combined", { stream }));
+}
 
 const { sequelize } = require("./models/index");
 
