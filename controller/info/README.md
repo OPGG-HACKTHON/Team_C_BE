@@ -12,6 +12,8 @@
 
 [getPOGRank](#getPOGRank)
 
+[getTeamInfo](#getTeamInfo)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -51,6 +53,7 @@
   	"status": 201,
   	"data": [
   		{
+  			"id": 73,
   			"aTeamName": "NS",
   			"bTeamName": "HLE",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
@@ -58,10 +61,10 @@
   			"aTeamScore": 2,
   			"bTeamScore": 1,
   			"status": 1,
-  			"startTime": "2021-08-01T17:00:00.000Z",
-  			"gameKey": 100011557
+  			"startTime": "2021-08-01T17:00:00.000Z"
   		},
   		{
+  			"id": 74,
   			"aTeamName": "DK",
   			"bTeamName": "KT",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
@@ -69,8 +72,7 @@
   			"aTeamScore": 2,
   			"bTeamScore": 0,
   			"status": 1,
-  			"startTime": "2021-08-01T20:00:00.000Z",
-  			"gameKey": 100011558
+  			"startTime": "2021-08-01T20:00:00.000Z"
   		}
   	]
   }
@@ -81,6 +83,7 @@
     | success         | boolean | 응답 성공 여부                                              |
     | status          | number  | Status Code                                                 |
     | data            | List    | 해당 월에 존재하는 경기 정보들                              |
+    | data.id         | number  | game table pk                                               |
     | data.aTeamName  | string  | A팀 이름                                                    |
     | data.bTeamName  | string  | B팀 이름                                                    |
     | data.aTeamIcon  | string  | A팀 아이콘 URL                                              |
@@ -89,7 +92,6 @@
     | data.bTeamScore | number  | B팀 스코어                                                  |
     | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
     | data.startTime  | Date    | 경기 시작 시간                                              |
-    | data.gameKey    | number  | 해당 경기의 세부 내용을 조회하기 위해 필요한 KEY            |
 
 - fail
   ```json
@@ -128,39 +130,39 @@
   	"status": 201,
   	"data": [
   		{
+  			"id": 3,
   			"rank": 1,
   			"name": "NS",
   			"icon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
   			"win": 11,
   			"lose": 4,
-  			"rate": 73,
-  			"key": 100000436
+  			"rate": 73
   		},
   		{
+  			"id": 8,
   			"rank": 2,
   			"name": "GEN",
   			"icon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
   			"win": 10,
   			"lose": 4,
-  			"rate": 71,
-  			"key": 100000064
+  			"rate": 71
   		}
   	]
   }
   ```
 
-  - | Field     | Type    | Description          |
-    | --------- | ------- | -------------------- |
-    | success   | boolean | 응답 성공 여부       |
-    | status    | number  | Status Code          |
-    | data      | List    | LCK 팀들             |
-    | data.rank | number  | 팀 순위              |
-    | data.name | string  | 팀 이름              |
-    | data.icon | string  | 팀 아이콘 URL        |
-    | data.win  | number  | 팀 승리 수           |
-    | data.lose | number  | 팀 패배 수           |
-    | data.rate | number  | 팀 승률              |
-    | data.key  | number  | 해당 팀에 대한 key값 |
+  - | Field     | Type    | Description    |
+    | --------- | ------- | -------------- |
+    | success   | boolean | 응답 성공 여부 |
+    | status    | number  | Status Code    |
+    | data      | List    | LCK 팀들       |
+    | data.id   | number  | team table pk  |
+    | data.rank | number  | 팀 순위        |
+    | data.name | string  | 팀 이름        |
+    | data.icon | string  | 팀 아이콘 URL  |
+    | data.win  | number  | 팀 승리 수     |
+    | data.lose | number  | 팀 패배 수     |
+    | data.rate | number  | 팀 승률        |
 
 - fail
   ```json
@@ -268,6 +270,76 @@ POG 순위를 확인하는 API
     | data.team      | object  | 선수의 소속 팀 Obj |
     | data.team.icon | string  | 팀 icon img url    |
     | data.team.name | string  | 팀 이름            |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+## getTeamInfo
+
+### description
+
+전체 팀 이름, 아이콘, id를 확인하는 API
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/teamInfo`
+
+### Res
+
+- success
+
+  `data의 리스트는 축약했습니다.`
+  `팀의 정렬은 name 오름차순입니다.`
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": [
+  		{
+  			"id": 9,
+  			"name": "AF",
+  			"icon": "https://cdn.pandascore.co/images/team/image/120/afreeca_freecslogo_profile.png"
+  		},
+  		{
+  			"id": 2,
+  			"name": "BRO",
+  			"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png"
+  		},
+  		{
+  			"id": 1,
+  			"name": "DK",
+  			"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png"
+  		},
+  		{
+  			"id": 5,
+  			"name": "DRX",
+  			"icon": "https://cdn.pandascore.co/images/team/image/126370/220px_dr_xlogo_square.png"
+  		}
+  	]
+  }
+  ```
+
+  - | Field     | Type    | Description    |
+    | --------- | ------- | -------------- |
+    | success   | boolean | 응답 성공 여부 |
+    | status    | number  | Status Code    |
+    | data      | List    | LCK 팀들       |
+    | data.id   | number  | team db pk     |
+    | data.name | string  | 팀 이름        |
+    | data.icon | string  | 팀 아이콘 URL  |
 
 - fail
   ```json
