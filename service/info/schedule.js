@@ -13,6 +13,8 @@ module.exports = {
 				const a_team = await teamRepo.findTeamByKey(data.aTeamId);
 				const b_team = await teamRepo.findTeamByKey(data.bTeamId);
 
+				curGame.id = data.id;
+
 				curGame.aTeamName = a_team.dataValues.name;
 				curGame.bTeamName = b_team.dataValues.name;
 
@@ -25,8 +27,6 @@ module.exports = {
 				curGame.status = data.status;
 
 				curGame.startTime = adjustTime(data.startTime);
-
-				curGame.gameKey = data.key;
 
 				gameList.push(curGame);
 			}
