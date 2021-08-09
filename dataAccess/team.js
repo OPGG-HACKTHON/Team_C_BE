@@ -86,4 +86,13 @@ module.exports = {
 			res(result);
 		});
 	},
+	getTeamInfo: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findAll({
+				order: [["name", "ASC"]],
+				attributes: ["id", "name", "icon"],
+			});
+			res(result);
+		});
+	},
 };
