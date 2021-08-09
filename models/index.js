@@ -51,6 +51,7 @@ db.Set = require("./set")(sequelize, Sequelize);
 db.SetPlayer = require("./setPlayer")(sequelize, Sequelize);
 db.POG = require("./POG")(sequelize, Sequelize);
 db.Tinder = require("./tinder")(sequelize, Sequelize);
+db.TopTinder = require("./topTinder")(sequelize, Sequelize);
 
 db.User.hasMany(db.Tinder, {
 	onUpdate: "SET NULL",
@@ -107,5 +108,11 @@ db.User.hasMany(db.POG, {
 	onUpdate: "CASCADE",
 });
 db.POG.belongsTo(db.User);
+
+db.Tinder.hasMany(db.TopTinder, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.TopTinder.belongsTo(db.Tinder);
 
 module.exports = db;
