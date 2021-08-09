@@ -12,6 +12,8 @@
 
 [getPOGRank](#getPOGRank)
 
+[getTeamInfo](#getTeamInfo)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -51,7 +53,7 @@
   	"status": 201,
   	"data": [
   		{
-  			"id": 73
+  			"id": 73,
   			"aTeamName": "NS",
   			"bTeamName": "HLE",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
@@ -59,10 +61,10 @@
   			"aTeamScore": 2,
   			"bTeamScore": 1,
   			"status": 1,
-  			"startTime": "2021-08-01T17:00:00.000Z",
+  			"startTime": "2021-08-01T17:00:00.000Z"
   		},
   		{
-  			"id": 74
+  			"id": 74,
   			"aTeamName": "DK",
   			"bTeamName": "KT",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
@@ -70,7 +72,7 @@
   			"aTeamScore": 2,
   			"bTeamScore": 0,
   			"status": 1,
-  			"startTime": "2021-08-01T20:00:00.000Z",
+  			"startTime": "2021-08-01T20:00:00.000Z"
   		}
   	]
   }
@@ -128,22 +130,22 @@
   	"status": 201,
   	"data": [
   		{
-  			"id": 3
+  			"id": 3,
   			"rank": 1,
   			"name": "NS",
   			"icon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
   			"win": 11,
   			"lose": 4,
-  			"rate": 73,
+  			"rate": 73
   		},
   		{
-  			"id": 8
+  			"id": 8,
   			"rank": 2,
   			"name": "GEN",
   			"icon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
   			"win": 10,
   			"lose": 4,
-  			"rate": 71,
+  			"rate": 71
   		}
   	]
   }
