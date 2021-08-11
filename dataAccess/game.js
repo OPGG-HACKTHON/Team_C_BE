@@ -72,4 +72,23 @@ module.exports = {
 			res(result);
 		});
 	},
+	getCurrentSchedule: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findOne({
+				attributes: [
+					"id",
+					"aTeamId",
+					"bTeamId",
+					"aTeamScore",
+					"bTeamScore",
+					"startTime",
+					"status",
+				],
+				where: {
+					[Op.or]: [{ status: 0 }, { status: -1 }],
+				},
+			});
+			res(result);
+		});
+	},
 };
