@@ -12,6 +12,8 @@
 
 [updateSchedule](#updateSchedule)
 
+[updateGamePlayer](#updateGamePlayer)
+
 ## 외부 API, 크롤링을 통한 데이터 핸들링 파트
 
 ### 서버에서 사용할 API들입니다.
@@ -171,5 +173,31 @@ SportsData API를 통해 경기의 내용을 받아와서 DB에 업데이트 하
 	"success": true,
 	"status": 201,
 	"data": "일정 업데이트를 완료했습니다."
+}
+```
+
+## updateGamePlayer
+
+### description
+
+각 경기에 뛰는 선수의 목록을 업데이트
+
+### Req
+
+- method
+
+  `PUT`
+
+- url
+
+  `/gamePlayer`
+
+### Res
+
+```json
+{
+	"success": true,
+	"status": 201,
+	"data": "현재 경기의 선수 업데이트를 완료했습니다."
 }
 ```

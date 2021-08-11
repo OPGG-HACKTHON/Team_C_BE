@@ -1,9 +1,17 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes, player) => {
 	return sequelize.define(
 		"game_player",
 		{
 			count: {
 				type: DataTypes.INTEGER,
+			},
+			playerKey: {
+				type: DataTypes.INTEGER,
+				references: {
+					model: player,
+					key: "key",
+				},
+				allowNull: false,
 			},
 		},
 		{
