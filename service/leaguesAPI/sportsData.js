@@ -22,6 +22,26 @@ module.exports = {
 			);
 		});
 	},
+	getGamePlayerByGameKey: (gameKey) => {
+		return new Promise((res, rej) => {
+			const SPORTSDATA_KEY = process.env.SPORTSDATA_KEY;
+			request(
+				{
+					url: `https://api.sportsdata.io/v3/lol/stats/json/BoxScore/${gameKey}?key=${SPORTSDATA_KEY}`,
+					method: "GET",
+				},
+				(error, response, body) => {
+					if (error) {
+						console.error(error);
+						return rej(error);
+					}
+					if (response.statusCode === 200) {
+						res(JSON.parse(body));
+					}
+				}
+			);
+		});
+	},
 	getPlayersByTeamId: (teamId) => {
 		return new Promise((res, rej) => {
 			const SPORTSDATA_KEY = process.env.SPORTSDATA_KEY;
