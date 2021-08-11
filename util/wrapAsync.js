@@ -1,17 +1,30 @@
 const { fail } = require("../util/resUtil");
+const { logger } = require("../config/winston");
 
 module.exports = function wrapAsync(fn) {
 	return async (req, res, next) => {
 		try {
 			await fn(req, res, next);
 		} catch (err) {
-			if (res.headersSent) {
-				return;
+			if (process.env.NODE_ENV == "production") {
+				const errObj = {
+					req: {
+						headers: req.headers,
+						query: req.query,
+						body: req.body,
+						route: req.route,
+					},
+					error: {
+						message: err.message,
+						stack: err.stack,
+						status: err.status,
+					},
+					user: req.user,
+				};
+				logger.error(errObj);
 			}
-			console.error(err);
-			res
-				.status(500)
-				.json(fail(500, "서버 내 예상치 못한 에러가 발생했습니다."));
+
+			return res.status(500).json(fail(500, err.message));
 		}
 	};
 };

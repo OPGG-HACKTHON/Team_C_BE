@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes, team) => {
 				type: DataTypes.INTEGER,
 				unique: true,
 			},
-			a_team_id: {
+			aTeamId: {
 				type: DataTypes.INTEGER,
 				references: {
 					model: team,
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes, team) => {
 				},
 				allowNull: false,
 			},
-			b_team_id: {
+			bTeamId: {
 				type: DataTypes.INTEGER,
 				references: {
 					model: team,
@@ -22,10 +22,10 @@ module.exports = (sequelize, DataTypes, team) => {
 				},
 				allowNull: false,
 			},
-			a_team_score: {
+			aTeamScore: {
 				type: DataTypes.INTEGER(1),
 			},
-			b_team_score: {
+			bTeamScore: {
 				type: DataTypes.INTEGER(1),
 			},
 			startTime: {

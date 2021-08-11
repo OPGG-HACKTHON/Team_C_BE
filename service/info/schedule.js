@@ -10,23 +10,23 @@ module.exports = {
 				const curGame = {};
 
 				const data = game.dataValues;
-				const a_team = await teamRepo.findTeamByKey(data.a_team_id);
-				const b_team = await teamRepo.findTeamByKey(data.b_team_id);
+				const a_team = await teamRepo.findTeamByKey(data.aTeamId);
+				const b_team = await teamRepo.findTeamByKey(data.bTeamId);
 
-				curGame.a_teamName = a_team.dataValues.name;
-				curGame.b_teamName = b_team.dataValues.name;
+				curGame.id = data.id;
 
-				curGame.a_teamIcon = a_team.dataValues.icon;
-				curGame.b_teamIcon = b_team.dataValues.icon;
+				curGame.aTeamName = a_team.dataValues.name;
+				curGame.bTeamName = b_team.dataValues.name;
 
-				curGame.a_teamScore = data.a_team_score;
-				curGame.b_teamScore = data.b_team_score;
+				curGame.aTeamIcon = a_team.dataValues.icon;
+				curGame.bTeamIcon = b_team.dataValues.icon;
+
+				curGame.aTeamScore = data.aTeamScore;
+				curGame.bTeamScore = data.bTeamScore;
 
 				curGame.status = data.status;
 
 				curGame.startTime = adjustTime(data.startTime);
-
-				curGame.gameKey = data.key;
 
 				gameList.push(curGame);
 			}

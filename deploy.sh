@@ -9,4 +9,10 @@ cd ./app/step2/zip/
 npm i
 sleep 5
 
-pm2 start app.js
+npm uninstall cross-env
+sleep 3
+
+npm i cross-env
+sleep 3
+
+npm run deploy
