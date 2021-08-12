@@ -1,10 +1,12 @@
 const { GamePlayer } = require("../models/index");
+const { Game } = require("../models/index");
 const { Op } = require("sequelize");
 
 module.exports = {
 	getGamePlayerByGameId: (gameId) => {
 		return new Promise(async (res, rej) => {
 			const result = await GamePlayer.findAll({
+				include: [{ model: Game, attributes: ["aTeamId", "bTeamId"] }],
 				where: {
 					gameId: gameId,
 				},
