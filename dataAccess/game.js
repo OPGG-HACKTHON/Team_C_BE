@@ -72,6 +72,27 @@ module.exports = {
 			res(result);
 		});
 	},
+	getLastFinishedSchedule: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findOne({
+				order: [["startTime", "DESC"]],
+				attributes: [
+					"id",
+					"aTeamId",
+					"bTeamId",
+					"aTeamScore",
+					"bTeamScore",
+					"startTime",
+					"finishedAt",
+					"status",
+				],
+				where: {
+					status: 1,
+				},
+			});
+			res(result);
+		});
+	},
 	getCurrentSchedule: () => {
 		return new Promise(async (res, rej) => {
 			const result = await Game.findOne({
