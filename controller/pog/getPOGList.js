@@ -24,6 +24,8 @@ const getPOGList = async (req, res) => {
 		const player = rawPlayer.dataValues;
 		const playerInfo = await playerRepo.getPlayerByKey(player.playerKey);
 
+		playerInfo.dataValues.gamePlayerId = player.id;
+
 		if (playerInfo.dataValues.teamId == aTeam.id) {
 			delete playerInfo.dataValues.teamId;
 			aTeam.dataValues.player.push(playerInfo.dataValues);

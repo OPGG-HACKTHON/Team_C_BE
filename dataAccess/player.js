@@ -54,7 +54,7 @@ module.exports = {
 	getPlayerByKey: (key) => {
 		return new Promise(async (res, rej) => {
 			const result = await Player.findOne({
-				attributes: ["nickname", "role", "image", "key", "teamId"],
+				attributes: ["nickname", "role", "image", "teamId"],
 				where: { key: key },
 			});
 			res(result);

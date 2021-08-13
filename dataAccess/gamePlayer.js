@@ -36,4 +36,30 @@ module.exports = {
 			});
 		});
 	},
+	getGamePlayerByGameId: (gamePlayerId) => {
+		return new Promise(async (res, rej) => {
+			const result = await GamePlayer.findOne({
+				where: {
+					id: gamePlayerId,
+				},
+			});
+			res(result);
+		});
+	},
+	updateCount: (gamePlayerId, count) => {
+		return new Promise((res, rej) => {
+			GamePlayer.update(
+				{
+					count: count,
+				},
+				{ where: { id: gamePlayerId } }
+			)
+				.then(() => {
+					res("success");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 };

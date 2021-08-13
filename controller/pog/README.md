@@ -4,6 +4,8 @@
 
 [getPOGList](#getPOGList)
 
+[getPOGResult](#getPOGResult)
+
 ## POG 투표와 조회를 위한 API Router입니다.
 
 ## Base URL
@@ -46,13 +48,13 @@
   					"nickname": "Kiin",
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/3524/220px_af_kiin_2020_split_1.png",
-  					"key": 100000581
+  					"gamePlayerId": 92
   				},
   				{
   					"nickname": "Leo",
   					"role": "adc",
   					"image": "https://cdn.pandascore.co/images/player/image/14239/lsb_leo_2021_split_1.png",
-  					"key": 100000622
+  					"gamePlayerId": 94
   				}
   			]
   		},
@@ -65,13 +67,7 @@
   					"nickname": "Morgan",
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/21861/hle_morgan_2021_split_1.png",
-  					"key": 100002033
-  				},
-  				{
-  					"nickname": "Chovy",
-  					"role": "mid",
-  					"image": "https://cdn.pandascore.co/images/player/image/15000/hle_chovy_2021_split_1.png",
-  					"key": 100000941
+  					"gamePlayerId": 91
   				}
   			]
   		}
@@ -81,19 +77,19 @@
 
   aTeam과 bTeam은 중복된 내용이기에 생략했습니다.
 
-  - | Field                      | Type    | Description                  |
-    | -------------------------- | ------- | ---------------------------- |
-    | success                    | boolean | 응답 성공 여부               |
-    | status                     | number  | Status Code                  |
-    | data                       | object  | 각 팀                        |
-    | data.aTeam.name            | string  | aTeam의 이름                 |
-    | data.aTeam.icon            | string  | aTeam의 icon url             |
-    | data.aTeam.id              | number  | aTeam의 table pk             |
-    | data.aTeam.player          | List    | aTeam 선수 출전 선수 목록    |
-    | data.aTeam.player.nickname | string  | 선수 이름                    |
-    | data.aTeam.player.role     | string  | 선수 라인                    |
-    | data.aTeam.player.image    | string  | 선수 image url               |
-    | data.aTeam.player.key      | string  | 투표할 때 필요한 선수 key 값 |
+  - | Field                          | Type    | Description                  |
+    | ------------------------------ | ------- | ---------------------------- |
+    | success                        | boolean | 응답 성공 여부               |
+    | status                         | number  | Status Code                  |
+    | data                           | object  | 각 팀                        |
+    | data.aTeam.name                | string  | aTeam의 이름                 |
+    | data.aTeam.icon                | string  | aTeam의 icon url             |
+    | data.aTeam.id                  | number  | aTeam의 table pk             |
+    | data.aTeam.player              | List    | aTeam 선수 출전 선수 목록    |
+    | data.aTeam.player.nickname     | string  | 선수 이름                    |
+    | data.aTeam.player.role         | string  | 선수 라인                    |
+    | data.aTeam.player.image        | string  | 선수 image url               |
+    | data.aTeam.player.gamePlayerId | number  | 투표할 때 필요한 선수 key 값 |
 
 - fail
   ```json
@@ -140,7 +136,7 @@
   					"nickname": "Kiin",
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/3524/220px_af_kiin_2020_split_1.png",
-  					"key": 100000581,
+  					"gamePlayerId": 92,
   					"cnt": 363,
   					"rate": 1
   				},
@@ -148,7 +144,7 @@
   					"nickname": "Leo",
   					"role": "adc",
   					"image": "https://cdn.pandascore.co/images/player/image/14239/lsb_leo_2021_split_1.png",
-  					"key": 100000622,
+  					"gamePlayerId": 94,
   					"cnt": 1235,
   					"rate": 3.42
   				}
@@ -163,7 +159,7 @@
   					"nickname": "Morgan",
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/21861/hle_morgan_2021_split_1.png",
-  					"key": 100002033,
+  					"gamePlayerId": 91,
   					"cnt": 6456,
   					"rate": 17.92
   				},
@@ -171,7 +167,7 @@
   					"nickname": "Chovy",
   					"role": "mid",
   					"image": "https://cdn.pandascore.co/images/player/image/15000/hle_chovy_2021_split_1.png",
-  					"key": 100000941,
+  					"gamePlayerId": 93,
   					"cnt": 8965,
   					"rate": 24.88
   				}
@@ -183,21 +179,21 @@
 
   aTeam과 bTeam은 중복된 내용이기에 생략했습니다.
 
-  - | Field                      | Type    | Description                             |
-    | -------------------------- | ------- | --------------------------------------- |
-    | success                    | boolean | 응답 성공 여부                          |
-    | status                     | number  | Status Code                             |
-    | data                       | object  | 각 팀                                   |
-    | data.aTeam.name            | string  | aTeam의 이름                            |
-    | data.aTeam.icon            | string  | aTeam의 icon url                        |
-    | data.aTeam.id              | number  | aTeam의 table pk                        |
-    | data.aTeam.player          | List    | aTeam 선수 출전 선수 목록               |
-    | data.aTeam.player.nickname | string  | 선수 이름                               |
-    | data.aTeam.player.role     | string  | 선수 라인                               |
-    | data.aTeam.player.image    | string  | 선수 image url                          |
-    | data.aTeam.player.key      | string  | 투표할 때 필요한 선수 key 값            |
-    | data.aTeam.player.cnt      | number  | 선수 투표수                             |
-    | data.aTeam.player.rate     | number  | 전체 선수가 100일 때, 선수의 cnt 백분율 |
+  - | Field                          | Type    | Description                             |
+    | ------------------------------ | ------- | --------------------------------------- |
+    | success                        | boolean | 응답 성공 여부                          |
+    | status                         | number  | Status Code                             |
+    | data                           | object  | 각 팀                                   |
+    | data.aTeam.name                | string  | aTeam의 이름                            |
+    | data.aTeam.icon                | string  | aTeam의 icon url                        |
+    | data.aTeam.id                  | number  | aTeam의 table pk                        |
+    | data.aTeam.player              | List    | aTeam 선수 출전 선수 목록               |
+    | data.aTeam.player.nickname     | string  | 선수 이름                               |
+    | data.aTeam.player.role         | string  | 선수 라인                               |
+    | data.aTeam.player.image        | string  | 선수 image url                          |
+    | data.aTeam.player.gamePlayerId | number  | 투표할 때 필요한 선수 key 값            |
+    | data.aTeam.player.cnt          | number  | 선수 투표수                             |
+    | data.aTeam.player.rate         | number  | 전체 선수가 100일 때, 선수의 cnt 백분율 |
 
 - fail
   ```json
