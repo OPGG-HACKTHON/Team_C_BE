@@ -14,6 +14,8 @@
 
 [getTeamInfo](#getTeamInfo)
 
+[getCurrentGame](#getCurrentGame)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -340,6 +342,81 @@ POG 순위를 확인하는 API
     | data.id   | number  | team db pk     |
     | data.name | string  | 팀 이름        |
     | data.icon | string  | 팀 아이콘 URL  |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+## getCurrentGame
+
+### description
+
+종료되고 30분이 지나지 않은 경기나, 현재 진행 중이거나, 예정인 가장 가까운 경기에 대한 정보를 제공합니다.
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/currentGame`
+
+### Res
+
+- success - 경기가 존재할 때
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": {
+  		"id": 83,
+  		"aTeamScore": 0,
+  		"bTeamScore": 0,
+  		"startTime": "2021-08-12T08:00:00.000Z",
+  		"status": -1,
+  		"aTeam": {
+  			"name": "AF",
+  			"icon": "https://cdn.pandascore.co/images/team/image/120/afreeca_freecslogo_profile.png"
+  		},
+  		"bTeam": {
+  			"name": "HLE",
+  			"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png"
+  		}
+  	}
+  }
+  ```
+
+- success - 예정된 경기가 없을 때
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": null
+  }
+  ```
+
+  - | Field           | Type    | Description                                                 |
+    | --------------- | ------- | ----------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                              |
+    | status          | number  | Status Code                                                 |
+    | data.id         | number  | game table pk                                               |
+    | data.aTeamScore | number  | A팀 스코어                                                  |
+    | data.bTeamScore | number  | B팀 스코어                                                  |
+    | data.startTime  | date    | 경기 시작 시간                                              |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
+    | data.aTeam.name | string  | A팀 이름                                                    |
+    | data.aTeam.icon | string  | A팀 icon url                                                |
+    | data.bTeam.name | string  | B팀 이름                                                    |
+    | data.bTeam.icon | string  | B팀 icon url                                                |
 
 - fail
   ```json
