@@ -6,6 +6,8 @@
 
 [getPOGResult](#getPOGResult)
 
+[votePOG](#votePOG)
+
 ## POG 투표와 조회를 위한 API Router입니다.
 
 ## Base URL
@@ -201,5 +203,82 @@
   	"success": false,
   	"status": 500,
   	"msg": "Internel Error"
+  }
+  ```
+
+## votePOG
+
+### description
+
+POG 투표 API
+
+### Req
+
+- method
+
+  - `POST`
+
+- url
+
+  - `/vote`
+
+- body
+
+```json
+{
+	"userUid": 1820326560,
+	"vote": [
+		{ "gamePlayerId": 92, "count": 11 },
+		{ "gamePlayerId": 94, "count": 14 },
+		{ "gamePlayerId": 96, "count": 11 }
+	]
+}
+```
+
+- | Field                | Type   | Description                 |
+  | -------------------- | ------ | --------------------------- |
+  | userUid              | number | user Uid                    |
+  | vote                 | list   | 각 선수 투표에 대한 리스트  |
+  | vote[0].gamePlayerId | number | player에 투표에 해당하는 id |
+  | vote[0].count        | number | 사용자가 터치한 투표 수     |
+
+### Res
+
+- success
+
+  `data의 리스트는 축약했습니다.`
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": "투표를 완료했습니다."
+  }
+  ```
+
+  aTeam과 bTeam은 중복된 내용이기에 생략했습니다.
+
+  - | Field   | Type    | Description    |
+    | ------- | ------- | -------------- |
+    | success | boolean | 응답 성공 여부 |
+    | status  | number  | Status Code    |
+    | data    | string  | 성공 메시지    |
+
+- fail
+
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+- fail - uid error
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "uid에 해당하는 id가 존재하지 않습니다."
   }
   ```
