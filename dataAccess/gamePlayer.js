@@ -29,4 +29,11 @@ module.exports = {
 				});
 		});
 	},
+	getPOGCntSum: (gameId) => {
+		return new Promise((res, rej) => {
+			GamePlayer.sum("count", { where: { gameId: gameId } }).then((sum) => {
+				res(sum);
+			});
+		});
+	},
 };
