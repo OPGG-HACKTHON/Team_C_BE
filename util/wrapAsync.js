@@ -23,7 +23,7 @@ module.exports = function wrapAsync(fn) {
 				};
 				logger.error(errObj);
 			}
-
+			console.error(err);
 			return res.status(500).json(fail(500, err.message));
 		}
 	};
