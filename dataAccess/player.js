@@ -51,4 +51,13 @@ module.exports = {
 			res(result);
 		});
 	},
+	getPlayerByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findOne({
+				attributes: ["nickname", "role", "image", "teamId"],
+				where: { key: key },
+			});
+			res(result);
+		});
+	},
 };
