@@ -9,7 +9,6 @@ const getPOGList = async (req, res) => {
 	const currentGameId = recentSchedule.dataValues.id;
 
 	const pogList = await gamePlayerRepo.getGamePlayerByGameId(currentGameId);
-
 	const curInfo = pogList[0].dataValues.game.dataValues;
 	const aTeamId = curInfo.aTeamId;
 	const bTeamId = curInfo.bTeamId;
