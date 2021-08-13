@@ -18,7 +18,7 @@ const votePOG = async (req, res) => {
 		// pog repo logging
 		await POGRepo.createPOGVote(curVote, userId);
 
-		let curGamePlayer = await gamePlayerRepo.getGamePlayerByGameId(
+		let curGamePlayer = await gamePlayerRepo.getGamePlayerByGamePlayerId(
 			curVote.gamePlayerId
 		);
 

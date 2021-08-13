@@ -36,7 +36,7 @@ module.exports = {
 			});
 		});
 	},
-	getGamePlayerByGameId: (gamePlayerId) => {
+	getGamePlayerByGamePlayerId: (gamePlayerId) => {
 		return new Promise(async (res, rej) => {
 			const result = await GamePlayer.findOne({
 				where: {
