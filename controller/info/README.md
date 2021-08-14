@@ -3,6 +3,7 @@
 ### 수정 Log
 
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
+2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
 
 ---
 
@@ -265,6 +266,7 @@ POG 순위를 확인하는 API
     | data.nickname  | string  | 선수 이름          |
     | data.role      | string  | 선수 포지션        |
     | data.point     | number  | 선수의 POG 포인트  |
+    | data.rank      | number  | 선수의 랭킹        |
     | data.team      | object  | 선수의 소속 팀 Obj |
     | data.team.icon | string  | 팀 icon img url    |
     | data.team.name | string  | 팀 이름            |
