@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       nickname: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(30),
       },
       refreshedAt: {
         type: DataTypes.DATE,

@@ -1,5 +1,5 @@
 const { User } = require("../models/index");
-
+const { verifyToken } = require("../util/jwt");
 module.exports = {
   checkNewUser: (uid) => {
     return new Promise((res, rej) => {
@@ -10,7 +10,7 @@ module.exports = {
           if (user === null) {
             res("notRegistered");
           } else {
-            res("registered");
+            res(user.dataValues.id);
           }
         })
         .catch((err) => {
@@ -24,6 +24,8 @@ module.exports = {
       User.create({
         uid: user.uid,
         provider: user.provider,
+        nickname: user.nickname,
+        teamId: user.teamId,
       })
         .then(() => {
           res("success init User");
@@ -85,6 +87,20 @@ module.exports = {
           teamUpdateAvailableAt: `${month}월 ${day}일`,
         });
       }
+    });
+  },
+
+  getUser: (req) => {
+    return new Promise((res, rej) => {
+      const token = verifyToken(req.headers.accesstoken);
+      const userId = token.userId;
+      User.findOne({ where: { id: userId } })
+        .then((user) => {
+          res(user.dataValues);
+        })
+        .catch((err) => {
+          rej(err);
+        });
     });
   },
 };
