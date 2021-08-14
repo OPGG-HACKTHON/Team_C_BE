@@ -4,15 +4,8 @@ const POGRepo = require("../../dataAccess/POG");
 const gamePlayerRepo = require("../../dataAccess/gamePlayer");
 
 const votePOG = async (req, res) => {
-	const { userUid, vote } = req.body;
-
-	const userData = await userRepo.getUserIdByUid(userUid);
-	if (userData == null)
-		return res.json(
-			resUtil.fail(400, "uid에 해당하는 id가 존재하지 않습니다.")
-		);
-
-	const userId = userData.dataValues.id;
+	const { vote } = req.body;
+	const userId = req.userId;
 
 	for (const curVote of vote) {
 		// pog repo logging
