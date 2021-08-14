@@ -47,12 +47,12 @@ db.Team = require("./team")(sequelize, Sequelize);
 db.Player = require("./player")(sequelize, Sequelize);
 db.Game = require("./game")(sequelize, Sequelize, db.Team);
 db.User = require("./user")(sequelize, Sequelize);
-db.Set = require("./set")(sequelize, Sequelize);
-db.SetPlayer = require("./setPlayer")(sequelize, Sequelize);
 db.POG = require("./POG")(sequelize, Sequelize);
 db.Tinder = require("./tinder")(sequelize, Sequelize);
 db.TopTinder = require("./topTinder")(sequelize, Sequelize);
 db.RefreshToken = require("./refreshToken")(sequelize, Sequelize);
+db.GamePlayer = require("./gamePlayer")(sequelize, Sequelize, db.Player);
+
 db.User.hasMany(db.Tinder, {
   onUpdate: "SET NULL",
   onDelete: "SET NULL",
@@ -79,35 +79,21 @@ db.Team.hasMany(db.User, {
 });
 db.User.belongsTo(db.Team);
 
-db.Game.hasMany(db.Set, {
-  onUpdate: "CASCADE",
-  onDelete: "SET NULL",
-});
-db.Set.belongsTo(db.Game);
-
 db.User.hasOne(db.RefreshToken, {
   onDelete: "CASCADE",
   onUpdate: "NO ACTION",
 });
 db.RefreshToken.belongsTo(db.User);
 
-db.Player.hasMany(db.SetPlayer, {
+db.Game.hasMany(db.GamePlayer, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
-db.SetPlayer.belongsTo(db.Player);
 
-db.Set.hasMany(db.SetPlayer, {
+db.GamePlayer.hasMany(db.POG, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
-db.SetPlayer.belongsTo(db.Set);
-
-db.SetPlayer.hasMany(db.POG, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
-});
-db.POG.belongsTo(db.SetPlayer);
 
 db.User.hasMany(db.POG, {
   onDelete: "CASCADE",

@@ -4,7 +4,6 @@ const request = require("supertest");
 jest.setTimeout(10000);
 
 afterAll(async () => {
-	sessionStore.close();
 	server.close();
 });
 
