@@ -20,6 +20,31 @@ module.exports = {
 				});
 		});
 	},
+	createPlayerBySportsData: (teamInfo, player) => {
+		return new Promise((res, rej) => {
+			const playerRole = player.Position;
+			let role = "";
+			if (playerRole == "jungle") role = "jun";
+			else if (playerRole == "ADC") role = "adc";
+			else if (playerRole == "Support") role = "sup";
+			else if (playerRole == "top") role = "top";
+			else role = "mid";
+
+			Player.create({
+				nickname: player.MatchName,
+				role: role,
+				point: 0,
+				teamId: teamInfo,
+				key: player.PlayerId,
+			})
+				.then(() => {
+					res("success init Player");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 	updatePlayerKey: (matchName, playerId) => {
 		return new Promise((res, rej) => {
 			Player.update(
@@ -56,6 +81,15 @@ module.exports = {
 			const result = await Player.findOne({
 				attributes: ["nickname", "role", "image", "teamId"],
 				where: { key: key },
+			});
+			res(result);
+		});
+	},
+	getPlayerKeyByTeamId: (teamId) => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findAll({
+				attributes: ["key"],
+				where: { teamId: teamId },
 			});
 			res(result);
 		});

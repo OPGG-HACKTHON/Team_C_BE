@@ -117,4 +117,12 @@ module.exports = {
 			res(result);
 		});
 	},
+	getTeamKey: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findAll({
+				attributes: ["id", "key"],
+			});
+			res(result);
+		});
+	},
 };

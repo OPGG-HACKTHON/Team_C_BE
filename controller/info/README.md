@@ -3,6 +3,7 @@
 ### 수정 Log
 
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
+2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
 
 ---
 
@@ -210,7 +211,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 1
   		},
   		{
   			"nickname": "Lava",
@@ -219,7 +221,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
   				"name": "BRO"
-  			}
+  			},
+  			"rank": 2
   		},
   		{
   			"nickname": "Khan",
@@ -228,7 +231,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 3
   		},
   		{
   			"nickname": "Rahel",
@@ -237,25 +241,18 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 4
   		},
   		{
   			"nickname": "5Kid",
   			"role": "adc",
   			"point": 0,
   			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
+  				"icon": "https://opgg-hackathon.s3.ap-northeast-2.amazonaws.com/kt-01.png",
   				"name": "KT"
-  			}
-  		},
-  		{
-  			"nickname": "Arthur",
-  			"role": "jun",
-  			"point": 0,
-  			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
-  				"name": "HLE"
-  			}
+  			},
+  			"rank": 5
   		}
   	]
   }
@@ -269,6 +266,7 @@ POG 순위를 확인하는 API
     | data.nickname  | string  | 선수 이름          |
     | data.role      | string  | 선수 포지션        |
     | data.point     | number  | 선수의 POG 포인트  |
+    | data.rank      | number  | 선수의 랭킹        |
     | data.team      | object  | 선수의 소속 팀 Obj |
     | data.team.icon | string  | 팀 icon img url    |
     | data.team.name | string  | 팀 이름            |
