@@ -210,7 +210,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 1
   		},
   		{
   			"nickname": "Lava",
@@ -219,7 +220,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
   				"name": "BRO"
-  			}
+  			},
+  			"rank": 2
   		},
   		{
   			"nickname": "Khan",
@@ -228,7 +230,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 3
   		},
   		{
   			"nickname": "Rahel",
@@ -237,25 +240,18 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 4
   		},
   		{
   			"nickname": "5Kid",
   			"role": "adc",
   			"point": 0,
   			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
+  				"icon": "https://opgg-hackathon.s3.ap-northeast-2.amazonaws.com/kt-01.png",
   				"name": "KT"
-  			}
-  		},
-  		{
-  			"nickname": "Arthur",
-  			"role": "jun",
-  			"point": 0,
-  			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
-  				"name": "HLE"
-  			}
+  			},
+  			"rank": 5
   		}
   	]
   }
