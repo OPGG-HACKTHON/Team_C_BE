@@ -8,6 +8,6 @@ const login = require("../controller/oAuthApi/login");
 const { checkTokens } = require("../util/checkTokens");
 router.post("/login", wrapAsync(login));
 
-router.get("/read", checkTokens, wrapAsync(getUser));
+router.get("/read", wrapAsync(checkTokens), wrapAsync(getUser));
 
 module.exports = router;

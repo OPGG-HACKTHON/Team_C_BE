@@ -36,12 +36,15 @@ module.exports = {
     });
   },
 
-  updateNickname: (uid, newNickname) => {
+  updateNickname: (req) => {
+    const userId = req.userId;
+    const newNickname = req.body.nickname;
+    console.log(newNickname);
     return new Promise((res, rej) => {
       User.update(
         { nickname: newNickname, refreshedAt: Date.now() },
         {
-          where: { uid: uid },
+          where: { id: userId },
         }
       )
         .then(() => {
@@ -53,47 +56,54 @@ module.exports = {
     });
   },
 
-  updateTeamId: (user, teamId) => {
+  updateTeamId: (req) => {
+    const userId = req.userId;
+    const teamId = req.body.teamId;
     return new Promise((res, rej) => {
-      if (user.teamUpdatedAt === null) {
-        User.update({ teamId: teamId, teamUpdateAt: Date.now() })
-          .then(() => {
-            res("success");
-          })
-          .catch((err) => {
-            rej(err);
+      User.findOne({ where: { id: userId } }).then((user) => {
+        console.log(user.dataValues.teamUpdatedAt);
+        if (user.dataValues.teamUpdatedAt === null) {
+          User.update(
+            { teamId: teamId, teamUpdateAt: Date.now() },
+            { where: { id: userId } }
+          )
+            .then(() => {
+              res("success");
+            })
+            .catch((err) => {
+              rej(err);
+            });
+        } else if (
+          Date.parse(user.dataValues.teamUpdatedAt) + 1000 * 60 * 60 * 24 * 30 <
+          Date.now()
+        ) {
+          User.update(
+            { teamId: teamId, teamUpdatedAt: Date.now() },
+            {
+              where: { id: userId },
+            }
+          )
+            .then(() => {
+              res("success");
+            })
+            .catch((err) => {
+              rej(err);
+            });
+        } else {
+          const updated = new Date(user.dataValues.teamUpdatedAt);
+          const month = updated.getMonth() + 2; // 1월 = 0 이고 한달뒤 가능하니 +2
+          const day = updated.getDate();
+          res({
+            teamUpdateAvailableAt: `${month}월 ${day}일`,
           });
-      } else if (
-        Date.parse(user.teamUpdatedAt) + 1000 * 60 * 60 * 24 * 30 <
-        Date.now()
-      ) {
-        User.update(
-          { teamId: teamId, teamUpdatedAt: Date.now() },
-          {
-            where: { uid: user.uid },
-          }
-        )
-          .then(() => {
-            res("success");
-          })
-          .catch((err) => {
-            rej(err);
-          });
-      } else {
-        const updated = new Date(user.teamUpdatedAt);
-        const month = updated.getMonth() + 2; // 1월 = 0 이고 한달뒤 가능하니 +2
-        const day = updated.getDate();
-        res({
-          teamUpdateAvailableAt: `${month}월 ${day}일`,
-        });
-      }
+        }
+      });
     });
   },
 
   getUser: (req) => {
     return new Promise((res, rej) => {
-      const token = verifyToken(req.headers.accesstoken);
-      const userId = token.userId;
+      const userId = req.userId;
       User.findOne({ where: { id: userId } })
         .then((user) => {
           res(user.dataValues);

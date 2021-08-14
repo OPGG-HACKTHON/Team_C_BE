@@ -89,11 +89,13 @@ db.Game.hasMany(db.GamePlayer, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
+db.GamePlayer.belongsTo(db.Game);
 
 db.GamePlayer.hasMany(db.POG, {
   onDelete: "CASCADE",
   onUpdate: "CASCADE",
 });
+db.POG.belongsTo(db.GamePlayer);
 
 db.User.hasMany(db.POG, {
   onDelete: "CASCADE",
