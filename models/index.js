@@ -79,24 +79,21 @@ db.Team.hasMany(db.User, {
 });
 db.User.belongsTo(db.Team);
 
-
 db.User.hasOne(db.RefreshToken, {
   onDelete: "CASCADE",
   onUpdate: "NO ACTION",
 });
 db.RefreshToken.belongsTo(db.User);
 
-
 db.Game.hasMany(db.GamePlayer, {
-	onDelete: "CASCADE",
-	onUpdate: "CASCADE",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 db.GamePlayer.belongsTo(db.Game);
 
-
 db.GamePlayer.hasMany(db.POG, {
-	onDelete: "CASCADE",
-	onUpdate: "CASCADE",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
 db.POG.belongsTo(db.GamePlayer);
 
