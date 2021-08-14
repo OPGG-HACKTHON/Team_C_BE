@@ -36,22 +36,23 @@ module.exports = {
     });
   },
 
-  updateNickname: (uid, newNickname) => {
-    return new Promise((res, rej) => {
-      User.update(
-        { nickname: newNickname, refreshedAt: Date.now() },
-        {
-          where: { uid: uid },
-        }
-      )
-        .then(() => {
-          res("닉네임변경성공");
-        })
-        .catch((err) => {
-          rej(err);
-        });
-    });
-  },
+
+	updateNickname: (uid, newNickname) => {
+		return new Promise((res, rej) => {
+			User.update(
+				{ nickname: newNickname, refreshedAt: Date.now() },
+				{
+					where: { uid: uid },
+				}
+			)
+				.then(() => {
+					res("닉네임변경성공");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 
   updateTeamId: (user, teamId) => {
     return new Promise((res, rej) => {
