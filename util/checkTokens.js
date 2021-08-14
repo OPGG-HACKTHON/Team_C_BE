@@ -42,7 +42,10 @@ module.exports = {
 				// case4: acc, ref 모두 유효한 경우
 			}
 		}
-		const { userId } = jwt.verify(req.headers.accesstoken);
+		const { userId } = jwt.verify(
+			req.headers.accesstoken,
+			process.env.JWT_SECRET
+		);
 		req.userId = userId;
 		next();
 	},

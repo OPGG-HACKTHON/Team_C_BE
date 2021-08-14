@@ -1,5 +1,7 @@
 `해당 문서 및 API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
+1. [ 21.8.14 | votePOG body, header 수정 ] : 기존 헤더의 토큰 부재로, body에 user uid를 따로 입력 받아 사용했던 로직을, 토큰 사용을 통해 불필요해서 제거 했습니다.
+
 ---
 
 [getPOGList](#getPOGList)
@@ -218,6 +220,13 @@ POG 투표 API
 
   - `POST`
 
+- header
+
+  - | Field        | Type   | Description  |
+    | ------------ | ------ | ------------ |
+    | accesstoken  | string | accesstoken  |
+    | refreshtoken | string | refreshtoken |
+
 - url
 
   - `/vote`
@@ -226,7 +235,6 @@ POG 투표 API
 
 ```json
 {
-	"userUid": 1820326560,
 	"vote": [
 		{ "gamePlayerId": 92, "count": 11 },
 		{ "gamePlayerId": 94, "count": 14 },
@@ -237,7 +245,6 @@ POG 투표 API
 
 - | Field                | Type   | Description                 |
   | -------------------- | ------ | --------------------------- |
-  | userUid              | number | user Uid                    |
   | vote                 | list   | 각 선수 투표에 대한 리스트  |
   | vote[0].gamePlayerId | number | player에 투표에 해당하는 id |
   | vote[0].count        | number | 사용자가 터치한 투표 수     |
