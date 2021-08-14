@@ -3,6 +3,7 @@
 ### 수정 Log
 
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
+2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
 
 ---
 
@@ -13,6 +14,8 @@
 [getPOGRank](#getPOGRank)
 
 [getTeamInfo](#getTeamInfo)
+
+[getCurrentGame](#getCurrentGame)
 
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
@@ -208,7 +211,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 1
   		},
   		{
   			"nickname": "Lava",
@@ -217,7 +221,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
   				"name": "BRO"
-  			}
+  			},
+  			"rank": 2
   		},
   		{
   			"nickname": "Khan",
@@ -226,7 +231,8 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 3
   		},
   		{
   			"nickname": "Rahel",
@@ -235,25 +241,18 @@ POG 순위를 확인하는 API
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
   				"name": "DK"
-  			}
+  			},
+  			"rank": 4
   		},
   		{
   			"nickname": "5Kid",
   			"role": "adc",
   			"point": 0,
   			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
+  				"icon": "https://opgg-hackathon.s3.ap-northeast-2.amazonaws.com/kt-01.png",
   				"name": "KT"
-  			}
-  		},
-  		{
-  			"nickname": "Arthur",
-  			"role": "jun",
-  			"point": 0,
-  			"team": {
-  				"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
-  				"name": "HLE"
-  			}
+  			},
+  			"rank": 5
   		}
   	]
   }
@@ -267,6 +266,7 @@ POG 순위를 확인하는 API
     | data.nickname  | string  | 선수 이름          |
     | data.role      | string  | 선수 포지션        |
     | data.point     | number  | 선수의 POG 포인트  |
+    | data.rank      | number  | 선수의 랭킹        |
     | data.team      | object  | 선수의 소속 팀 Obj |
     | data.team.icon | string  | 팀 icon img url    |
     | data.team.name | string  | 팀 이름            |
@@ -340,6 +340,81 @@ POG 순위를 확인하는 API
     | data.id   | number  | team db pk     |
     | data.name | string  | 팀 이름        |
     | data.icon | string  | 팀 아이콘 URL  |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "Internel Error"
+  }
+  ```
+
+## getCurrentGame
+
+### description
+
+종료되고 30분이 지나지 않은 경기나, 현재 진행 중이거나, 예정인 가장 가까운 경기에 대한 정보를 제공합니다.
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/currentGame`
+
+### Res
+
+- success - 경기가 존재할 때
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": {
+  		"id": 83,
+  		"aTeamScore": 0,
+  		"bTeamScore": 0,
+  		"startTime": "2021-08-12T08:00:00.000Z",
+  		"status": -1,
+  		"aTeam": {
+  			"name": "AF",
+  			"icon": "https://cdn.pandascore.co/images/team/image/120/afreeca_freecslogo_profile.png"
+  		},
+  		"bTeam": {
+  			"name": "HLE",
+  			"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png"
+  		}
+  	}
+  }
+  ```
+
+- success - 예정된 경기가 없을 때
+
+  ```json
+  {
+  	"success": true,
+  	"status": 201,
+  	"data": null
+  }
+  ```
+
+  - | Field           | Type    | Description                                                 |
+    | --------------- | ------- | ----------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                              |
+    | status          | number  | Status Code                                                 |
+    | data.id         | number  | game table pk                                               |
+    | data.aTeamScore | number  | A팀 스코어                                                  |
+    | data.bTeamScore | number  | B팀 스코어                                                  |
+    | data.startTime  | date    | 경기 시작 시간                                              |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
+    | data.aTeam.name | string  | A팀 이름                                                    |
+    | data.aTeam.icon | string  | A팀 icon url                                                |
+    | data.bTeam.name | string  | B팀 이름                                                    |
+    | data.bTeam.icon | string  | B팀 icon url                                                |
 
 - fail
   ```json

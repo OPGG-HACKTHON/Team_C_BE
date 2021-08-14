@@ -34,4 +34,18 @@ module.exports = {
 			res(gameList);
 		});
 	},
+	parseCurGame: (curGame) => {
+		return new Promise(async (res, rej) => {
+			const aTeam = await teamRepo.findTeamMinInfoByKey(curGame.aTeamId);
+			const bTeam = await teamRepo.findTeamMinInfoByKey(curGame.bTeamId);
+
+			delete curGame.aTeamId;
+			delete curGame.bTeamId;
+
+			curGame.aTeam = aTeam.dataValues;
+			curGame.bTeam = bTeam.dataValues;
+
+			res(curGame);
+		});
+	},
 };

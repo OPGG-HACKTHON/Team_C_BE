@@ -61,6 +61,28 @@ module.exports = {
 			res(result);
 		});
 	},
+	findTeamMinInfoByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findOne({
+				attributes: ["name", "icon"],
+				where: {
+					key: key,
+				},
+			});
+			res(result);
+		});
+	},
+	findTeamInfoByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findOne({
+				attributes: ["name", "icon", "id"],
+				where: {
+					key: key,
+				},
+			});
+			res(result);
+		});
+	},
 	updateTeamKey: (teamInfo) => {
 		return new Promise((res, rej) => {
 			Team.update(
@@ -91,6 +113,14 @@ module.exports = {
 			const result = await Team.findAll({
 				order: [["name", "ASC"]],
 				attributes: ["id", "name", "icon"],
+			});
+			res(result);
+		});
+	},
+	getTeamKey: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Team.findAll({
+				attributes: ["id", "key"],
 			});
 			res(result);
 		});
