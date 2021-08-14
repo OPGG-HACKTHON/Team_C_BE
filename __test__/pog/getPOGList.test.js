@@ -2,7 +2,6 @@ const { server, sessionStore } = require("../../app");
 const request = require("supertest");
 
 afterAll(async () => {
-	sessionStore.close();
 	server.close();
 });
 
