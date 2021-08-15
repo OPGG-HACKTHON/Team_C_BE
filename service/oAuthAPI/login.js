@@ -18,8 +18,6 @@ module.exports = {
         });
 
         generateRefreshToken(userId).then((response) => {
-          let headers = { accesstoken: accesstoken, refreshtoken: response };
-
           res.setHeader("accesstoken", accesstoken);
           res.setHeader("refreshtoken", response);
 
