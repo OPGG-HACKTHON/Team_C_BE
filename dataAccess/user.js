@@ -27,8 +27,23 @@ module.exports = {
         nickname: user.nickname,
         teamId: user.teamId,
       })
+        .then((user) => {
+          res(user.dataValues.id);
+        })
+        .catch((err) => {
+          rej(err);
+        });
+    });
+  },
+
+  deleteUser: (req) => {
+    const userId = req.userId;
+    console.log(userId);
+
+    return new Promise((res, rej) => {
+      User.destroy({ where: { id: userId } })
         .then(() => {
-          res("success init User");
+          res("success");
         })
         .catch((err) => {
           rej(err);
