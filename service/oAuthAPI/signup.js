@@ -4,12 +4,12 @@ const { generateRefreshToken } = require("../../dataAccess/refreshToken");
 
 const resUtil = require("../../util/resUtil");
 module.exports = {
-  async signup(req, res) {
+  async signup(body) {
     let userData = {
-      uid: req.body.id, //소셜 id값
-      nickname: req.body.nickname,
-      teamId: req.body.teamId,
-      provider: req.body.provider,
+      uid: body.id, //소셜 id값
+      nickname: body.nickname,
+      teamId: body.teamId,
+      provider: body.provider,
     };
 
     await user.createUser(userData).then((response) => {

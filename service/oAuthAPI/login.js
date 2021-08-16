@@ -4,8 +4,8 @@ const { generateRefreshToken } = require("../../dataAccess/refreshToken");
 const resUtil = require("../../util/resUtil");
 
 module.exports = {
-  async login(req, res) {
-    let uid = req.body.id; // 소셜 ID
+  async login(id) {
+    let uid = id; // 소셜 ID
     await user.checkNewUser(uid).then((response) => {
       if (response === "notRegistered") {
         return res.json(resUtil.fail(401, "회원가입이 필요한 유저입니다."));

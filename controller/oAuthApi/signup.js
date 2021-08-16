@@ -1,8 +1,11 @@
 const resUtil = require("../../util/resUtil");
 const signupMethod = require("../../service/oAuthAPI/signup");
 const signup = (req, res) => {
-  if (req.body.id && req.body.nickname && req.body.provider) {
-    signupMethod.signup(req, res);
+  const body = req.body;
+  const { id, nickname, provider } = body;
+
+  if (id && nickname && provider) {
+    signupMethod.signup(body);
   } else {
     res.json(resUtil.fail(400, "missing requirements"));
   }
