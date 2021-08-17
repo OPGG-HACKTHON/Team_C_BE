@@ -4,6 +4,7 @@
 
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
 2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
+3. [ 21.8.18 | getPOGRank, getCurrentGame ] : Team info를 나타내는 부분을 TeamInfod와 동일하게 ID 필드를 추가했습니다.
 
 ---
 
