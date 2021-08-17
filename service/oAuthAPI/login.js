@@ -4,7 +4,7 @@ const { generateRefreshToken } = require("../../dataAccess/refreshToken");
 const resUtil = require("../../util/resUtil");
 
 module.exports = {
-  async login(id) {
+  async login(id, res) {
     let uid = id; // 소셜 ID
     await user.checkNewUser(uid).then((response) => {
       if (response === "notRegistered") {

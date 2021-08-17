@@ -4,7 +4,7 @@ const { generateRefreshToken } = require("../../dataAccess/refreshToken");
 
 const resUtil = require("../../util/resUtil");
 module.exports = {
-  async signup(body) {
+  async signup(body, res) {
     let userData = {
       uid: body.id, //소셜 id값
       nickname: body.nickname,

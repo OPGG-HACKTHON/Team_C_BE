@@ -2,7 +2,7 @@ const user = require("../../dataAccess/user");
 const resUtil = require("../../util/resUtil");
 
 module.exports = {
-  async signout(userId) {
+  async signout(userId, res) {
     await user.deleteUser(userId).then((response) => {
       console.log(response);
       if (response === "success") {

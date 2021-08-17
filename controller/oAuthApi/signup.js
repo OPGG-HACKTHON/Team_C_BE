@@ -5,7 +5,7 @@ const signup = (req, res) => {
   const { id, nickname, provider } = body;
 
   if (id && nickname && provider) {
-    signupMethod.signup(body);
+    signupMethod.signup(body, res);
   } else {
     res.json(resUtil.fail(400, "missing requirements"));
   }

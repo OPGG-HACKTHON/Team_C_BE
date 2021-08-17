@@ -3,7 +3,7 @@ const loginMethod = require("../../service/oAuthAPI/login");
 const login = (req, res) => {
   const { id } = req.body;
   if (id) {
-    loginMethod.login(id);
+    loginMethod.login(id, res);
   } else {
     res.json(resUtil.fail(400, "missing id"));
   }
