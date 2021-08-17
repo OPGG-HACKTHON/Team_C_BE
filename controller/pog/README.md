@@ -101,7 +101,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -205,7 +205,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -278,15 +278,6 @@ POG 투표 API
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
-  }
-  ```
-
-- fail - uid error
-  ```json
-  {
-  	"success": false,
-  	"status": 500,
-  	"msg": "uid에 해당하는 id가 존재하지 않습니다."
+  	"msg": "internal Error"
   }
   ```
