@@ -64,7 +64,7 @@ module.exports = {
 	findTeamMinInfoByKey: (key) => {
 		return new Promise(async (res, rej) => {
 			const result = await Team.findOne({
-				attributes: ["name", "icon"],
+				attributes: ["name", "icon", "id"],
 				where: {
 					key: key,
 				},

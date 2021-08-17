@@ -101,7 +101,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -172,7 +172,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -210,7 +210,8 @@ POG 순위를 확인하는 API
   			"point": 200,
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
-  				"name": "DK"
+  				"name": "DK",
+  				"id": 1
   			},
   			"rank": 1
   		},
@@ -220,7 +221,8 @@ POG 순위를 확인하는 API
   			"point": 150,
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
-  				"name": "BRO"
+  				"name": "BRO",
+  				"id": 2
   			},
   			"rank": 2
   		},
@@ -230,7 +232,8 @@ POG 순위를 확인하는 API
   			"point": 100,
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
-  				"name": "DK"
+  				"name": "DK",
+  				"id": 1
   			},
   			"rank": 3
   		},
@@ -240,7 +243,8 @@ POG 순위를 확인하는 API
   			"point": 100,
   			"team": {
   				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
-  				"name": "DK"
+  				"name": "DK",
+  				"id": 1
   			},
   			"rank": 4
   		},
@@ -250,7 +254,8 @@ POG 순위를 확인하는 API
   			"point": 0,
   			"team": {
   				"icon": "https://opgg-hackathon.s3.ap-northeast-2.amazonaws.com/kt-01.png",
-  				"name": "KT"
+  				"name": "KT",
+  				"id": 10
   			},
   			"rank": 5
   		}
@@ -270,13 +275,14 @@ POG 순위를 확인하는 API
     | data.team      | object  | 선수의 소속 팀 Obj |
     | data.team.icon | string  | 팀 icon img url    |
     | data.team.name | string  | 팀 이름            |
+    | data.team.id   | number  | team table pk      |
 
 - fail
   ```json
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -346,7 +352,7 @@ POG 순위를 확인하는 API
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -375,18 +381,20 @@ POG 순위를 확인하는 API
   	"success": true,
   	"status": 201,
   	"data": {
-  		"id": 83,
+  		"id": 85,
   		"aTeamScore": 0,
   		"bTeamScore": 0,
-  		"startTime": "2021-08-12T08:00:00.000Z",
+  		"startTime": "2021-08-13T08:00:00.000Z",
   		"status": -1,
   		"aTeam": {
-  			"name": "AF",
-  			"icon": "https://cdn.pandascore.co/images/team/image/120/afreeca_freecslogo_profile.png"
+  			"name": "GEN",
+  			"icon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
+  			"id": 8
   		},
   		"bTeam": {
-  			"name": "HLE",
-  			"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png"
+  			"name": "BRO",
+  			"icon": "https://cdn.pandascore.co/images/team/image/128218/fredit_brio_nlogo_square.png",
+  			"id": 2
   		}
   	}
   }
@@ -413,14 +421,16 @@ POG 순위를 확인하는 API
     | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
     | data.aTeam.name | string  | A팀 이름                                                    |
     | data.aTeam.icon | string  | A팀 icon url                                                |
+    | data.aTeam.id   | number  | team table pk                                               |
     | data.bTeam.name | string  | B팀 이름                                                    |
     | data.bTeam.icon | string  | B팀 icon url                                                |
+    | data.bTeam.id   | number  | team table pk                                               |
 
 - fail
   ```json
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
