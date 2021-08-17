@@ -27,7 +27,7 @@ const getPOGResult = async (req, res) => {
 		const playerInfo = await playerRepo.getPlayerByKey(player.playerKey);
 
 		playerInfo.dataValues.gamePlayerId = player.id;
-		playerInfo.dataValues.cnt = rawPlayer.dataValues.count;
+		playerInfo.dataValues.count = rawPlayer.dataValues.count;
 		let rate = (rawPlayer.dataValues.count * 100) / countSum;
 		rate = Math.floor(rate * 100);
 		rate /= 100;
