@@ -66,7 +66,7 @@ module.exports = {
 	getPOGRank: () => {
 		return new Promise(async (res, rej) => {
 			const result = await Player.findAll({
-				include: [{ model: Team, attributes: ["icon", "name"] }],
+				include: [{ model: Team, attributes: ["icon", "name", "id"] }],
 				order: [
 					["point", "DESC"],
 					["nickname", "ASC"],
