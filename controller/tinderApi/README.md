@@ -58,3 +58,13 @@
   "msg": "틴더 생성 실패."
 }
 ```
+
+user의 reportedCount가 5이상인 경우
+
+```json
+{
+  "success": false,
+  "status": 401,
+  "msg": "틴더 생성이 금지된 유저입니다."
+}
+```

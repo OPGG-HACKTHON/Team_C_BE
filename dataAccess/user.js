@@ -132,4 +132,16 @@ module.exports = {
         });
     });
   },
+
+  getReportedCountbyUserId: (userId) => {
+    return new Promise((res, rej) => {
+      User.findOne({ where: { id: userId } })
+        .then((user) => {
+          res(user.dataValues.reportedCount);
+        })
+        .catch((err) => {
+          rej(err);
+        });
+    });
+  },
 };

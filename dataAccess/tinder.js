@@ -11,8 +11,6 @@ module.exports = {
         gameId: body.gameId,
       })
         .then(async (tinder) => {
-          console.log("생성된틴더", tinder);
-
           res("success");
         })
         .catch((err) => {
