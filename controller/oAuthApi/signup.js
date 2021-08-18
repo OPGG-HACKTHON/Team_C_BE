@@ -1,13 +1,17 @@
 const resUtil = require("../../util/resUtil");
 const signupMethod = require("../../service/oAuthAPI/signup");
-const signup = (req, res) => {
+const signup = async (req, res) => {
   const body = req.body;
   const { id, nickname, provider } = body;
 
   if (id && nickname && provider) {
-    signupMethod.signup(body, res);
+    const { accesstoken, refreshtoken } = await signupMethod.signup(body);
+
+    res.setHeader("accesstoken", accesstoken);
+    res.setHeader("refreshtoken", refreshtoken);
+    return res.json(resUtil.success(200, "회원가입 성공"));
   } else {
-    res.json(resUtil.fail(400, "missing requirements"));
+    return res.json(resUtil.fail(400, "missing requirements"));
   }
 };
 
