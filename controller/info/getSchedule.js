@@ -7,7 +7,7 @@ const getSchedule = async (req, res) => {
 	const monthSchedule = await gameRepo.getMonthSchedule(month);
 	const gameList = await scheduleService.parseGameList(monthSchedule);
 
-	res.json(resUtil.success(201, gameList));
+	res.json(resUtil.success(200, gameList));
 };
 
 module.exports = getSchedule;
