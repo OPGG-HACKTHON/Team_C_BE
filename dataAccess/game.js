@@ -26,7 +26,7 @@ module.exports = {
 		return new Promise(async (res, rej) => {
 			const result = await Game.findOne({
 				where: {
-					[Op.or]: [{ status: 0 }, { status: -1 }],
+					[Op.or]: [{ status: 1 }, { status: 0 }, { status: -1 }],
 				},
 			});
 			res(result);

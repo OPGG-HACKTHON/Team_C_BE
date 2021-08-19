@@ -17,6 +17,11 @@ const updateSchedule = async (req, res) => {
 
 	const resultSchedule = sportsData.compareSchedule(recentGameInDB, recentGame);
 
+	// finishedGame 발동
+	if (recentGameInDB.status == 1 && resultSchedule.status == 2) {
+		console.log("save pog, top");
+	}
+
 	await game.updateSchedule(resultSchedule, recentGameInDB.key);
 
 	res.json(resUtil.success(201, "일정 업데이트를 완료했습니다."));
