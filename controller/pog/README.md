@@ -102,7 +102,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 
@@ -206,7 +206,7 @@
   {
   	"success": false,
   	"status": 500,
-  	"msg": "Internel Error"
+  	"msg": "internal Error"
   }
   ```
 

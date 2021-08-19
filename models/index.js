@@ -79,6 +79,12 @@ db.Team.hasMany(db.User, {
 });
 db.User.belongsTo(db.Team);
 
+db.Tinder.belongsTo(db.Team);
+
+db.Team.hasMany(db.Tinder, {
+  onDelete: "SET NULL",
+  onUpdate: "SET NULL",
+});
 db.User.hasOne(db.RefreshToken, {
   onDelete: "CASCADE",
   onUpdate: "NO ACTION",

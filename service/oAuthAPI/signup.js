@@ -2,30 +2,24 @@ const user = require("../../dataAccess/user");
 const jwt = require("jsonwebtoken");
 const { generateRefreshToken } = require("../../dataAccess/refreshToken");
 
-const resUtil = require("../../util/resUtil");
 module.exports = {
-  async signup(req, res) {
+  async signup(body) {
     let userData = {
-      uid: req.body.id, //소셜 id값
-      nickname: req.body.nickname,
-      teamId: req.body.teamId,
-      provider: req.body.provider,
+      uid: body.id, //소셜 id값
+      nickname: body.nickname,
+      teamId: body.teamId,
+      provider: body.provider,
     };
 
-    await user.createUser(userData).then((response) => {
-      let userId = response; //response = user ID
+    const userId = await user.createUser(userData);
 
-      const accesstoken = jwt.sign({ userId }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-        issuer: "milestone",
-      });
-
-      generateRefreshToken(userId).then((response) => {
-        res.setHeader("accesstoken", accesstoken);
-        res.setHeader("refreshtoken", response);
-
-        return res.json(resUtil.success(200, "회원가입 성공"));
-      });
+    const accesstoken = await jwt.sign({ userId }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+      issuer: "milestone",
     });
+
+    const refreshtoken = await generateRefreshToken(userId);
+
+    return { accesstoken, refreshtoken };
   },
 };
