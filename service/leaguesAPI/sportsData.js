@@ -138,7 +138,7 @@ module.exports = {
 		} else if (
 			recentSchedule.Status == "Final" &&
 			(new Date() <
-				new Date(Date.parse(dbSchedule.finishedAt) + 1000 * 60 * 30) ||
+				new Date(Date.parse(dbSchedule.finishedAt) + 1000 * 60 * 3) ||
 				dbSchedule.status == -1 ||
 				dbSchedule.status == 0)
 		) {
