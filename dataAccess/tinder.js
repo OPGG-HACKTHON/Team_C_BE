@@ -1,5 +1,4 @@
 const { Tinder } = require("../models/index");
-const oneDay = require("../util/oneDay");
 const moment = require("moment");
 const { Op } = require("sequelize");
 module.exports = {
