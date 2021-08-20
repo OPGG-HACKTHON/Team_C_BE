@@ -68,7 +68,7 @@ module.exports = {
 				where: {
 					[Op.and]: [
 						{ userId: { [Op.notIn]: [userId] } },
-						{ createdAt: { [Op.gte]: moment().subtract(1, "week") } },
+						{ createdAt: { [Op.gte]: moment().subtract(1, "minute") } },
 						{ teamId: { [Op.notIn]: filter } },
 					],
 				},

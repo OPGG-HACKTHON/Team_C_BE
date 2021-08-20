@@ -4,6 +4,8 @@
 
 [getHistory](#getHistory)
 
+`아래 getTinder API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
+
 [getTinder](#getTinder)
 
 ## 틴더 CRUD에 이용되는 API입니다.
