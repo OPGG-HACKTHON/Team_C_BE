@@ -10,7 +10,7 @@ const getPOGRank = async (req, res) => {
 		rank += 1;
 	}
 
-	res.json(resUtil.success(201, pogRank));
+	res.json(resUtil.success(200, pogRank));
 };
 
 module.exports = getPOGRank;

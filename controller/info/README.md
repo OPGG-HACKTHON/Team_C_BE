@@ -5,6 +5,8 @@
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
 2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
 3. [ 21.8.18 | getPOGRank, getCurrentGame ] : Team info를 나타내는 부분을 TeamInfod와 동일하게 ID 필드를 추가했습니다.
+4. [ 21.8.20 | getCurrentGame 로직 수정 ] : 기존 -1 (경기 전), 0 (경기 중), 1 (경기 후) 3가지의 status를 제공했는데, 경기 후 30분 전과 후를 명확히 구분짓는 로직이 필요해서, 경기 업데이트 api의 status를 -1 (경기 전), 0 (경기 중), 1 (경기 후 30분 이전), 2 (경기 후 30분 이후) 4가지로 변경했습니다. 이에 따라 current 게임의 status 또한 4가지가 됐습니다.
+5. [ 21.8.20 | status code 변경 ] : 기존 get 방식의 성공 리스폰스의 status가 201에서 200으로 변경.
 
 ---
 
@@ -54,7 +56,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 73,
@@ -82,20 +84,20 @@
   }
   ```
 
-  - | Field           | Type    | Description                                                 |
-    | --------------- | ------- | ----------------------------------------------------------- |
-    | success         | boolean | 응답 성공 여부                                              |
-    | status          | number  | Status Code                                                 |
-    | data            | List    | 해당 월에 존재하는 경기 정보들                              |
-    | data.id         | number  | game table pk                                               |
-    | data.aTeamName  | string  | A팀 이름                                                    |
-    | data.bTeamName  | string  | B팀 이름                                                    |
-    | data.aTeamIcon  | string  | A팀 아이콘 URL                                              |
-    | data.bTeamIcon  | string  | B팀 아이콘 URL                                              |
-    | data.aTeamScore | number  | A팀 스코어                                                  |
-    | data.bTeamScore | number  | B팀 스코어                                                  |
-    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
-    | data.startTime  | Date    | 경기 시작 시간                                              |
+  - | Field           | Type    | Description                                                                                             |
+    | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                                                                          |
+    | status          | number  | Status Code                                                                                             |
+    | data            | List    | 해당 월에 존재하는 경기 정보들                                                                          |
+    | data.id         | number  | game table pk                                                                                           |
+    | data.aTeamName  | string  | A팀 이름                                                                                                |
+    | data.bTeamName  | string  | B팀 이름                                                                                                |
+    | data.aTeamIcon  | string  | A팀 아이콘 URL                                                                                          |
+    | data.bTeamIcon  | string  | B팀 아이콘 URL                                                                                          |
+    | data.aTeamScore | number  | A팀 스코어                                                                                              |
+    | data.bTeamScore | number  | B팀 스코어                                                                                              |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 종료 후 30분 이전 , 2 : 경기 종료 후 30분 이후 |
+    | data.startTime  | Date    | 경기 시작 시간                                                                                          |
 
 - fail
   ```json
@@ -131,7 +133,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 3,
@@ -203,7 +205,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"nickname": "BeryL",
@@ -313,7 +315,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 9,
@@ -380,7 +382,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"id": 85,
   		"aTeamScore": 0,
@@ -406,26 +408,27 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": null
   }
   ```
 
-  - | Field           | Type    | Description                                                 |
-    | --------------- | ------- | ----------------------------------------------------------- |
-    | success         | boolean | 응답 성공 여부                                              |
-    | status          | number  | Status Code                                                 |
-    | data.id         | number  | game table pk                                               |
-    | data.aTeamScore | number  | A팀 스코어                                                  |
-    | data.bTeamScore | number  | B팀 스코어                                                  |
-    | data.startTime  | date    | 경기 시작 시간                                              |
-    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
-    | data.aTeam.name | string  | A팀 이름                                                    |
-    | data.aTeam.icon | string  | A팀 icon url                                                |
-    | data.aTeam.id   | number  | team table pk                                               |
-    | data.bTeam.name | string  | B팀 이름                                                    |
-    | data.bTeam.icon | string  | B팀 icon url                                                |
-    | data.bTeam.id   | number  | team table pk                                               |
+
+  - | Field           | Type    | Description                                                                                             |
+    | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                                                                          |
+    | status          | number  | Status Code                                                                                             |
+    | data.id         | number  | game table pk                                                                                           |
+    | data.aTeamScore | number  | A팀 스코어                                                                                              |
+    | data.bTeamScore | number  | B팀 스코어                                                                                              |
+    | data.startTime  | date    | 경기 시작 시간                                                                                          |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 종료 후 30분 이전 , 2 : 경기 종료 후 30분 이후 |
+    | data.aTeam.name | string  | A팀 이름                                                                                                |
+    | data.aTeam.icon | string  | A팀 icon url                                                                                            |
+    | data.aTeam.id   | number  | team table pk                                                                                           |
+    | data.bTeam.name | string  | B팀 이름                                                                                                |
+    | data.bTeam.icon | string  | B팀 icon url                                                                                            |
+    | data.bTeam.id   | number  | team table pk                                                                                           |
 
 - fail
   ```json

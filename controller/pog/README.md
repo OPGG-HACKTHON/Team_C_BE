@@ -1,6 +1,8 @@
 `해당 문서 및 API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
 1. [ 21.8.14 | votePOG body, header 수정 ] : 기존 헤더의 토큰 부재로, body에 user uid를 따로 입력 받아 사용했던 로직을, 토큰 사용을 통해 불필요해서 제거 했습니다.
+2. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
+3. [ 21.8.20 | http status code update ] : get 방식의 api 성공 리스폰스 status를 200으로 변경.
 
 ---
 
@@ -41,7 +43,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"aTeam": {
   			"name": "AF",
@@ -129,7 +131,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"aTeam": {
   			"name": "AF",
@@ -141,7 +143,7 @@
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/3524/220px_af_kiin_2020_split_1.png",
   					"gamePlayerId": 92,
-  					"cnt": 363,
+  					"count": 363,
   					"rate": 1
   				},
   				{
@@ -149,7 +151,7 @@
   					"role": "adc",
   					"image": "https://cdn.pandascore.co/images/player/image/14239/lsb_leo_2021_split_1.png",
   					"gamePlayerId": 94,
-  					"cnt": 1235,
+  					"count": 1235,
   					"rate": 3.42
   				}
   			]
@@ -164,7 +166,7 @@
   					"role": "top",
   					"image": "https://cdn.pandascore.co/images/player/image/21861/hle_morgan_2021_split_1.png",
   					"gamePlayerId": 91,
-  					"cnt": 6456,
+  					"count": 6456,
   					"rate": 17.92
   				},
   				{
@@ -172,7 +174,7 @@
   					"role": "mid",
   					"image": "https://cdn.pandascore.co/images/player/image/15000/hle_chovy_2021_split_1.png",
   					"gamePlayerId": 93,
-  					"cnt": 8965,
+  					"count": 8965,
   					"rate": 24.88
   				}
   			]
@@ -183,21 +185,21 @@
 
   aTeam과 bTeam은 중복된 내용이기에 생략했습니다.
 
-  - | Field                          | Type    | Description                             |
-    | ------------------------------ | ------- | --------------------------------------- |
-    | success                        | boolean | 응답 성공 여부                          |
-    | status                         | number  | Status Code                             |
-    | data                           | object  | 각 팀                                   |
-    | data.aTeam.name                | string  | aTeam의 이름                            |
-    | data.aTeam.icon                | string  | aTeam의 icon url                        |
-    | data.aTeam.id                  | number  | aTeam의 table pk                        |
-    | data.aTeam.player              | List    | aTeam 선수 출전 선수 목록               |
-    | data.aTeam.player.nickname     | string  | 선수 이름                               |
-    | data.aTeam.player.role         | string  | 선수 라인                               |
-    | data.aTeam.player.image        | string  | 선수 image url                          |
-    | data.aTeam.player.gamePlayerId | number  | 투표할 때 필요한 선수 key 값            |
-    | data.aTeam.player.cnt          | number  | 선수 투표수                             |
-    | data.aTeam.player.rate         | number  | 전체 선수가 100일 때, 선수의 cnt 백분율 |
+  - | Field                          | Type    | Description                               |
+    | ------------------------------ | ------- | ----------------------------------------- |
+    | success                        | boolean | 응답 성공 여부                            |
+    | status                         | number  | Status Code                               |
+    | data                           | object  | 각 팀                                     |
+    | data.aTeam.name                | string  | aTeam의 이름                              |
+    | data.aTeam.icon                | string  | aTeam의 icon url                          |
+    | data.aTeam.id                  | number  | aTeam의 table pk                          |
+    | data.aTeam.player              | List    | aTeam 선수 출전 선수 목록                 |
+    | data.aTeam.player.nickname     | string  | 선수 이름                                 |
+    | data.aTeam.player.role         | string  | 선수 라인                                 |
+    | data.aTeam.player.image        | string  | 선수 image url                            |
+    | data.aTeam.player.gamePlayerId | number  | 투표할 때 필요한 선수 key 값              |
+    | data.aTeam.player.count        | number  | 선수 투표수                               |
+    | data.aTeam.player.rate         | number  | 전체 선수가 100일 때, 선수의 count 백분율 |
 
 - fail
   ```json
@@ -277,6 +279,6 @@ POG 투표 API
   {
   	"success": false,
   	"status": 500,
-  	"msg": "internal Error"
+  	"msg": "Internel Error"
   }
   ```
