@@ -12,7 +12,7 @@ const { stream } = require("./config/winston");
 const { fail } = require("./util/resUtil");
 
 const leaguesAPI = require("./router/leaguesAPI.router");
-const testAPI = require("./router/testAPI.router");
+
 const auth = require("./router/auth");
 const userSetting = require("./router/userSetting");
 const infoRouter = require("./router/info.router");
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
 app.use("/leaguesApi", leaguesAPI);
-app.use("/testAPI", testAPI);
+
 app.use("/auth", auth);
 app.use("/userSetting", userSetting);
 app.use("/info", infoRouter);
