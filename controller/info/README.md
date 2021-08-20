@@ -84,20 +84,20 @@
   }
   ```
 
-  - | Field           | Type    | Description                                                 |
-    | --------------- | ------- | ----------------------------------------------------------- |
-    | success         | boolean | 응답 성공 여부                                              |
-    | status          | number  | Status Code                                                 |
-    | data            | List    | 해당 월에 존재하는 경기 정보들                              |
-    | data.id         | number  | game table pk                                               |
-    | data.aTeamName  | string  | A팀 이름                                                    |
-    | data.bTeamName  | string  | B팀 이름                                                    |
-    | data.aTeamIcon  | string  | A팀 아이콘 URL                                              |
-    | data.bTeamIcon  | string  | B팀 아이콘 URL                                              |
-    | data.aTeamScore | number  | A팀 스코어                                                  |
-    | data.bTeamScore | number  | B팀 스코어                                                  |
-    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 |
-    | data.startTime  | Date    | 경기 시작 시간                                              |
+  - | Field           | Type    | Description                                                                                             |
+    | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                                                                          |
+    | status          | number  | Status Code                                                                                             |
+    | data            | List    | 해당 월에 존재하는 경기 정보들                                                                          |
+    | data.id         | number  | game table pk                                                                                           |
+    | data.aTeamName  | string  | A팀 이름                                                                                                |
+    | data.bTeamName  | string  | B팀 이름                                                                                                |
+    | data.aTeamIcon  | string  | A팀 아이콘 URL                                                                                          |
+    | data.bTeamIcon  | string  | B팀 아이콘 URL                                                                                          |
+    | data.aTeamScore | number  | A팀 스코어                                                                                              |
+    | data.bTeamScore | number  | B팀 스코어                                                                                              |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 종료 후 30분 이전 , 2 : 경기 종료 후 30분 이후 |
+    | data.startTime  | Date    | 경기 시작 시간                                                                                          |
 
 - fail
   ```json
@@ -413,21 +413,22 @@ POG 순위를 확인하는 API
   }
   ```
 
-  - | Field           | Type    | Description                                                                                  |
-    | --------------- | ------- | -------------------------------------------------------------------------------------------- |
-    | success         | boolean | 응답 성공 여부                                                                               |
-    | status          | number  | Status Code                                                                                  |
-    | data.id         | number  | game table pk                                                                                |
-    | data.aTeamScore | number  | A팀 스코어                                                                                   |
-    | data.bTeamScore | number  | B팀 스코어                                                                                   |
-    | data.startTime  | date    | 경기 시작 시간                                                                               |
-    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 끝 30분 이전, 2 : 경기 끝 30분 이후 |
-    | data.aTeam.name | string  | A팀 이름                                                                                     |
-    | data.aTeam.icon | string  | A팀 icon url                                                                                 |
-    | data.aTeam.id   | number  | team table pk                                                                                |
-    | data.bTeam.name | string  | B팀 이름                                                                                     |
-    | data.bTeam.icon | string  | B팀 icon url                                                                                 |
-    | data.bTeam.id   | number  | team table pk                                                                                |
+
+  - | Field           | Type    | Description                                                                                             |
+    | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                                                                          |
+    | status          | number  | Status Code                                                                                             |
+    | data.id         | number  | game table pk                                                                                           |
+    | data.aTeamScore | number  | A팀 스코어                                                                                              |
+    | data.bTeamScore | number  | B팀 스코어                                                                                              |
+    | data.startTime  | date    | 경기 시작 시간                                                                                          |
+    | data.status     | number  | 해당 경기의 상태 ex) -1 : 경기 전, 0 : 경기 중, 1 : 경기 종료 후 30분 이전 , 2 : 경기 종료 후 30분 이후 |
+    | data.aTeam.name | string  | A팀 이름                                                                                                |
+    | data.aTeam.icon | string  | A팀 icon url                                                                                            |
+    | data.aTeam.id   | number  | team table pk                                                                                           |
+    | data.bTeam.name | string  | B팀 이름                                                                                                |
+    | data.bTeam.icon | string  | B팀 icon url                                                                                            |
+    | data.bTeam.id   | number  | team table pk                                                                                           |
 
 - fail
   ```json

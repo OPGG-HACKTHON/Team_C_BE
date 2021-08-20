@@ -1,5 +1,9 @@
 `해당 문서 및 API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
+### 수정 Log
+
+1. [ 21.8.20 | updateSchedule 로직 수정 ] : 기존 status를 -1, 0, 1로만 두고 경기 전, 중, 후로 나눴는데, 경기 종료 후 메시지 및 pog 투표 유지와 30분 후, pog 결과 및 틴더 top 10을 수집하기 위해, status 상태 변화 감지가 필요하여 status를 -1(경기 전), 0(경기 중), 1(경기 후 30분 이전), 2(경기 후 30분 이후)로 나누는 변화가 생겼습니다.
+
 [updateTeamRank](#updateTeamRank)
 
 [initTeamInfo](#initTeamInfo)
