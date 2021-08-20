@@ -94,4 +94,31 @@ module.exports = {
 			res(result);
 		});
 	},
+	updatePOGPoint: (key, point) => {
+		return new Promise((res, rej) => {
+			Player.update(
+				{
+					point: point,
+				},
+				{
+					where: { key: key },
+				}
+			)
+				.then(() => {
+					res("success update Player Key");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
+	getPointByKey: (key) => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findOne({
+				attributes: ["point"],
+				where: { key: key },
+			});
+			res(result);
+		});
+	},
 };
