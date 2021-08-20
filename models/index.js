@@ -9,34 +9,34 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+	sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
+	sequelize = new Sequelize(
+		config.database,
+		config.username,
+		config.password,
+		config
+	);
 }
 
 fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
-      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-    );
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes
-    );
-    db[model.name] = model;
-  });
+	.filter((file) => {
+		return (
+			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+		);
+	})
+	.forEach((file) => {
+		const model = require(path.join(__dirname, file))(
+			sequelize,
+			Sequelize.DataTypes
+		);
+		db[model.name] = model;
+	});
 
 Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+	if (db[modelName].associate) {
+		db[modelName].associate(db);
+	}
 });
 
 db.sequelize = sequelize;
@@ -52,67 +52,80 @@ db.Tinder = require("./tinder")(sequelize, Sequelize);
 db.TopTinder = require("./topTinder")(sequelize, Sequelize);
 db.RefreshToken = require("./refreshToken")(sequelize, Sequelize);
 db.GamePlayer = require("./gamePlayer")(sequelize, Sequelize, db.Player);
+db.TinderRecord = require("./tinderRecord")(sequelize, Sequelize);
 
 db.User.hasMany(db.Tinder, {
-  onUpdate: "SET NULL",
-  onDelete: "SET NULL",
+	onUpdate: "SET NULL",
+	onDelete: "SET NULL",
 });
 db.Tinder.belongsTo(db.User);
 
 db.Game.hasMany(db.Tinder, {
-  onUpdate: "SET NULL",
-  onDelete: "SET NULL",
+	onUpdate: "SET NULL",
+	onDelete: "SET NULL",
 });
 db.Tinder.belongsTo(db.Game);
 
 db.Report = require("./report")(sequelize, Sequelize, db.User, db.Tinder);
 
 db.Team.hasMany(db.Player, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
 });
 db.Player.belongsTo(db.Team);
 
 db.Team.hasMany(db.User, {
-  onUpdate: "SET NULL",
-  onDelete: "SET NULL",
+	onUpdate: "SET NULL",
+	onDelete: "SET NULL",
 });
 db.User.belongsTo(db.Team);
 
 db.Tinder.belongsTo(db.Team);
 
 db.Team.hasMany(db.Tinder, {
-  onDelete: "SET NULL",
-  onUpdate: "SET NULL",
+	onDelete: "SET NULL",
+	onUpdate: "SET NULL",
 });
 db.User.hasOne(db.RefreshToken, {
-  onDelete: "CASCADE",
-  onUpdate: "NO ACTION",
+	onDelete: "CASCADE",
+	onUpdate: "NO ACTION",
 });
 db.RefreshToken.belongsTo(db.User);
 
 db.Game.hasMany(db.GamePlayer, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
 });
 db.GamePlayer.belongsTo(db.Game);
 
 db.GamePlayer.hasMany(db.POG, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
 });
 db.POG.belongsTo(db.GamePlayer);
 
 db.User.hasMany(db.POG, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
 });
 db.POG.belongsTo(db.User);
 
 db.Tinder.hasMany(db.TopTinder, {
-  onDelete: "CASCADE",
-  onUpdate: "CASCADE",
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
 });
 db.TopTinder.belongsTo(db.Tinder);
+
+db.Tinder.hasMany(db.TinderRecord, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.TinderRecord.belongsTo(db.Tinder);
+
+db.User.hasMany(db.TinderRecord, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.TinderRecord.belongsTo(db.User);
 
 module.exports = db;
