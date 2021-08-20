@@ -106,7 +106,7 @@ module.exports = {
 					"status",
 				],
 				where: {
-					[Op.or]: [{ status: 0 }, { status: -1 }],
+					[Op.or]: [{ status: 1 }, { status: 0 }, { status: -1 }],
 				},
 			});
 			res(result);

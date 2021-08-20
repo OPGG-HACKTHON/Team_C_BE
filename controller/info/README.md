@@ -5,6 +5,8 @@
 1. [ 21.8.9 | getMonthSchedule field name 수정 ] : 기존 스네이크와 카멜 표기법이 섞인 필드를 제공하였는데, 모두 카멜 표기법으로 통일했습니다.
 2. [ 21.8.14 | getPOGRank ] : getPOGRank에서 rank 필드가 추가됐습니다.
 3. [ 21.8.18 | getPOGRank, getCurrentGame ] : Team info를 나타내는 부분을 TeamInfod와 동일하게 ID 필드를 추가했습니다.
+4. [ 21.8.20 | getCurrentGame 로직 수정 ] : 기존 -1 (경기 전), 0 (경기 중), 1 (경기 후) 3가지의 status를 제공했는데, 경기 후 30분 전과 후를 명확히 구분짓는 로직이 필요해서, 경기 업데이트 api의 status를 -1 (경기 전), 0 (경기 중), 1 (경기 후 30분 이전), 2 (경기 후 30분 이후) 4가지로 변경했습니다. 이에 따라 current 게임의 status 또한 4가지가 됐습니다.
+5. [ 21.8.20 | status code 변경 ] : 기존 get 방식의 성공 리스폰스의 status가 201에서 200으로 변경.
 
 ---
 
@@ -54,7 +56,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 73,
@@ -131,7 +133,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 3,
@@ -203,7 +205,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"nickname": "BeryL",
@@ -313,7 +315,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": [
   		{
   			"id": 9,
@@ -380,7 +382,7 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"id": 85,
   		"aTeamScore": 0,
@@ -406,10 +408,11 @@ POG 순위를 확인하는 API
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": null
   }
   ```
+
 
   - | Field           | Type    | Description                                                                                             |
     | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
