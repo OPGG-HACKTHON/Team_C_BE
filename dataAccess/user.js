@@ -49,7 +49,6 @@ module.exports = {
   },
 
   updateNickname: (userId, newNickname) => {
-    console.log(newNickname);
     return new Promise((res, rej) => {
       User.update(
         { nickname: newNickname, refreshedAt: Date.now() },
@@ -69,7 +68,6 @@ module.exports = {
   updateTeamId: (userId, teamId) => {
     return new Promise((res, rej) => {
       User.findOne({ where: { id: userId } }).then((user) => {
-        console.log(user.dataValues.teamUpdatedAt);
         if (user.dataValues.teamUpdatedAt === null) {
           User.update(
             { teamId: teamId, teamUpdateAt: Date.now() },

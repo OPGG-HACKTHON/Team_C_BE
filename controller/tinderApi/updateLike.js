@@ -2,7 +2,6 @@ const resUtil = require("../../util/resUtil");
 const tinderMethod = require("../../dataAccess/tinder");
 const updateLike = async (req, res) => {
   const { tinderId, like, dislike, superlike, pass } = req.body;
-  console.log(req.body);
   if (tinderId && like >= 0 && dislike >= 0 && superlike >= 0 && pass >= 0) {
     const body = {
       tinderId: tinderId,
