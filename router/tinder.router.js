@@ -5,10 +5,11 @@ const { checkTokens } = require("../util/checkTokens");
 const create = require("../controller/tinderApi/create");
 const history = require("../controller/tinderApi/getHistory");
 const getTinder = require("../controller/tinderApi/getTinder");
+const createReport = require("../controller/tinderApi/createReport");
 const router = express.Router();
 
 router.post("/create", wrapAsync(checkTokens), wrapAsync(create));
 router.get("/history", wrapAsync(checkTokens), wrapAsync(history));
 router.get("/", wrapAsync(checkTokens), wrapAsync(getTinder));
-
+router.post("/report", wrapAsync(checkTokens), wrapAsync(createReport));
 module.exports = router;
