@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/create", wrapAsync(checkTokens), wrapAsync(create));
 router.get("/history", wrapAsync(checkTokens), wrapAsync(history));
-router.get("/", wrapAsync(getTinder));
+router.get("/", wrapAsync(checkTokens), wrapAsync(getTinder));
 
 module.exports = router;
