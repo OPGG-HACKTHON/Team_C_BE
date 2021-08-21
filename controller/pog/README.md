@@ -4,6 +4,7 @@
 2. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
 3. [ 21.8.20 | http status code update ] : get 방식의 api 성공 리스폰스 status를 200으로 변경.
 
+
 ---
 
 [getPOGList](#getPOGList)
