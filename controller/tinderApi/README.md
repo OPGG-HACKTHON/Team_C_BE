@@ -1,8 +1,12 @@
-`해당 문서 및 API는 이정표가 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
+`아래 API는 이정표가 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
 [createTinder](#createTinder)
 
 [getHistory](#getHistory)
+
+[createReport](#createReport)
+
+[updateLike](#updateLike)
 
 `아래 getTinder API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
@@ -49,9 +53,9 @@
 
 ```json
 {
-	"success": true,
-	"status": 200,
-	"data": "틴더 생성 성공"
+  "success": true,
+  "status": 200,
+  "data": "틴더 생성 성공"
 }
 ```
 
@@ -59,9 +63,9 @@
 
 ```json
 {
-	"success": false,
-	"status": 400,
-	"msg": "틴더 생성 실패"
+  "success": false,
+  "status": 400,
+  "msg": "틴더 생성 실패"
 }
 ```
 
@@ -130,9 +134,9 @@
 
 ```json
 {
-	"success": false,
-	"status": 401,
-	"msg": "하루동안 히스토리가 없습니다."
+  "success": false,
+  "status": 401,
+  "msg": "하루동안 히스토리가 없습니다."
 }
 ```
 
@@ -140,9 +144,9 @@
 
 ```json
 {
-	"success": false,
-	"status": 400,
-	"msg": "히스토리 조회 실패"
+  "success": false,
+  "status": 400,
+  "msg": "히스토리 조회 실패"
 }
 ```
 
@@ -186,46 +190,46 @@
 
 ```json
 {
-	"success": true,
-	"status": 200,
-	"data": [
-		{
-			"id": 38,
-			"message": "테스트 틴더 2번 메시지입니다.",
-			"like": 0,
-			"superlike": 0,
-			"dislike": 0,
-			"pass": 0,
-			"createdAt": "2021-08-20T04:28:51.000Z",
-			"user": {
-				"id": 49,
-				"nickname": "f222ker"
-			},
-			"team": {
-				"id": 4,
-				"icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
-				"name": "LSB"
-			}
-		},
-		{
-			"id": 37,
-			"message": "테스트 틴더 메시지입니다.",
-			"like": 0,
-			"superlike": 0,
-			"dislike": 0,
-			"pass": 0,
-			"createdAt": "2021-08-20T04:28:44.000Z",
-			"user": {
-				"id": 49,
-				"nickname": "f222ker"
-			},
-			"team": {
-				"id": 4,
-				"icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
-				"name": "LSB"
-			}
-		}
-	]
+  "success": true,
+  "status": 200,
+  "data": [
+    {
+      "id": 38,
+      "message": "테스트 틴더 2번 메시지입니다.",
+      "like": 0,
+      "superlike": 0,
+      "dislike": 0,
+      "pass": 0,
+      "createdAt": "2021-08-20T04:28:51.000Z",
+      "user": {
+        "id": 49,
+        "nickname": "f222ker"
+      },
+      "team": {
+        "id": 4,
+        "icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
+        "name": "LSB"
+      }
+    },
+    {
+      "id": 37,
+      "message": "테스트 틴더 메시지입니다.",
+      "like": 0,
+      "superlike": 0,
+      "dislike": 0,
+      "pass": 0,
+      "createdAt": "2021-08-20T04:28:44.000Z",
+      "user": {
+        "id": 49,
+        "nickname": "f222ker"
+      },
+      "team": {
+        "id": 4,
+        "icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
+        "name": "LSB"
+      }
+    }
+  ]
 }
 ```
 
@@ -250,8 +254,135 @@
 - fail
   ```json
   {
-  	"success": false,
-  	"status": 500,
-  	"msg": "internal Error"
+    "success": false,
+    "status": 500,
+    "msg": "internal Error"
   }
   ```
+
+## createReport
+
+### description
+
+틴더 리폿 생성
+
+### Req
+
+- method
+
+  `POST`
+
+- url
+
+  `/report`
+
+- header
+
+  | Method       | parameter | Description          | Required |
+  | ------------ | --------- | -------------------- | :------: |
+  | accesstoken  | {{token}} | accesstoken(1hr)     |    O     |
+  | refreshtoken | {{token}} | refreshtoken(30days) |    O     |
+
+- body
+  | Field | Type | Description | Required |
+  | -------- | ------ | ---------------------- |:------: |
+  | tinderId | Int | 리폿 대상 틴더의 id | O |
+  | reportMsg | text | 리폿 내용 | O |
+
+### Res
+
+- success
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "data": "리폿 성공"
+}
+```
+
+> 리폿 성공시에 리폿된 틴더에 대한 처리나 유저에 대한 제재에 대한 로직은 아직 구현되지 않았습니다.
+
+-fail
+
+```json
+{
+  "success": false,
+  "status": 400,
+  "msg": "리폿 실패"
+}
+```
+
+틴더id나 리폿메시지가 body에 담겨있지 않을경우
+
+```json
+{
+  "success": false,
+  "status": 400,
+  "msg": "틴더id나 리폿메시지가 부족합니다."
+}
+```
+
+## updateLike
+
+### description
+
+틴더 리액션 추가(업데이트)
+
+### Req
+
+- method
+
+  `PUT`
+
+- url
+
+  `/react`
+
+- header
+
+  | Method       | parameter | Description          | Required |
+  | ------------ | --------- | -------------------- | :------: |
+  | accesstoken  | {{token}} | accesstoken(1hr)     |    O     |
+  | refreshtoken | {{token}} | refreshtoken(30days) |    O     |
+
+- body
+  | Field | Type | Description | Required |
+  | -------- | ------ | ---------------------- |:------: |
+  | tinderId | Int | 리액션 대상 틴더의 id | O |
+  | like | Int | like 선택 시 1, 아니면 0 | O |
+  | dislike | Int | dislike 선택 시 1, 아니면 0 | O |
+  | superlike | Int | superlike 선택 시 1, 아니면 0 | O |
+  | pass | Int | pass 선택 시 1, 아니면 0 | O |
+
+### Res
+
+- success
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "data": "리액션 성공"
+}
+```
+
+-fail
+
+```json
+{
+  "success": false,
+  "status": 400,
+  "msg": "리액션 실패"
+}
+```
+
+틴더id나 리폿메시지가 body에 담겨있지 않을경우
+
+```json
+{
+  "success": false,
+  "status": 400,
+  "msg": "틴더id나 리액션정보가 부족합니다."
+}
+```
