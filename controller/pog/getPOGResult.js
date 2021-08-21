@@ -41,7 +41,7 @@ const getPOGResult = async (req, res) => {
 			bTeam.dataValues.player.push(playerInfo.dataValues);
 		}
 	}
-	res.json(resUtil.success(201, { aTeam, bTeam }));
+	res.json(resUtil.success(200, { aTeam, bTeam }));
 };
 
 module.exports = getPOGResult;

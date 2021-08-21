@@ -36,10 +36,7 @@ module.exports = {
     });
   },
 
-  deleteUser: (req) => {
-    const userId = req.userId;
-    console.log(userId);
-
+  deleteUser: (userId) => {
     return new Promise((res, rej) => {
       User.destroy({ where: { id: userId } })
         .then(() => {
@@ -51,10 +48,7 @@ module.exports = {
     });
   },
 
-  updateNickname: (req) => {
-    const userId = req.userId;
-    const newNickname = req.body.nickname;
-    console.log(newNickname);
+  updateNickname: (userId, newNickname) => {
     return new Promise((res, rej) => {
       User.update(
         { nickname: newNickname, refreshedAt: Date.now() },
@@ -71,12 +65,9 @@ module.exports = {
     });
   },
 
-  updateTeamId: (req) => {
-    const userId = req.userId;
-    const teamId = req.body.teamId;
+  updateTeamId: (userId, teamId) => {
     return new Promise((res, rej) => {
       User.findOne({ where: { id: userId } }).then((user) => {
-        console.log(user.dataValues.teamUpdatedAt);
         if (user.dataValues.teamUpdatedAt === null) {
           User.update(
             { teamId: teamId, teamUpdateAt: Date.now() },
@@ -116,12 +107,35 @@ module.exports = {
     });
   },
 
-  getUser: (req) => {
+  getUser: (userId) => {
     return new Promise((res, rej) => {
-      const userId = req.userId;
       User.findOne({ where: { id: userId } })
         .then((user) => {
           res(user.dataValues);
+        })
+        .catch((err) => {
+          rej(err);
+        });
+    });
+  },
+
+  getTeamIdbyUserId: (userId) => {
+    return new Promise((res, rej) => {
+      User.findOne({ where: { id: userId } })
+        .then((user) => {
+          res(user.dataValues.teamId);
+        })
+        .catch((err) => {
+          rej(err);
+        });
+    });
+  },
+
+  getReportedCountbyUserId: (userId) => {
+    return new Promise((res, rej) => {
+      User.findOne({ where: { id: userId } })
+        .then((user) => {
+          res(user.dataValues.reportedCount);
         })
         .catch((err) => {
           rej(err);

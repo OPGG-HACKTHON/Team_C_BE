@@ -1,7 +1,9 @@
 `해당 문서 및 API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
 1. [ 21.8.14 | votePOG body, header 수정 ] : 기존 헤더의 토큰 부재로, body에 user uid를 따로 입력 받아 사용했던 로직을, 토큰 사용을 통해 불필요해서 제거 했습니다.
-1. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
+2. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
+3. [ 21.8.20 | http status code update ] : get 방식의 api 성공 리스폰스 status를 200으로 변경.
+
 
 ---
 
@@ -42,7 +44,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"aTeam": {
   			"name": "AF",
@@ -130,7 +132,7 @@
   ```json
   {
   	"success": true,
-  	"status": 201,
+  	"status": 200,
   	"data": {
   		"aTeam": {
   			"name": "AF",
@@ -278,6 +280,6 @@ POG 투표 API
   {
   	"success": false,
   	"status": 500,
-  	"msg": "internal Error"
+  	"msg": "Internel Error"
   }
   ```

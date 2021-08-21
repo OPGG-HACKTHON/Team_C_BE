@@ -99,7 +99,8 @@ module.exports = {
 			gameInfo.startTime = time;
 
 			gameInfo.status =
-				gameInfo.aTeamScore == 2 || gameInfo.bTeamScore == 2 ? 1 : -1;
+				gameInfo.aTeamScore == 2 || gameInfo.bTeamScore == 2 ? 2 : -1;
+
 			if (new Date() + 9 * 60 * 60 * 1000 > time) gameInfo.status = 0;
 
 			gameInfo.gameId = schedule.GameId;
@@ -122,7 +123,10 @@ module.exports = {
 		resultSchedule.bTeamScore =
 			resultSchedule.bTeamScore == null ? 0 : resultSchedule.bTeamScore;
 
-		if (dbSchedule.finishedAt == null && recentSchedule.Status == "Final") {
+		if (
+			(dbSchedule.finishedAt == null || dbSchedule.finishedAt == 0) &&
+			recentSchedule.Status == "Final"
+		) {
 			resultSchedule.finishedAt = new Date();
 		}
 
@@ -131,8 +135,16 @@ module.exports = {
 			new Date() < dbSchedule.startTime
 		) {
 			resultSchedule.status = -1;
-		} else if (recentSchedule.Status == "Final") {
+		} else if (
+			recentSchedule.Status == "Final" &&
+			(new Date() <
+				new Date(Date.parse(dbSchedule.finishedAt) + 1000 * 60 * 3) ||
+				dbSchedule.status == -1 ||
+				dbSchedule.status == 0)
+		) {
 			resultSchedule.status = 1;
+		} else if (recentSchedule.Status == "Final") {
+			resultSchedule.status = 2;
 		} else {
 			resultSchedule.status = 0;
 		}

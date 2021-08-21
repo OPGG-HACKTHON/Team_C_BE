@@ -62,4 +62,15 @@ module.exports = {
 				});
 		});
 	},
+	getPOGByGameId: (gameId) => {
+		return new Promise(async (res, rej) => {
+			const result = await GamePlayer.findOne({
+				order: [["count", "DESC"]],
+				where: {
+					gameId: gameId,
+				},
+			});
+			res(result);
+		});
+	},
 };
