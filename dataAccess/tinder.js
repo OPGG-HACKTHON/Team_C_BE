@@ -106,4 +106,24 @@ module.exports = {
         });
     });
   },
+
+  updateLike: (body) => {
+    return new Promise((res, rej) => {
+      Tinder.increment(
+        {
+          like: body.like,
+          dislike: body.dislike,
+          superlike: body.superlike,
+          pass: body.pass,
+        },
+        { where: { id: body.tinderId } }
+      )
+        .then(() => {
+          res("success");
+        })
+        .catch((err) => {
+          rej(err);
+        });
+    });
+  },
 };
