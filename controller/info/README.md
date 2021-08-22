@@ -20,6 +20,8 @@
 
 [getCurrentGame](#getCurrentGame)
 
+[getGameResultById](#getGameResultById)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -413,7 +415,6 @@ POG 순위를 확인하는 API
   }
   ```
 
-
   - | Field           | Type    | Description                                                                                             |
     | --------------- | ------- | ------------------------------------------------------------------------------------------------------- |
     | success         | boolean | 응답 성공 여부                                                                                          |
@@ -429,6 +430,73 @@ POG 순위를 확인하는 API
     | data.bTeam.name | string  | B팀 이름                                                                                                |
     | data.bTeam.icon | string  | B팀 icon url                                                                                            |
     | data.bTeam.id   | number  | team table pk                                                                                           |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "internal Error"
+  }
+  ```
+
+## getGameResultById
+
+### description
+
+GameId를 통해 해당 경기에 대한 정보를 받는 API
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/gameResult?gameId=360`
+
+- params
+  - | Field  | Type    | Description          |
+    | ------ | ------- | -------------------- |
+    | gameId | Integer | 조회를 원하는 gameId |
+
+### Res
+
+- success
+
+  ```json
+  {
+  	"success": true,
+  	"status": 200,
+  	"data": {
+  		"id": 360,
+  		"aTeamName": "NS",
+  		"bTeamName": "GEN",
+  		"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
+  		"bTeamIcon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
+  		"aTeamScore": 0,
+  		"bTeamScore": 2,
+  		"status": 1,
+  		"startTime": "2021-08-15T20:00:00.000Z"
+  	}
+  }
+  ```
+
+  - | Field           | Type    | Description                                                             |
+    | --------------- | ------- | ----------------------------------------------------------------------- |
+    | success         | boolean | 응답 성공 여부                                                          |
+    | status          | number  | Status Code                                                             |
+    | data            | object  | 해당 경기                                                               |
+    | data.id         | number  | team db pk                                                              |
+    | data.aTeamName  | string  | 팀 이름                                                                 |
+    | data.bTeamName  | string  | 팀 이름                                                                 |
+    | data.aTeamIcon  | string  | 팀 아이콘 URL                                                           |
+    | data.bTeamIcon  | string  | 팀 아이콘 URL                                                           |
+    | data.aTeamScore | number  | 팀 스코어                                                               |
+    | data.bTeamScore | number  | 팀 스코어                                                               |
+    | data.status     | number  | 경기 상태 (-1:경기전, 0:경기중, 1:경기후 30분 이전, 2:경기후 30분 이후) |
+    | data.startTime  | date    | 경기 시작시간                                                           |
 
 - fail
   ```json

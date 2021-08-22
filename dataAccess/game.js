@@ -112,4 +112,14 @@ module.exports = {
 			res(result);
 		});
 	},
+	getGameById: (gameId) => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findOne({
+				where: {
+					id: gameId,
+				},
+			});
+			res(result);
+		});
+	},
 };
