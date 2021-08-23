@@ -10,6 +10,8 @@
 
 `아래 getTinder API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
+1. [ 21.8.23 | getTinder field 추가 ] : gameId 필드 추가.
+
 [getTinder](#getTinder)
 
 ## 틴더 CRUD에 이용되는 API입니다.
@@ -53,9 +55,9 @@
 
 ```json
 {
-  "success": true,
-  "status": 200,
-  "data": "틴더 생성 성공"
+	"success": true,
+	"status": 200,
+	"data": "틴더 생성 성공"
 }
 ```
 
@@ -63,9 +65,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "틴더 생성 실패"
+	"success": false,
+	"status": 400,
+	"msg": "틴더 생성 실패"
 }
 ```
 
@@ -134,9 +136,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 401,
-  "msg": "하루동안 히스토리가 없습니다."
+	"success": false,
+	"status": 401,
+	"msg": "하루동안 히스토리가 없습니다."
 }
 ```
 
@@ -144,9 +146,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "히스토리 조회 실패"
+	"success": false,
+	"status": 400,
+	"msg": "히스토리 조회 실패"
 }
 ```
 
@@ -190,73 +192,76 @@
 
 ```json
 {
-  "success": true,
-  "status": 200,
-  "data": [
-    {
-      "id": 38,
-      "message": "테스트 틴더 2번 메시지입니다.",
-      "like": 0,
-      "superlike": 0,
-      "dislike": 0,
-      "pass": 0,
-      "createdAt": "2021-08-20T04:28:51.000Z",
-      "user": {
-        "id": 49,
-        "nickname": "f222ker"
-      },
-      "team": {
-        "id": 4,
-        "icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
-        "name": "LSB"
-      }
-    },
-    {
-      "id": 37,
-      "message": "테스트 틴더 메시지입니다.",
-      "like": 0,
-      "superlike": 0,
-      "dislike": 0,
-      "pass": 0,
-      "createdAt": "2021-08-20T04:28:44.000Z",
-      "user": {
-        "id": 49,
-        "nickname": "f222ker"
-      },
-      "team": {
-        "id": 4,
-        "icon": "https://cdn.pandascore.co/images/team/image/75013/liiv_sandbo_xlogo_profile.png",
-        "name": "LSB"
-      }
-    }
-  ]
+	"success": true,
+	"status": 200,
+	"data": [
+		{
+			"id": 55,
+			"gameId": null,
+			"message": "베이스 url 테스트입니다22",
+			"like": 0,
+			"superlike": 0,
+			"dislike": 0,
+			"pass": 0,
+			"createdAt": "2021-08-23T13:24:03.000Z",
+			"user": {
+				"id": 49,
+				"nickname": "hahahsa"
+			},
+			"team": {
+				"id": 1,
+				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+				"name": "DK"
+			}
+		},
+		{
+			"id": 54,
+			"gameId": null,
+			"message": "베이스 url 테스트입니다",
+			"like": 0,
+			"superlike": 0,
+			"dislike": 0,
+			"pass": 0,
+			"createdAt": "2021-08-23T13:24:00.000Z",
+			"user": {
+				"id": 49,
+				"nickname": "hahahsa"
+			},
+			"team": {
+				"id": 1,
+				"icon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+				"name": "DK"
+			}
+		}
+	]
 }
 ```
 
-- | Field              | Type    | Description           |
-  | ------------------ | ------- | --------------------- |
-  | success            | boolean | 응답 성공 여부        |
-  | status             | number  | Status Code           |
-  | data               | list    | 각 틴더               |
-  | data.id            | number  | 틴더 id               |
-  | data.message       | string  | 틴더 메시지           |
-  | data.like          | number  | 틴더 like 수          |
-  | data.superlike     | number  | 틴더 superlike 수     |
-  | data.dislike       | number  | 틴더 dislike 수       |
-  | data.pass          | number  | 틴더 pass 수          |
-  | data.createdAt     | data    | tinder 생성일         |
-  | data.user.id       | number  | 틴더 작성자의 id      |
-  | data.user.nickname | number  | 틴더 작성자의 닉네임  |
-  | data.team.id       | number  | 틴더 작성자의 팀 id   |
-  | data.team.icon     | number  | 틴더 작성자의 팀 icon |
-  | data.team.name     | number  | 틴더 작성자의 팀 name |
+- | Field              | Type    | Description                              |
+  | ------------------ | ------- | ---------------------------------------- |
+  | success            | boolean | 응답 성공 여부                           |
+  | status             | number  | Status Code                              |
+  | data               | list    | 각 틴더                                  |
+  | data.id            | number  | 틴더 id                                  |
+  | data.gameId        | number  | 해당 경기 id, 경기 진행 중이 아니면 null |
+  | data.message       | string  | 틴더 메시지                              |
+  | data.like          | number  | 틴더 like 수                             |
+  | data.superlike     | number  | 틴더 superlike 수                        |
+  | data.dislike       | number  | 틴더 dislike 수                          |
+  | data.pass          | number  | 틴더 pass 수                             |
+  | data.createdAt     | data    | tinder 생성일                            |
+  | data.user.id       | number  | 틴더 작성자의 id                         |
+  | data.user.nickname | number  | 틴더 작성자의 닉네임                     |
+  | data.team.id       | number  | 틴더 작성자의 팀 id                      |
+  | data.team.icon     | number  | 틴더 작성자의 팀 icon                    |
+  | data.team.name     | number  | 틴더 작성자의 팀 name                    |
 
 - fail
   ```json
   {
-    "success": false,
-    "status": 500,
-    "msg": "internal Error"
+  	"success": false,
+  	"status": 500,
+  	"msg": "internal Error"
   }
   ```
 
@@ -295,9 +300,9 @@
 
 ```json
 {
-  "success": true,
-  "status": 200,
-  "data": "리폿 성공"
+	"success": true,
+	"status": 200,
+	"data": "리폿 성공"
 }
 ```
 
@@ -307,9 +312,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "리폿 실패"
+	"success": false,
+	"status": 400,
+	"msg": "리폿 실패"
 }
 ```
 
@@ -317,9 +322,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "틴더id나 리폿메시지가 부족합니다."
+	"success": false,
+	"status": 400,
+	"msg": "틴더id나 리폿메시지가 부족합니다."
 }
 ```
 
@@ -361,9 +366,9 @@
 
 ```json
 {
-  "success": true,
-  "status": 200,
-  "data": "리액션 성공"
+	"success": true,
+	"status": 200,
+	"data": "리액션 성공"
 }
 ```
 
@@ -371,9 +376,9 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "리액션 실패"
+	"success": false,
+	"status": 400,
+	"msg": "리액션 실패"
 }
 ```
 
@@ -381,8 +386,8 @@
 
 ```json
 {
-  "success": false,
-  "status": 400,
-  "msg": "틴더id나 리액션정보가 부족합니다."
+	"success": false,
+	"status": 400,
+	"msg": "틴더id나 리액션정보가 부족합니다."
 }
 ```
