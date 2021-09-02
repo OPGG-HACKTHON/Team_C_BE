@@ -12,6 +12,10 @@
 
 [getHOF](#getHOF)
 
+[getTotalTinder](#getTotalTinder)
+
+[getTotalLike](#getTotalLike)
+
 `아래 getTinder API는 장효택이 작성했으며 궁금하신 부분있으면 언제든 연락주세요!`
 
 1. [ 21.8.23 | getTinder field 추가 ] : gameId 필드 추가.
@@ -617,6 +621,106 @@ History 페이지에서 명예의 전당 정보 받기
   | data.tinder.createdAt     | date    | tinder 생성일               |
   | data.tinder.user.id       | number  | 틴더 작성자의 id            |
   | data.tinder.user.nickname | number  | 틴더 작성자의 닉네임        |
+
+- fail
+  ```json
+  {
+    "success": false,
+    "status": 500,
+    "msg": "internal Error"
+  }
+  ```
+
+## getTotalTinder
+
+### description
+
+유저가 작성한 틴더 개수 가져오기
+
+### Req
+
+- method
+
+  `GET`
+
+- url
+
+  `/totalTinder`
+
+- header
+
+  | Method       | parameter | Description          | Required |
+  | ------------ | --------- | -------------------- | :------: |
+  | accesstoken  | {{token}} | accesstoken(1hr)     |    O     |
+  | refreshtoken | {{token}} | refreshtoken(30days) |    O     |
+
+### Res
+
+- success
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "data": int
+}
+```
+
+- | Field   | Type    | Description                 |
+  | ------- | ------- | --------------------------- |
+  | success | boolean | 응답 성공 여부              |
+  | status  | number  | Status Code                 |
+  | data    | int     | 유저가 작성한 전체틴더 개수 |
+
+- fail
+  ```json
+  {
+    "success": false,
+    "status": 500,
+    "msg": "internal Error"
+  }
+  ```
+
+## getTotalLike
+
+### description
+
+유저가 받은 총 like + superlike 가져오기
+
+### Req
+
+- method
+
+  `GET`
+
+- url
+
+  `/totalLike`
+
+- header
+
+  | Method       | parameter | Description          | Required |
+  | ------------ | --------- | -------------------- | :------: |
+  | accesstoken  | {{token}} | accesstoken(1hr)     |    O     |
+  | refreshtoken | {{token}} | refreshtoken(30days) |    O     |
+
+### Res
+
+- success
+
+```json
+{
+  "success": true,
+  "status": 200,
+  "data": int
+}
+```
+
+- | Field   | Type    | Description                          |
+  | ------- | ------- | ------------------------------------ |
+  | success | boolean | 응답 성공 여부                       |
+  | status  | number  | Status Code                          |
+  | data    | int     | 유저가 받은 총 like + superlike 개수 |
 
 - fail
   ```json
