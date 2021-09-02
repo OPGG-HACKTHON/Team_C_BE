@@ -5,8 +5,16 @@ const teamRepo = require("../../dataAccess/team");
 const playerRepo = require("../../dataAccess/player");
 
 const getPOGResult = async (req, res) => {
-	const recentSchedule = await gameRepo.getRecentSchedule();
-	const currentGameId = recentSchedule.dataValues.id;
+	const { gameId } = req.query;
+
+	let currentGameId;
+
+	if (gameId) {
+		currentGameId = gameId;
+	} else {
+		const recentSchedule = await gameRepo.getRecentSchedule();
+		currentGameId = recentSchedule.dataValues.id;
+	}
 
 	const pogList = await gamePlayerRepo.getGamePlayerByGameId(currentGameId);
 
