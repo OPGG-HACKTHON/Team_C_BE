@@ -3,7 +3,7 @@
 1. [ 21.8.14 | votePOG body, header 수정 ] : 기존 헤더의 토큰 부재로, body에 user uid를 따로 입력 받아 사용했던 로직을, 토큰 사용을 통해 불필요해서 제거 했습니다.
 2. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
 3. [ 21.8.20 | http status code update ] : get 방식의 api 성공 리스폰스 status를 200으로 변경.
-
+4. [ 21.9.02 | getPOGResult ] : query를 통한 gameId 검색 추가(gameId 비우면 현재 게임으로 검색 가능).
 
 ---
 
@@ -121,7 +121,14 @@
 
 - url
 
-  - `/result`
+  - `/result?gameId={gameId}`
+  - 만약 gameId를 비운다면 현재 OnAir 경기의 POG Result가 나옵니다!
+
+- params
+
+  | key    | type | Description |
+  | ------ | ---- | ----------- |
+  | gameId | int  | 해당 게임id |
 
 ### Res
 
