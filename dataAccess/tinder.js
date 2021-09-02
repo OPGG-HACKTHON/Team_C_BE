@@ -52,61 +52,61 @@ module.exports = {
 
             list.push(data);
           });
+					res({ list });
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
+	getAllTinderByGameId: (gameId) => {
+		return new Promise(async (res, rej) => {
+			const result = await Tinder.findAll({
+				where: { gameId: gameId },
+			});
+			res(result);
+		});
+	},
+	getTinder: (userId, filter) => {
+		return new Promise((res, rej) => {
+			Tinder.findAll({
+				// include: [{ model: User, where: { teamId: { [Op.notIn]: filter } } }],
+				include: [
+					{ model: User, attributes: ["id", "nickname"] },
+					{ model: Team, attributes: ["id", "icon", "name"] },
+				],
+				where: {
+					[Op.and]: [
+						{ userId: { [Op.notIn]: [userId] } },
+						{ createdAt: { [Op.gte]: moment().subtract(3, "week") } },
+						{ teamId: { [Op.notIn]: filter } },
+					],
+				},
+				attributes: [
+					"id",
+					"gameId",
+					"message",
+					"like",
+					"superlike",
+					"dislike",
+					"pass",
+					"createdAt",
+				],
+			})
+				.then(async (tinders) => {
+					let list = [];
+					await tinders.map((tinder) => {
+						const data = tinder.dataValues;
+						list.push(data);
+					});
+					res(list);
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 
-          res({ list });
-        })
-        .catch((err) => {
-          rej(err);
-        });
-    });
-  },
-  getAllTinderByGameId: (gameId) => {
-    return new Promise(async (res, rej) => {
-      const result = await Tinder.findAll({
-        where: { gameId: gameId },
-      });
-      res(result);
-    });
-  },
-  getTinder: (userId, filter) => {
-    return new Promise((res, rej) => {
-      Tinder.findAll({
-        // include: [{ model: User, where: { teamId: { [Op.notIn]: filter } } }],
-        include: [
-          { model: User, attributes: ["id", "nickname"] },
-          { model: Team, attributes: ["id", "icon", "name"] },
-        ],
-        where: {
-          [Op.and]: [
-            { userId: { [Op.notIn]: [userId] } },
-            { createdAt: { [Op.gte]: moment().subtract(1, "minute") } },
-            { teamId: { [Op.notIn]: filter } },
-          ],
-        },
-        attributes: [
-          "id",
-          "gameId",
-          "message",
-          "like",
-          "superlike",
-          "dislike",
-          "pass",
-          "createdAt",
-        ],
-      })
-        .then(async (tinders) => {
-          let list = [];
-          await tinders.map((tinder) => {
-            const data = tinder.dataValues;
-            list.push(data);
-          });
-          res(list);
-        })
-        .catch((err) => {
-          rej(err);
-        });
-    });
-  },
 
   updateLike: (body) => {
     return new Promise((res, rej) => {
