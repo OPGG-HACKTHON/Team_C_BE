@@ -122,4 +122,10 @@ module.exports = {
 			res(result);
 		});
 	},
+	getAllGames: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findAll({});
+			res(result);
+		});
+	},
 };

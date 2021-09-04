@@ -7,6 +7,7 @@ const initSchedule = require("../controller/leaguesApi/initSchedule");
 const updateSchedule = require("../controller/leaguesApi/updateSchedule");
 const updateGamePlayer = require("../controller/leaguesApi/updateGamePlayer");
 const updatePlayerInfo = require("../controller/leaguesApi/updatePlayerInfo");
+const initGamePlayer = require("../controller/leaguesApi/initGamePlayer");
 const wrapAsync = require("../util/wrapAsync");
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.post("/teamInit", wrapAsync(initTeamInfo));
 router.post("/player", wrapAsync(initPlayerInfo));
 router.post("/apiKeys", wrapAsync(addAPIKeys));
 router.post("/schedule", wrapAsync(initSchedule));
+router.post("/gamePlayer", wrapAsync(initGamePlayer));
 router.put("/schedule", wrapAsync(updateSchedule));
 router.put("/gamePlayer", wrapAsync(updateGamePlayer));
 router.put("/playerInfo", wrapAsync(updatePlayerInfo));
