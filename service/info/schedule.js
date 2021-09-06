@@ -26,7 +26,7 @@ module.exports = {
 
 				curGame.status = data.status;
 
-				curGame.startTime = adjustTime(data.startTime);
+				curGame.startTime = data.startTime;
 
 				gameList.push(curGame);
 			}
@@ -69,7 +69,7 @@ module.exports = {
 
 			curGame.status = data.status;
 
-			curGame.startTime = adjustTime(data.startTime);
+			curGame.startTime = data.startTime;
 
 			res(curGame);
 		});
