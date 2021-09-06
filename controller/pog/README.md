@@ -4,6 +4,7 @@
 2. [ 21.8.18 | getPOGResult ] : cnt라는 용어를 count로 통일했습니다.
 3. [ 21.8.20 | http status code update ] : get 방식의 api 성공 리스폰스 status를 200으로 변경.
 4. [ 21.9.02 | getPOGResult ] : query를 통한 gameId 검색 추가(gameId 비우면 현재 게임으로 검색 가능).
+5. [ 21.9.07 | getPOGResult ] : 팀별 POG 순위 필드 추가.
 
 ---
 
@@ -142,48 +143,52 @@
   	"status": 200,
   	"data": {
   		"aTeam": {
-  			"name": "AF",
-  			"icon": "https://cdn.pandascore.co/images/team/image/120/afreeca_freecslogo_profile.png",
-  			"id": 9,
+  			"name": "NS",
+  			"icon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
+  			"id": 3,
   			"player": [
   				{
-  					"nickname": "Kiin",
+  					"nickname": "Rich",
   					"role": "top",
-  					"image": "https://cdn.pandascore.co/images/player/image/3524/220px_af_kiin_2020_split_1.png",
-  					"gamePlayerId": 92,
-  					"count": 363,
-  					"rate": 1
+  					"image": "https://cdn.pandascore.co/images/player/image/22948/ns_rich_2021_split_1.png",
+  					"gamePlayerId": 141,
+  					"count": 188,
+  					"rate": 22.48,
+  					"rateRank": 1
   				},
   				{
-  					"nickname": "Leo",
-  					"role": "adc",
-  					"image": "https://cdn.pandascore.co/images/player/image/14239/lsb_leo_2021_split_1.png",
-  					"gamePlayerId": 94,
-  					"count": 1235,
-  					"rate": 3.42
+  					"nickname": "Kellin",
+  					"role": "sup",
+  					"image": "https://cdn.pandascore.co/images/player/image/19302/ns_kellin_2021_split_1.png",
+  					"gamePlayerId": 145,
+  					"count": 159,
+  					"rate": 19.01,
+  					"rateRank": 2
   				}
   			]
   		},
   		"bTeam": {
-  			"name": "HLE",
-  			"icon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
-  			"id": 7,
+  			"name": "GEN",
+  			"icon": "https://cdn.pandascore.co/images/team/image/2882/geng-hooir6i9.png",
+  			"id": 8,
   			"player": [
   				{
-  					"nickname": "Morgan",
-  					"role": "top",
-  					"image": "https://cdn.pandascore.co/images/player/image/21861/hle_morgan_2021_split_1.png",
-  					"gamePlayerId": 91,
-  					"count": 6456,
-  					"rate": 17.92
+  					"nickname": "Clid",
+  					"role": "jun",
+  					"image": "https://cdn.pandascore.co/images/player/image/1736/220px_gen_clid_2020_split_1.png",
+  					"gamePlayerId": 137,
+  					"count": 123,
+  					"rate": 14.71,
+  					"rateRank": 1
   				},
   				{
-  					"nickname": "Chovy",
-  					"role": "mid",
-  					"image": "https://cdn.pandascore.co/images/player/image/15000/hle_chovy_2021_split_1.png",
-  					"gamePlayerId": 93,
-  					"count": 8965,
-  					"rate": 24.88
+  					"nickname": "Life",
+  					"role": "sup",
+  					"image": "https://cdn.pandascore.co/images/player/image/15259/220px-GEN_Life_2019_Split_2.png",
+  					"gamePlayerId": 140,
+  					"count": 121,
+  					"rate": 14.47,
+  					"rateRank": 2
   				}
   			]
   		}
@@ -208,6 +213,7 @@
     | data.aTeam.player.gamePlayerId | number  | 투표할 때 필요한 선수 key 값              |
     | data.aTeam.player.count        | number  | 선수 투표수                               |
     | data.aTeam.player.rate         | number  | 전체 선수가 100일 때, 선수의 count 백분율 |
+    | data.aTeam.player.rateRank     | number  | 팀별 선수 POG 순위                        |
 
 - fail
   ```json
