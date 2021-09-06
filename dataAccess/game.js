@@ -53,10 +53,10 @@ module.exports = {
 				});
 		});
 	},
-	getMonthSchedule: (month) => {
+	getMonthSchedule: (year, month) => {
 		return new Promise(async (res, rej) => {
-			curMonth = new Date(2021, month - 1, 1);
-			nextMonth = new Date(2021, month, 1);
+			curMonth = new Date(year, month - 1, 1);
+			nextMonth = new Date(year, month, 1);
 
 			const result = await Game.findAll(
 				// { include: Team },
@@ -119,6 +119,12 @@ module.exports = {
 					id: gameId,
 				},
 			});
+			res(result);
+		});
+	},
+	getAllGames: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Game.findAll({});
 			res(result);
 		});
 	},
