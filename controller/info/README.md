@@ -7,6 +7,7 @@
 3. [ 21.8.18 | getPOGRank, getCurrentGame ] : Team info를 나타내는 부분을 TeamInfod와 동일하게 ID 필드를 추가했습니다.
 4. [ 21.8.20 | getCurrentGame 로직 수정 ] : 기존 -1 (경기 전), 0 (경기 중), 1 (경기 후) 3가지의 status를 제공했는데, 경기 후 30분 전과 후를 명확히 구분짓는 로직이 필요해서, 경기 업데이트 api의 status를 -1 (경기 전), 0 (경기 중), 1 (경기 후 30분 이전), 2 (경기 후 30분 이후) 4가지로 변경했습니다. 이에 따라 current 게임의 status 또한 4가지가 됐습니다.
 5. [ 21.8.20 | status code 변경 ] : 기존 get 방식의 성공 리스폰스의 status가 201에서 200으로 변경.
+6. [ 21.9.6 | getMonthSchedule 형식 변경] : 기존 month만 받던 형식에서 year, month 두 값을 받음
 
 ---
 
@@ -42,12 +43,13 @@
 
 - url
 
-  - `/schedule?month=8`
+  - `/schedule?month=8&year=2021`
 
 - params
-  - | Field | Type    | Description      |
-    | ----- | ------- | ---------------- |
-    | month | Integer | 조회를 원하는 월 |
+  - | Field | Type    | Description        |
+    | ----- | ------- | ------------------ |
+    | month | Integer | 조회를 원하는 월   |
+    | year  | Integer | 조회를 원하는 연도 |
 
 ### Res
 
@@ -61,26 +63,26 @@
   	"status": 200,
   	"data": [
   		{
-  			"id": 73,
+  			"id": 343,
   			"aTeamName": "NS",
   			"bTeamName": "HLE",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128217/nongshim_red_forcelogo_square.png",
   			"bTeamIcon": "https://cdn.pandascore.co/images/team/image/2883/hanwha-life-esports-1s04vbu0.png",
   			"aTeamScore": 2,
   			"bTeamScore": 1,
-  			"status": 1,
-  			"startTime": "2021-08-01T17:00:00.000Z"
+  			"status": 2,
+  			"startTime": "2021-08-01T08:00:00.000Z"
   		},
   		{
-  			"id": 74,
+  			"id": 344,
   			"aTeamName": "DK",
   			"bTeamName": "KT",
   			"aTeamIcon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
-  			"bTeamIcon": "https://cdn.pandascore.co/images/team/image/63/kt_rolsterlogo_profile.png",
+  			"bTeamIcon": "https://opgg-hackathon.s3.ap-northeast-2.amazonaws.com/kt-01.png",
   			"aTeamScore": 2,
   			"bTeamScore": 0,
-  			"status": 1,
-  			"startTime": "2021-08-01T20:00:00.000Z"
+  			"status": 2,
+  			"startTime": "2021-08-01T11:00:00.000Z"
   		}
   	]
   }
@@ -478,7 +480,7 @@ GameId를 통해 해당 경기에 대한 정보를 받는 API
   		"aTeamScore": 0,
   		"bTeamScore": 2,
   		"status": 1,
-  		"startTime": "2021-08-15T20:00:00.000Z"
+  		"startTime": "2021-08-15T11:00:00.000Z"
   	}
   }
   ```

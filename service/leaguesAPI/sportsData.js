@@ -101,7 +101,7 @@ module.exports = {
 			gameInfo.status =
 				gameInfo.aTeamScore == 2 || gameInfo.bTeamScore == 2 ? 2 : -1;
 
-			if (new Date() + 9 * 60 * 60 * 1000 > time) gameInfo.status = 0;
+			if (new Date() > time) gameInfo.status = 0;
 
 			gameInfo.gameId = schedule.GameId;
 

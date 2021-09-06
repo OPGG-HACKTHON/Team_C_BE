@@ -10,7 +10,6 @@ const initSchedule = async (req, res) => {
 		const time = adjustTime(schedule.DateTime);
 		await sportsData.createSchedule(schedule, time);
 	});
-
 	res.json(resUtil.success(201, "일정 생성을 완료했습니다."));
 };
 
