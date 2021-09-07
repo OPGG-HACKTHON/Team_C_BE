@@ -49,6 +49,36 @@ const getPOGResult = async (req, res) => {
 			bTeam.dataValues.player.push(playerInfo.dataValues);
 		}
 	}
+
+	aTeam.dataValues.player.sort((a, b) => {
+		return b.count - a.count;
+	});
+	bTeam.dataValues.player.sort((a, b) => {
+		return b.count - a.count;
+	});
+
+	let curRank = 0;
+	let curCnt = -1;
+
+	for (const player of aTeam.dataValues.player) {
+		if (curCnt != player.count) {
+			curRank += 1;
+		}
+		curCnt = player.count;
+		player.rateRank = curRank;
+	}
+
+	curRank = 0;
+	curCnt = -1;
+
+	for (const player of bTeam.dataValues.player) {
+		if (curCnt != player.count) {
+			curRank += 1;
+		}
+		curCnt = player.count;
+		player.rateRank = curRank;
+	}
+
 	res.json(resUtil.success(200, { aTeam, bTeam }));
 };
 
