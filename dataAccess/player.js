@@ -121,4 +121,12 @@ module.exports = {
 			res(result);
 		});
 	},
+	getPlayerByTeamId: (teamId) => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findAll({
+				where: { teamId: teamId },
+			});
+			res(result);
+		});
+	},
 };
