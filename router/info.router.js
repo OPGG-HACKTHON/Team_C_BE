@@ -7,6 +7,7 @@ const getPOGRank = require("../controller/info/getPOGRank");
 const getTeamInfo = require("../controller/info/getTeamInfo");
 const getCurrentGame = require("../controller/info/getCurrentGame");
 const getGameById = require("../controller/info/getGameById");
+const getTeamPlayer = require("../controller/info/getTeamPlayer");
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.get("/pogRank", wrapAsync(getPOGRank));
 router.get("/teamInfo", wrapAsync(getTeamInfo));
 router.get("/currentGame", wrapAsync(getCurrentGame));
 router.get("/gameResult", wrapAsync(getGameById));
+router.get("/teamPlayer", wrapAsync(getTeamPlayer));
 
 module.exports = router;
