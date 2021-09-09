@@ -23,6 +23,8 @@
 
 [getGameResultById](#getGameResultById)
 
+[getTeamPlayer](#getTeamPlayer)
+
 ## 경기 일정, 순위, POG 순위 등 다양한 정보를 다루는 API Router입니다.
 
 ## Base URL
@@ -499,6 +501,85 @@ GameId를 통해 해당 경기에 대한 정보를 받는 API
     | data.bTeamScore | number  | 팀 스코어                                                               |
     | data.status     | number  | 경기 상태 (-1:경기전, 0:경기중, 1:경기후 30분 이전, 2:경기후 30분 이후) |
     | data.startTime  | date    | 경기 시작시간                                                           |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "internal Error"
+  }
+  ```
+
+## getTeamPlayer
+
+### description
+
+TeamId를 통해 해당 팀의 선수 목록을 받는 API
+
+### Req
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/teamPlayer?teamId=5`
+
+- params
+  - | Field  | Type    | Description          |
+    | ------ | ------- | -------------------- |
+    | teamId | Integer | 조회를 원하는 teamId |
+
+### Res
+
+- success
+
+  ```json
+  {
+  	"success": true,
+  	"status": 200,
+  	"data": [
+  		{
+  			"id": 22,
+  			"nickname": "Jett",
+  			"role": "mid",
+  			"image": "https://cdn.pandascore.co/images/player/image/506/lng_hoyoung_2021_split_1.png",
+  			"point": 0,
+  			"key": 100002036
+  		},
+  		{
+  			"id": 23,
+  			"nickname": "Kingen",
+  			"role": "top",
+  			"image": "https://cdn.pandascore.co/images/player/image/8172/drx_kingen_2021_split_1.png",
+  			"point": 0,
+  			"key": 100000611
+  		},
+  		{
+  			"id": 24,
+  			"nickname": "Destroy",
+  			"role": "top",
+  			"image": "https://cdn.pandascore.co/images/player/image/22949/drx_destroy_2021_split_1.png",
+  			"point": 0,
+  			"key": 100003107
+  		}
+  	]
+  }
+  ```
+
+  - | Field            | Type    | Description              |
+    | ---------------- | ------- | ------------------------ |
+    | success          | boolean | 응답 성공 여부           |
+    | status           | number  | Status Code              |
+    | data             | list    | 선수 list                |
+    | data[0].id       | number  | player db pk             |
+    | data[0].nickname | string  | 선수 이름                |
+    | data[0].role     | string  | 선수 포지션              |
+    | data[0].image    | string  | 선수 프로필 이미지 URL   |
+    | data[0].point    | number  | 선수 pog 점수            |
+    | data[0].key      | number  | API 검색을 위한 선수 key |
 
 - fail
   ```json

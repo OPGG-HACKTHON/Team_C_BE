@@ -53,6 +53,7 @@ db.TopTinder = require("./topTinder")(sequelize, Sequelize);
 db.RefreshToken = require("./refreshToken")(sequelize, Sequelize);
 db.GamePlayer = require("./gamePlayer")(sequelize, Sequelize, db.Player);
 db.TinderRecord = require("./tinderRecord")(sequelize, Sequelize);
+db.Preference = require("./preference")(sequelize, Sequelize);
 
 db.User.hasMany(db.Tinder, {
 	onUpdate: "SET NULL",
@@ -127,5 +128,17 @@ db.User.hasMany(db.TinderRecord, {
 	onUpdate: "CASCADE",
 });
 db.TinderRecord.belongsTo(db.User);
+
+db.User.hasMany(db.Preference, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.Preference.belongsTo(db.User);
+
+db.Player.hasMany(db.Preference, {
+	onDelete: "CASCADE",
+	onUpdate: "CASCADE",
+});
+db.Preference.belongsTo(db.Player);
 
 module.exports = db;
