@@ -25,7 +25,12 @@ module.exports = {
 	getUserPreference: (userId) => {
 		return new Promise(async (res, rej) => {
 			const result = await Preference.findAll({
-				include: [{ model: Player }],
+				include: [
+					{
+						model: Player,
+						attributes: ["id", "nickname", "role", "image", "point", "key"],
+					},
+				],
 				attributes: ["userId"],
 				where: { userId: userId },
 			});
