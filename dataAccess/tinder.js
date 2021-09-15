@@ -134,7 +134,6 @@ module.exports = {
             return parseInt(tinder.like) + parseInt(tinder.superlike);
           });
 
-          console.log(eachTinderLikes);
           for (i = 0; i < eachTinderLikes.length; i++) {
             count += eachTinderLikes[i];
           }
@@ -149,7 +148,17 @@ module.exports = {
     return new Promise((res, rej) => {
       Tinder.findAll({ where: { userId: userId } })
         .then((tinders) => {
-          res(tinders.length);
+          let count = 0;
+          let eachTinderLikes = tinders.map((tinder) => {
+            return parseInt(tinder.like) + parseInt(tinder.superlike);
+          });
+
+          for (i = 0; i < eachTinderLikes.length; i++) {
+            count += eachTinderLikes[i];
+          }
+
+          let result = { tinders: tinders.length, count: count };
+          res(result);
         })
         .catch((err) => rej(err));
     });

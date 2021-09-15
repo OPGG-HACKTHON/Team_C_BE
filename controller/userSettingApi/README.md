@@ -10,6 +10,8 @@
 
 [getUserPreference](#getUserPreference)
 
+[getProfile](#getProfile)
+
 ## 유저정보 수정에 이용되는 API입니다.
 
 ### nickname 변경시 user table의 refreshedAt 에 Date.now() 찍힘.
@@ -257,6 +259,63 @@
     | data[0].image    | string  | 선수 프로필 이미지 URL   |
     | data[0].point    | number  | 선수 pog 점수            |
     | data[0].key      | number  | API 검색을 위한 선수 key |
+
+- fail
+  ```json
+  {
+  	"success": false,
+  	"status": 500,
+  	"msg": "internal Error"
+  }
+  ```
+
+## getProfile
+
+### description
+
+마이페이지에서 유저 정보를 확인하는 API
+
+### Req
+
+- header
+
+  - | Field        | Type   | Description  |
+    | ------------ | ------ | ------------ |
+    | accesstoken  | string | accesstoken  |
+    | refreshtoken | string | refreshtoken |
+
+- method
+
+  - `GET`
+
+- url
+
+  - `/profile`
+
+### Res
+
+- success
+
+  ```json
+  {
+  	"success": true,
+  	"status": 200,
+  	"data": {
+  		"teamIcon": "https://cdn.pandascore.co/images/team/image/128409/dwg_ki_alogo_square.png",
+  		"teamName": "DK",
+  		"nickname": "페이커짱123"
+  	}
+  }
+  ```
+
+  - | Field         | Type    | Description    |
+    | ------------- | ------- | -------------- |
+    | success       | boolean | 응답 성공 여부 |
+    | status        | number  | Status Code    |
+    | data          | list    | 선수 list      |
+    | data.teamIcon | string  | 팀 아이콘      |
+    | data.teamName | string  | 팀 이름        |
+    | data.nickname | string  | 유저 닉네임    |
 
 - fail
   ```json
