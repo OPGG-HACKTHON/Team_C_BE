@@ -1,7 +1,7 @@
 const { server, sessionStore } = require("../../app");
 const request = require("supertest");
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 afterAll(async () => {
 	server.close();
