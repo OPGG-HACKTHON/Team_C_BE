@@ -73,4 +73,19 @@ module.exports = {
 			res(result);
 		});
 	},
+	createExampleGamePlayer: (player, gameId, cnt) => {
+		return new Promise((res, rej) => {
+			GamePlayer.create({
+				count: cnt,
+				playerKey: player,
+				gameId: gameId,
+			})
+				.then(() => {
+					res("success insert game");
+				})
+				.catch((err) => {
+					rej(err);
+				});
+		});
+	},
 };

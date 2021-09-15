@@ -130,4 +130,10 @@ module.exports = {
 			res(result);
 		});
 	},
+	getAllPlayer: () => {
+		return new Promise(async (res, rej) => {
+			const result = await Player.findAll({});
+			res(result);
+		});
+	},
 };
