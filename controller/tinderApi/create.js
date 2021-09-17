@@ -21,7 +21,7 @@ const create = async (req, res) => {
 		}
 		const result = await createTinder(body);
 
-		if (result === "success") {
+		if (result != null) {
 			res.json(resUtil.success(200, "틴더 생성 성공"));
 		} else {
 			res.json(resUtil.fail(400, "틴더 생성 실패"));
