@@ -10,8 +10,13 @@ module.exports = {
 			throw Error("API사용권한이없습니다.");
 
 		const accesstoken = verifyToken(req.headers.accesstoken);
-		const refreshtoken = verifyToken(req.headers.refreshtoken);
 
+		let refreshtoken = null;
+		if (req.headers.refreshtoken != undefined) {
+			refreshtoken = verifyToken(req.headers.refreshtoken);
+		}
+
+		console.log(accesstoken, refreshtoken);
 		if (accesstoken === null) {
 			if (refreshtoken === null)
 				//case1: acc, ref 모두 만료
