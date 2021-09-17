@@ -70,7 +70,7 @@ module.exports = {
 			User.findOne({ where: { id: userId } }).then((user) => {
 				if (user.dataValues.teamUpdatedAt === null) {
 					User.update(
-						{ teamId: teamId, teamUpdateAt: Date.now() },
+						{ teamId: teamId, teamUpdatedAt: Date.now() },
 						{ where: { id: userId } }
 					)
 						.then(() => {
