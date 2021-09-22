@@ -16,6 +16,8 @@ const updateLike = async (req, res) => {
 
 		const updateResult = await tinderMethod.updateLike(body);
 
+		await tinderRecordRepo.createRecord(tinderId, userId);
+
 		if (updateResult === "success") {
 			return res.json(resUtil.success(200, "리액션 성공"));
 		} else {
@@ -26,8 +28,6 @@ const updateLike = async (req, res) => {
 	}
 
 	//req.body 에서 tinderId, like, dislike, superlike, pass
-
-	await tinderRecordRepo.createRecord(tinderId, userId);
 };
 
 module.exports = updateLike;
