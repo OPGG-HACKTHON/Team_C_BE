@@ -1,7 +1,6 @@
 const resUtil = require("../../util/resUtil");
 const { createTinder } = require("../../dataAccess/tinder");
 const { getTeamIdbyUserId } = require("../../dataAccess/user");
-
 const topTinder = require("../../dataAccess/topTinder");
 
 const pushTinder = async (req, res) => {

@@ -80,7 +80,7 @@ module.exports = {
 				where: {
 					[Op.and]: [
 						{ userId: { [Op.notIn]: [userId] } },
-						{ createdAt: { [Op.gte]: moment().subtract(5, "min") } },
+						{ createdAt: { [Op.gte]: moment().subtract(5, "minute") } },
 						{ teamId: { [Op.notIn]: filter } },
 					],
 				},
