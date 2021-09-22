@@ -11,6 +11,7 @@ const getTopTinder = require("../controller/tinderApi/getTopTinder");
 const getHOF = require("../controller/tinderApi/getHOF");
 const getTotalLike = require("../controller/tinderApi/getTotalLike");
 const getTotalTinder = require("../controller/tinderApi/getTotalTinder");
+const pushTinder = require("../controller/tinderApi/pushTinder");
 
 const router = express.Router();
 
@@ -23,4 +24,5 @@ router.get("/toptinder", wrapAsync(checkTokens), wrapAsync(getTopTinder));
 router.get("/hof", wrapAsync(checkTokens), wrapAsync(getHOF));
 router.get("/totalLike", wrapAsync(checkTokens), wrapAsync(getTotalLike));
 router.get("/totalTinder", wrapAsync(checkTokens), wrapAsync(getTotalTinder));
+router.post("/pushTinder", wrapAsync(pushTinder));
 module.exports = router;

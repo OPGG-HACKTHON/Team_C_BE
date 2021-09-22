@@ -14,12 +14,12 @@ selectTinderWithCount = (tinders, count, userId) => {
 			if (curCnt < 0) continue;
 
 			// 중복 아니면 트루
-			// const checkDup = await checkDuplicate(tinder, userId);
+			const checkDup = await checkDuplicate(tinder, userId);
 
-			// if (checkDup) {
-			count -= 1;
-			processedTinders.push(tinder);
-			// }
+			if (checkDup) {
+				count -= 1;
+				processedTinders.push(tinder);
+			}
 		}
 
 		res(processedTinders);
