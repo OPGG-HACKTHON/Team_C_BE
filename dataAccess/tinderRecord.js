@@ -17,7 +17,7 @@ module.exports = {
 	createRecord: (tinder, userId) => {
 		return new Promise(async (res, rej) => {
 			await TinderRecord.create({
-				tinderId: tinder.id,
+				tinderId: tinder,
 				userId: userId,
 			});
 			res("success create record");
