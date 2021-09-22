@@ -6,7 +6,7 @@ const { logger } = require("../../config/winston");
 const pushPOGCnt = async (req, res) => {
 	// 343 360
 
-	for (let i = 343; i < 361; i++) {
+	for (let i = 271; i < 343; i++) {
 		const players = await gamePlayerRepo.getGamePlayerByGameId(i);
 
 		for (const player of players) {
