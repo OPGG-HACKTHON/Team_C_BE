@@ -1,13 +1,13 @@
-const resUtil = require("../../util/resUtil");
-const { createTinder } = require("../../dataAccess/tinder");
-const { getTeamIdbyUserId } = require("../../dataAccess/user");
+const cron = require("node-cron");
+const { createTinder } = require("../dataAccess/tinder");
+const { getTeamIdbyUserId } = require("../dataAccess/user");
+const topTinder = require("../dataAccess/topTinder");
 
-const topTinder = require("../../dataAccess/topTinder");
+const chatbot = () => {
+	cron.schedule("* * * * *", async () => {
+		const gameId = 386;
 
-const pushTinder = async (req, res) => {
-	// i 경기 아이디
-	for (let gameId = 271; gameId < 343; gameId++) {
-		for (let cnt = 1; cnt < 11; cnt++) {
+		for (let cnt = 1; cnt < 6; cnt++) {
 			const userId = 254 + getRandomInt(1, 11);
 
 			const teamId = await getTeamIdbyUserId(userId);
@@ -19,7 +19,6 @@ const pushTinder = async (req, res) => {
 				msg: tinderMessage[msgNum].message,
 				teamId: teamId,
 				gameId: gameId,
-				like: gameId - cnt * 13,
 			};
 
 			const result = await createTinder(body);
@@ -27,9 +26,7 @@ const pushTinder = async (req, res) => {
 
 			await topTinder.createTopTinder(tinderId, cnt);
 		}
-	}
-
-	res.json(resUtil.fail(201, "틴더, 탑틴더 생성 굿."));
+	});
 };
 
 function getRandomInt(min, max) {
@@ -96,4 +93,4 @@ const tinderMessage = [
 	},
 ];
 
-module.exports = pushTinder;
+module.exports = chatbot;
