@@ -45,4 +45,5 @@ API 명세 : Github Wiki`
 
 ## :link: Link
 [Google Play](https://play.google.com/store/apps/details?id=mobilec.milestone)
+<br/>
 [시연 영상](https://drive.google.com/file/d/1XDkOg3mOTG2YDgbClUFc3CHjGvJ6Axfw/view?usp=sharing)
