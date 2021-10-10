@@ -6,18 +6,12 @@
 ```
 모바일 C팀 안드로이드 저장소
 
-|**시연영상**|[링크](https://drive.google.com/file/d/1XDkOg3mOTG2YDgbClUFc3CHjGvJ6Axfw/view?usp=sharing)
+**시연영상** ➡️ &nbsp; [Click Here](https://drive.google.com/file/d/1XDkOg3mOTG2YDgbClUFc3CHjGvJ6Axfw/view?usp=sharing)
 
 # :trophy: Sweep
 
 <img src="https://user-images.githubusercontent.com/49590389/134460603-49ca826b-1106-4a38-856a-0d16d93408c2.png" width="100%"/>
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/49590389/134460641-68ca8ae7-9b1d-46c6-a458-919be4fe990e.png" width="49%"/> <img src="https://user-images.githubusercontent.com/49590389/134460645-c962d94c-1299-468b-8620-64c18102e518.png" width="49%"/> 
- </p>
- <p align="center">
- <img src="https://user-images.githubusercontent.com/49590389/134460648-a41e95aa-7c96-48e9-b937-a70553dc20b2.png" width="49%"/><img src="https://user-images.githubusercontent.com/49590389/134460650-1da07533-96ed-4648-bcb2-e58cb812560d.png" width="49%"/>
-</p>
 
 ## :speech_balloon: Language
 `JS`
@@ -51,3 +45,4 @@ API 명세 : Github Wiki`
 
 ## :link: Link
 [Google Play](https://play.google.com/store/apps/details?id=mobilec.milestone)
+[시연 영상](https://drive.google.com/file/d/1XDkOg3mOTG2YDgbClUFc3CHjGvJ6Axfw/view?usp=sharing)
