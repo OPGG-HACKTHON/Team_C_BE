@@ -17,7 +17,8 @@
 `JS`
 
 ## 🛠️ Technical Stack
-`baseurl : [ec2-3-37-194-249.ap-northeast-2.compute.amazonaws.com](http://ec2-3-37-194-249.ap-northeast-2.compute.amazonaws.com/)
+
+baseurl : [ec2-3-37-194-249.ap-northeast-2.compute.amazonaws.com](http://ec2-3-37-194-249.ap-northeast-2.compute.amazonaws.com/)
 
 프레임워크 : Node, Express
 
@@ -31,7 +32,7 @@ DB : MySQL, RDB
 
 서버 : EC2
 
-API 명세 : Github Wiki`
+API 명세 : Github Wiki
 
  
 ## ✋ Part
