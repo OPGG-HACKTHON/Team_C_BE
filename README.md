@@ -43,8 +43,9 @@ API 명세 : Github Wiki`
 ## ✋ Part
 |Part|Name|
 |------|---|
-|**Designer**|[이광훈]()|
-|**Server**|[이정표](https://github.com/jungpyolee), [장효택](https://github.com/HyoTaek-Jang)|
+|**팀장**|[이정표](https://github.com/jungpyolee)|
+|**디자이너**|[이광훈]()|
+|**백엔드**|[이정표](https://github.com/jungpyolee), [장효택](https://github.com/HyoTaek-Jang)|
 |**Android Client**|[김민호](https://github.com/Minoyam), [이윤지](https://github.com/zion830)|
 |**IOS Client**|[서정화](https://github.com/mohok)|
 
